@@ -15,9 +15,13 @@ body {
 }
 
 figure {
-	@apply mx-auto w-52 h-52 md:w-36 md:h-36;
+	@apply mx-auto transition duration-100 w-52 h-52 md:w-36 md:h-36;
 }
 
 .swiper-btn {
 	@apply absolute -translate-y-[50%]  w-[60px] py-[16px] px-4  items-center hidden md:flex z-10;
+}
+
+.swiper-slide:hover figure {
+	@apply scale-110;
 }

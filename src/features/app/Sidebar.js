@@ -13,19 +13,19 @@ const Sidebar = () => {
 		},
 		{
 			label: "MAKE RESERVATION",
-			path: "/",
+			path: "make-reservation",
 		},
 		{
 			label: "MY RESERVATIONS",
-			path: "/",
+			path: "my-reservations",
 		},
 	];
 
 	const renderRoutes = () => {
 		return routes.map((route, index) => {
 			return (
-				<li>
-					<SidebarLink key={index} label={route.label} path={route.path} />
+				<li key={index}>
+					<SidebarLink label={route.label} path={route.path} />
 				</li>
 			);
 		});

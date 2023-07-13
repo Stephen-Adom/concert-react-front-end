@@ -9,3 +9,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
+#default-sidebar ul li a.active {
+	@apply text-white bg-primaryGreen;
+}

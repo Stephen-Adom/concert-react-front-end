@@ -28,7 +28,7 @@ const ConcertSliderList = () => {
 		} else if (screenWidth === "small") {
 			return 1;
 		} else if (screenWidth === "medium") {
-			return 3;
+			return 2;
 		} else {
 			return 3;
 		}
@@ -58,7 +58,7 @@ const ConcertSliderList = () => {
 				disableNextButton={disableNextButton}
 			></SwiperNextButton>
 
-			<div className="flex items-center justify-center swiper-wrapper w-[70%] mx-auto">
+			<div className="flex items-center justify-center swiper-wrapper w-full md:!w-[70%] lg:!w-[70%] xl:!w-[70%] mx-auto">
 				<Swiper
 					spaceBetween={40}
 					slidesPerView={toggleSlidesPerView()}

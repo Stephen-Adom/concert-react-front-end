@@ -6,6 +6,30 @@ import { BsVimeo } from "react-icons/bs";
 import { LiaGoogle } from "react-icons/lia";
 
 const Sidebar = () => {
+	const routes = [
+		{
+			label: "CONCERTS",
+			path: "/",
+		},
+		{
+			label: "MAKE RESERVATION",
+			path: "/",
+		},
+		{
+			label: "MY RESERVATIONS",
+			path: "/",
+		},
+	];
+
+	const renderRoutes = () => {
+		return routes.map((route, index) => {
+			return (
+				<li>
+					<SidebarLink key={index} label={route.label} path={route.path} />
+				</li>
+			);
+		});
+	};
 	return (
 		<aside
 			id="default-sidebar"
@@ -14,32 +38,7 @@ const Sidebar = () => {
 		>
 			<div className="flex flex-col h-full py-4 pl-3 overflow-y-auto bg-white border-r border-neutral-200">
 				<h1>Concert</h1>
-				<ul className="space-y-2 font-medium mt-28">
-					<li>
-						<a href="#" className="flex items-center px-4 py-3 font-extrabold text-primaryDark">
-							MODELS
-						</a>
-					</li>
-
-					<li>
-						<a
-							href="#"
-							className="flex items-center px-4 py-3 font-extrabold text-primaryDark active"
-						>
-							LIFESTYLE
-						</a>
-					</li>
-
-					<li>
-						<a href="#" className="flex items-center px-4 py-3 font-extrabold text-primaryDark">
-							SHOP
-						</a>
-					</li>
-
-					<li>
-						<SidebarLink></SidebarLink>
-					</li>
-				</ul>
+				<ul className="space-y-2 font-medium mt-28">{renderRoutes()}</ul>
 
 				<div className="mt-auto footer">
 					<div className="flex items-center justify-center gap-1">

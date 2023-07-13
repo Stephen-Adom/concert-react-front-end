@@ -1,27 +1,66 @@
-import React from "react";
-import { BsCaretLeft, BsCaretRight } from "react-icons/bs";
-import { SwiperSlide } from "../../../components";
+import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { CustomSwiperSlide, SwiperNextButton, SwiperPrevButton } from "../../../components";
 
 const ConcertSliderList = () => {
+	const [swiperInstance, setSwiperInstance] = useState();
+	const [disablePrevButton, setDisablePrevButton] = useState(true);
+	const [disableNextButton, setDisableNextButton] = useState(false);
+
+	const slideChange = (e) => {
+		if (e?.isBeginning) {
+			setDisablePrevButton(true);
+		} else {
+			setDisablePrevButton(false);
+		}
+
+		if (e?.isEnd) {
+			setDisableNextButton(true);
+		} else {
+			setDisableNextButton(false);
+		}
+	};
+
 	return (
 		<div className="relative w-full gap-5 mt-10 concert-swiper-container">
-			<button
-				type="button"
-				className="swiper-btn  top-[50%] left-0  bg-[#efefef] rounded-tr-full rounded-br-full justify-end"
-			>
-				<BsCaretLeft className="text-white"></BsCaretLeft>
-			</button>
-			<button
-				type="button"
-				className="swiper-btn top-[50%] right-0 bg-primaryGreen rounded-tl-full rounded-bl-full  justify-start"
-			>
-				<BsCaretRight className="text-white"></BsCaretRight>
-			</button>
+			<SwiperPrevButton
+				swiper={swiperInstance}
+				disablePrevButton={disablePrevButton}
+			></SwiperPrevButton>
+			<SwiperNextButton
+				swiper={swiperInstance}
+				disableNextButton={disableNextButton}
+			></SwiperNextButton>
 
-			<div className="flex items-center justify-center gap-4 swiper-wrapper w-[70%] mx-auto">
-				<SwiperSlide></SwiperSlide>
-				<SwiperSlide></SwiperSlide>
-				<SwiperSlide></SwiperSlide>
+			<div className="flex items-center justify-center swiper-wrapper w-[70%] mx-auto">
+				<Swiper
+					spaceBetween={40}
+					slidesPerView={3}
+					onSlideChange={(e) => slideChange(e)}
+					onSwiper={(swiper) => setSwiperInstance(swiper)}
+				>
+					<SwiperSlide>
+						<CustomSwiperSlide></CustomSwiperSlide>
+					</SwiperSlide>
+					<SwiperSlide>
+						<CustomSwiperSlide></CustomSwiperSlide>
+					</SwiperSlide>
+					<SwiperSlide>
+						<CustomSwiperSlide></CustomSwiperSlide>
+					</SwiperSlide>
+					<SwiperSlide>
+						<CustomSwiperSlide></CustomSwiperSlide>
+					</SwiperSlide>
+					<SwiperSlide>
+						<CustomSwiperSlide></CustomSwiperSlide>
+					</SwiperSlide>
+					<SwiperSlide>
+						<CustomSwiperSlide></CustomSwiperSlide>
+					</SwiperSlide>
+					<SwiperSlide>
+						<CustomSwiperSlide></CustomSwiperSlide>
+					</SwiperSlide>
+				</Swiper>
 			</div>
 		</div>
 	);

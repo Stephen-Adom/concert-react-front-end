@@ -9,26 +9,29 @@ const Sidebar = () => {
 	return (
 		<aside
 			id="default-sidebar"
-			class="fixed top-0 left-0 z-40 w-56 h-screen transition-transform -translate-x-full sm:translate-x-0"
+			className="fixed top-0 left-0 z-40 w-56 h-screen transition-transform -translate-x-full sm:translate-x-0"
 			aria-label="Sidebar"
 		>
-			<div class="h-full pl-3 py-4 overflow-y-auto bg-white border-r border-neutral-200 flex flex-col">
+			<div className="flex flex-col h-full py-4 pl-3 overflow-y-auto bg-white border-r border-neutral-200">
 				<h1>Concert</h1>
-				<ul class="space-y-2 font-medium mt-20">
+				<ul className="space-y-2 font-medium mt-28">
 					<li>
-						<a href="#" class="flex items-center px-4 py-3 text-primaryDark font-extrabold">
+						<a href="#" className="flex items-center px-4 py-3 font-extrabold text-primaryDark">
 							MODELS
 						</a>
 					</li>
 
 					<li>
-						<a href="#" class="flex items-center px-4 py-3 text-primaryDark font-extrabold active">
+						<a
+							href="#"
+							className="flex items-center px-4 py-3 font-extrabold text-primaryDark active"
+						>
 							LIFESTYLE
 						</a>
 					</li>
 
 					<li>
-						<a href="#" class="flex items-center px-4 py-3 text-primaryDark font-extrabold">
+						<a href="#" className="flex items-center px-4 py-3 font-extrabold text-primaryDark">
 							SHOP
 						</a>
 					</li>

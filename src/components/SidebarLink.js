@@ -2,7 +2,7 @@ import React from "react";
 
 const SidebarLink = () => {
 	return (
-		<a href="#" class="flex items-center px-4 py-3 text-primaryDark font-extrabold">
+		<a href="#" className="flex items-center px-4 py-3 font-extrabold text-primaryDark">
 			TEST DRIVE
 		</a>
 	);

@@ -6,7 +6,9 @@ function App() {
 	return (
 		<div className="App">
 			<Sidebar></Sidebar>
-			<Outlet></Outlet>
+			<main className="ml-56">
+				<Outlet></Outlet>
+			</main>
 		</div>
 	);
 }

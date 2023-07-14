@@ -9,7 +9,7 @@ const Sidebar = () => {
 	const routes = [
 		{
 			label: "CONCERTS",
-			path: "concerts",
+			path: "home",
 		},
 		{
 			label: "MAKE RESERVATION",
@@ -22,6 +22,10 @@ const Sidebar = () => {
 		{
 			label: "ADD CONCERT",
 			path: "concert/add",
+		},
+		{
+			label: "DELETE CONCERT",
+			path: "concert/update",
 		},
 	];
 

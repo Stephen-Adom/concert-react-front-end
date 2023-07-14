@@ -17,9 +17,9 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
 
 	return (
 		<div className="">
-			<div class="w-full flex flex-col items-start bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100">
+			<div class="w-full flex flex-col items-start bg-white border border-gray-200 rounded-lg shadow lg:flex-row hover:bg-gray-100">
 				<img
-					class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+					class="object-cover w-full rounded-t-lg h-72 md:h-auto lg:w-48 md:rounded-none md:rounded-l-lg"
 					src="https://picsum.photos/500/500"
 					alt=""
 				/>
@@ -31,8 +31,8 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
 						Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse
 						chronological order.
 					</p>
-					<p class="flex items-center gap-x-5 text-sm mb-4">
-						<span className="text-neutral-500 flex items-center gap-x-1">
+					<p class="flex items-center gap-x-5 text-sm mb-4 flex-wrap">
+						<span className="text-neutral-500 flex items-center gap-x-1 mb-4 md:mb-0">
 							<CgUserList className="text-xl text-primaryGreen"></CgUserList>
 							Featured Artist: <span className="italic font-semibold">Taylor Swift</span>{" "}
 						</span>
@@ -55,7 +55,7 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
 				<span className="block font-semibold text-lg text-left">Available Time and Location</span>
 
 				<ul className="mt-3">
-					<li className="flex items-center gap-1 text-sm mb-2">
+					<li className="flex items-center gap-1 text-sm flex-wrap mb-2">
 						<TbCalendarCheck className="text-primaryGreen text-xl"></TbCalendarCheck>
 						Main Town City Hall <span className="font-semibold">- Los Angeles -</span> Friday, July
 						13, 2022

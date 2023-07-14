@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { MenuButton } from "../components";
+import { MenuButton, BackButton } from "../components";
 import { NewConcertDetails, ConcertLocationDetails, ConfirmSubmissionDetails } from "../features";
 
 const AddConcert = () => {
-	const [step, setStep] = useState(3);
+	const [step, setStep] = useState(1);
 
 	const renderPage = () => {
 		switch (step) {
@@ -43,14 +43,14 @@ const AddConcert = () => {
 	}, [step]);
 
 	return (
-		<div className="w-full h-screen">
+		<div className="w-full h-screen relative px-5 md:px-10">
 			<section className="flex flex-col items-center justify-start h-full py-10 text-center md:justify-center md:py-0">
 				<h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
 					<MenuButton></MenuButton>
 					CREATE CONCERT EVENT
 				</h1>
 
-				<div className="w-full md:!w-[70%] lg:!w-[70%] xl:!w-[70%] mx-auto mt-10">
+				<div className="w-full md:!w-[95%] lg:!w-[70%] xl:!w-[70%] mx-auto mt-10">
 					<ol className="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
 						<li
 							className={`${setStepperLinkStyle()} ${
@@ -85,6 +85,8 @@ const AddConcert = () => {
 					<section className="mt-5">{renderPage()}</section>
 				</div>
 			</section>
+
+			<BackButton></BackButton>
 		</div>
 	);
 };

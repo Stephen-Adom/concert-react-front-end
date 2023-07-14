@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import { Home, ConcertDetails, AddConcert } from "../pages";
+import { Home, ConcertDetails, AddConcert, ManageConcert } from "../pages";
 
 const router = createBrowserRouter([
 	{
@@ -8,7 +8,7 @@ const router = createBrowserRouter([
 		element: <App />,
 		children: [
 			{
-				path: "concerts",
+				path: "home",
 				element: <Home />,
 			},
 			{
@@ -18,6 +18,10 @@ const router = createBrowserRouter([
 			{
 				path: "concert/add",
 				element: <AddConcert />,
+			},
+			{
+				path: "concert/update",
+				element: <ManageConcert />,
 			},
 		],
 	},

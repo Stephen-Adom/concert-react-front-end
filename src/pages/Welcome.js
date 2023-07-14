@@ -15,7 +15,7 @@ const Welcome = () => {
         </div>
         <div className="flex space-x-4">
         <Link to="/signin">
-			<button type="button" class="focus:outline-none text-white bg-primaryGreen hover:bg-primaryGreenDark focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 h-[2.5rem] mr-2 mb-4">Sign In</button>
+			<button type="button" class="focus:outline-none text-white bg-primaryGreen hover:bg-primaryGreenDark font-medium rounded-lg text-sm px-5 py-2.5 h-[2.5rem] mr-2 mb-4">Sign In</button>
 		</Link>
 		<Link to="/signup">
 			<button type="button" class="text-white hover:text-white border border-primaryGreen hover:bg-primaryGreen font-medium rounded-lg text-sm px-5 py-2.5 h-[2.5rem] mr-2 mb-4 ">Sign Up</button>

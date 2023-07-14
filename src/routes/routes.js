@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import { Home, ConcertDetails } from "../pages";
+import { Home, ConcertDetails, AddConcert } from "../pages";
 
 const router = createBrowserRouter([
 	{
@@ -14,6 +14,10 @@ const router = createBrowserRouter([
 			{
 				path: "concerts/:id",
 				element: <ConcertDetails />,
+			},
+			{
+				path: "concert/add",
+				element: <AddConcert />,
 			},
 		],
 	},

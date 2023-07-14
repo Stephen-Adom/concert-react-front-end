@@ -33,3 +33,7 @@ div[role="tooltip"] {
 table.table-container tbody tr:nth-child(odd) {
 	@apply bg-[#e2e3e5];
 }
+
+.form-group {
+	@apply mb-6;
+}

@@ -19,6 +19,10 @@ const Sidebar = () => {
 			label: "MY RESERVATIONS",
 			path: "my-reservations",
 		},
+		{
+			label: "ADD CONCERT",
+			path: "concert/add",
+		},
 	];
 
 	const renderRoutes = () => {

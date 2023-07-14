@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { MenuButton } from "../components";
-import { NewConcertDetails, ConcertLocationDetails } from "../features";
+import { NewConcertDetails, ConcertLocationDetails, ConfirmSubmissionDetails } from "../features";
 
 const AddConcert = () => {
-	const [step, setStep] = useState(2);
+	const [step, setStep] = useState(3);
 
 	const renderPage = () => {
 		switch (step) {
@@ -11,8 +11,8 @@ const AddConcert = () => {
 				return <NewConcertDetails setStep={setStep}></NewConcertDetails>;
 			case 2:
 				return <ConcertLocationDetails setStep={setStep}></ConcertLocationDetails>;
-			default:
-				break;
+			case 3:
+				return <ConfirmSubmissionDetails setStep={setStep}></ConfirmSubmissionDetails>;
 		}
 	};
 

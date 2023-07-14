@@ -42,7 +42,7 @@ const Sidebar = () => {
 
 				<div className="mt-auto footer">
 				<div className="flex items-center justify-center gap-1">
-					<button type="button" class="focus:outline-none text-white bg-primaryGreen hover:bg-primaryGreen focus:ring-4  font-medium rounded-lg text-sm px-5 py-2.5 h-[2.5rem] mr-2 mb-4">Sign In</button>
+					<button type="button" class="focus:outline-none text-white bg-primaryGreen hover:bg-primaryGreenDark focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 h-[2.5rem] mr-2 mb-4">Sign In</button>
 					<button type="button" class="text-primaryGreen hover:text-white border border-primaryGreen hover:bg-primaryGreen font-medium rounded-lg text-sm px-5 py-2.5 h-[2.5rem] mr-2 mb-4 ">Sign Up</button>
 				</div>
 					<div className="flex items-center justify-center gap-1">

@@ -28,7 +28,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/signin",
-		element: <App />,
+		element: <SignIn />,
 		children: [
 			{
 				index: true,
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/signup",
-		element: <App />,
+		element: <SignUp />,
 		children: [
 			{
 				index: true,

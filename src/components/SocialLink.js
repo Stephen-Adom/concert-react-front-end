@@ -1,7 +1,5 @@
-import React from "react";
+import React from 'react';
 
-const SocialLink = () => {
-	return <div>SocialLink</div>;
-};
+const SocialLink = () => <div>SocialLink</div>;
 
 export default SocialLink;

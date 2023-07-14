@@ -1,10 +1,16 @@
 import React from "react";
 import { GiDrumKit } from "react-icons/gi";
 import { CgUserList } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
+import { Tooltip } from "flowbite-react";
 
 const SwiperSlide = () => {
+	const navigate = useNavigate();
 	return (
-		<div className="swiper-slide hover:cursor-pointer p-[10px]">
+		<div
+			className="swiper-slide hover:cursor-pointer p-[10px]"
+			onClick={() => navigate("/concerts/1")}
+		>
 			<figure className="overflow-hidden rounded-full">
 				<img src="https://picsum.photos/200/300" width="100%" alt="" />
 			</figure>
@@ -19,38 +25,17 @@ const SwiperSlide = () => {
 			</p>
 
 			<div className="flex items-center justify-center mt-4 additional-info gap-x-3">
-				<span
-					data-tooltip-target="tooltip-1"
-					data-tooltip-placement="right"
-					className="flex items-center justify-center w-8 h-8 border rounded-full border-primaryGrey"
-				>
-					<GiDrumKit className="text-primaryGrey"></GiDrumKit>
+				<Tooltip content="Band Name" style="light" placement="top">
+					<span className="flex items-center justify-center w-8 h-8 border rounded-full border-primaryGrey">
+						<GiDrumKit className="text-primaryGrey"></GiDrumKit>
+					</span>
+				</Tooltip>
 
-					<div
-						id="tooltip-1"
-						role="tooltip"
-						className="absolute z-50 invisible inline-block px-3 py-2 text-xs font-medium duration-300 !bg-white border rounded-lg shadow-sm border-neutral-300 text-primaryDark tooltip"
-					>
-						Band Name
-						<div className="border tooltip-arrow border-neutral-300" data-popper-arrow></div>
-					</div>
-				</span>
-				<span
-					data-tooltip-target="tooltip-2"
-					data-tooltip-placement="right"
-					className="flex items-center justify-center w-8 h-8 border rounded-full border-primaryGrey"
-				>
-					<CgUserList className="text-primaryGrey"></CgUserList>
-
-					<div
-						id="tooltip-2"
-						role="tooltip"
-						className="absolute z-50 invisible inline-block px-3 py-2 text-xs font-medium duration-300 !bg-white border rounded-lg shadow-sm border-neutral-300 text-primaryDark tooltip"
-					>
-						Artist Name
-						<div className="border tooltip-arrow border-neutral-300" data-popper-arrow></div>
-					</div>
-				</span>
+				<Tooltip content="Artist Name" style="light" placement="top">
+					<span className="flex items-center justify-center w-8 h-8 border rounded-full border-primaryGrey">
+						<CgUserList className="text-primaryGrey"></CgUserList>
+					</span>
+				</Tooltip>
 			</div>
 		</div>
 	);

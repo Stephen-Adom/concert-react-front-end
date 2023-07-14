@@ -25,3 +25,7 @@ figure {
 .swiper-slide:hover figure {
 	@apply scale-110;
 }
+
+div[role="tooltip"] {
+	@apply text-xs;
+}

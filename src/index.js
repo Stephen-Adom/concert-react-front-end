@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "flowbite/dist/flowbite.css";
 import "flowbite/dist/flowbite.js";
+import "primereact/resources/themes/saga-green/theme.css";
 import "./index.css";
 import "swiper/css";
 import { RouterProvider } from "react-router-dom";

@@ -29,3 +29,7 @@ figure {
 div[role="tooltip"] {
 	@apply text-xs;
 }
+
+table.table-container tbody tr:nth-child(odd) {
+	@apply bg-[#e2e3e5];
+}

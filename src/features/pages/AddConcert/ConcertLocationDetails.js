@@ -15,37 +15,37 @@ const ConcertLocationDetails = ({ setStep }) => {
 		<form>
 			<div className="flex items-center justify-center gap-x-3 mb-7 md:mb-0">
 				<span className="block text-sm">Enter Location Details</span>
-				<hr class="w-[80%] my-12 h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50 hidden md:block" />
+				<hr className="w-[80%] my-12 h-0.5 border-t-0 bg-neutral-100 opacity-100 dark:opacity-50 hidden md:block" />
 			</div>
 
-			<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-				<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-					<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+			<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+				<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 						<tr>
-							<th scope="col" class="px-6 py-3">
+							<th scope="col" className="px-6 py-3">
 								Hall Name
 							</th>
-							<th scope="col" class="px-6 py-3">
+							<th scope="col" className="px-6 py-3">
 								City
 							</th>
-							<th scope="col" class="px-6 py-3">
+							<th scope="col" className="px-6 py-3">
 								Event Date & Time
 							</th>
-							<th scope="col" class="px-6 py-3">
+							<th scope="col" className="px-6 py-3">
 								Action
 							</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+						<tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
 							<th
 								scope="row"
-								class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white min-w-[200px]"
+								className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white min-w-[200px]"
 							>
 								<input
 									type="text"
 									id="hall_name"
-									class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primaryGreen focus:border-primaryGreen block w-full p-3"
+									className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primaryGreen focus:border-primaryGreen block w-full p-3"
 									placeholder="Main Town Hall"
 									required
 								/>
@@ -53,7 +53,7 @@ const ConcertLocationDetails = ({ setStep }) => {
 							<td class="px-6 py-4 min-w-[200px]">
 								<select
 									id="city"
-									class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primaryGreen focus:border-primaryGreen block w-full p-2.5"
+									className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primaryGreen focus:border-primaryGreen block w-full p-2.5"
 								>
 									<option selected>Choose a country</option>
 									<option value="US">United States</option>
@@ -62,11 +62,11 @@ const ConcertLocationDetails = ({ setStep }) => {
 									<option value="DE">Germany</option>
 								</select>
 							</td>
-							<td class="px-6 py-4">
-								<div class="relative max-w-sm">
-									<div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+							<td className="px-6 py-4">
+								<div className="relative max-w-sm">
+									<div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
 										<svg
-											class="w-4 h-4 text-gray-500 dark:text-gray-400"
+											className="w-4 h-4 text-gray-500 dark:text-gray-400"
 											aria-hidden="true"
 											xmlns="http://www.w3.org/2000/svg"
 											fill="currentColor"
@@ -78,13 +78,13 @@ const ConcertLocationDetails = ({ setStep }) => {
 									<input
 										datepicker
 										type="datetime-local"
-										class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 										placeholder="Select date"
 									/>
 								</div>
 							</td>
-							<td class="px-6 py-4">
-								<a href="#" class="font-medium text-red-600 hover:underline">
+							<td className="px-6 py-4">
+								<a href="#" className="font-medium text-red-600 hover:underline">
 									Remove
 								</a>
 							</td>

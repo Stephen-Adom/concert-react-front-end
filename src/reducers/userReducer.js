@@ -3,7 +3,7 @@ import {
     SIGN_UP_FAILURE,
     SIGN_IN_SUCCESS,
     SIGN_IN_FAILURE,
-  } from './userActions';
+  } from '../actions/userActions';
   
   const initialState = {
     token: null,

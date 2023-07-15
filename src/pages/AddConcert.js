@@ -3,7 +3,7 @@ import { MenuButton, BackButton } from "../components";
 import { NewConcertDetails, ConcertLocationDetails, ConfirmSubmissionDetails } from "../features";
 
 const AddConcert = () => {
-	const [step, setStep] = useState(2);
+	const [step, setStep] = useState(1);
 
 	const renderPage = () => {
 		switch (step) {

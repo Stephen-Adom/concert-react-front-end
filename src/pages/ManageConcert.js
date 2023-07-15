@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
+import { ConfirmPopup, confirmPopup } from "primereact/confirmpopup";
 import { MenuButton, BackButton } from "../components";
 
 const ManageConcert = () => {
@@ -55,13 +56,13 @@ const ManageConcert = () => {
 
 	const formatConcertName = (concert) => {
 		return (
-			<div className="flex item-center gap-2">
+			<div className="flex gap-2 item-center">
 				<img
 					className="w-16 h-16 rounded-full"
 					src="https://picsum.photos/500/500"
 					alt="Bonnie image"
 				/>
-				<span className="font-bold flex items-center">{concert.name}</span>
+				<span className="flex items-center font-bold">{concert.name}</span>
 			</div>
 		);
 	};
@@ -76,9 +77,13 @@ const ManageConcert = () => {
 
 	const concertAction = (concert) => {
 		return (
-			<a href="#" className="font-medium text-red-600 hover:underline text-sm">
+			<button
+				type="button"
+				className="text-sm font-medium text-red-600 hover:underline"
+				onClick={confirmDeletion}
+			>
 				remove
-			</a>
+			</button>
 		);
 	};
 
@@ -128,15 +133,32 @@ const ManageConcert = () => {
 
 	const header = renderHeader();
 
+	const confirmDeletion = (event) => {
+		confirmPopup({
+			target: event.currentTarget,
+			message: "Do you want to delete this event?",
+			icon: "pi pi-info-circle",
+			acceptClassName: "p-button-danger",
+			accept,
+		});
+	};
+
+	const accept = () => {
+		console.log("delete event");
+		// toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+	};
+
 	return (
-		<div className="w-full h-screen relative px-5 md:px-10">
+		<div className="relative w-full h-screen px-5 md:px-10">
+			<ConfirmPopup />
+
 			<section className="flex flex-col items-center justify-start h-full py-10 text-center md:justify-center md:py-0">
 				<h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
 					<MenuButton></MenuButton>
 					MANAGE CONCERTS
 				</h1>
 
-				<section className="concert-list mt-5">
+				<section className="mt-5 concert-list">
 					<div className="block w-full bg-white border border-gray-200 rounded-lg shadow">
 						<DataTable
 							value={concerts}

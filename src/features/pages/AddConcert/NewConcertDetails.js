@@ -1,103 +1,206 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "flowbite-react";
 import { PiCaretCircleRightLight } from "react-icons/pi";
+import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
+import { ErrorMessage } from "../../../components";
 
 const NewConcertDetails = ({ setStep }) => {
-	const handleSubmit = () => {
-		setStep(2);
+	const [image, setImage] = useState(null);
+	const form = useForm({
+		defaultValues: {
+			concert_name: "",
+			description: "",
+			band_name: "",
+			artist_name: "",
+			seats_no: "",
+			image: "",
+		},
+	});
+	const {
+		register,
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = form;
+	const onSubmit = (formData) => {
+		const newData = {
+			...formData,
+			image,
+		};
+		console.log(newData, "submit");
+		// setStep(2);
 	};
+
+	const errorBorder = (field) => {
+		if (errors && errors[field]) {
+			return `!border-red-500 !focus:ring-red-500 !focus:border-red-500 !placeholder-red-700`;
+		} else {
+			return `border-gray-300 focus:ring-primaryGreen focus:border-primaryGreen`;
+		}
+	};
+
+	// console.log(errors);
+	console.log(image);
 	return (
-		<form>
-			<div className="form-group">
-				<label for="concert_name" class="block mb-2 text-sm font-medium text-gray-900 text-left">
-					Name of Concert
-				</label>
-				<input
-					type="text"
-					id="concert_name"
-					class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primaryGreen focus:border-primaryGreen block w-full p-3"
-					placeholder="Rocking Band"
-					required
-				/>
-			</div>
-
-			<div className="form-group">
-				<label for="description" class="block mb-2 text-sm font-medium text-gray-900 text-left">
-					Concert Details
-				</label>
-				<textarea
-					id="description"
-					rows="4"
-					class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-sm border border-gray-300 focus:ring-primaryGreen focus:border-primaryGreen"
-					placeholder="Write your thoughts here..."
-				></textarea>
-			</div>
-
-			<div className="form-group grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-5">
-				<section>
-					<label for="artist_name" class="block mb-2 text-sm font-medium text-gray-900 text-left">
-						Name of Artist
+		<>
+			<form onSubmit={handleSubmit(onSubmit)} noValidate>
+				<div className="form-group">
+					<label
+						htmlFor="concert_name"
+						className="block mb-2 text-sm font-medium text-left text-gray-900"
+					>
+						Name of Concert
 					</label>
 					<input
 						type="text"
-						id="artist_name"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primaryGreen focus:border-primaryGreen block w-full p-3"
-						placeholder="Taylor Swift"
+						id="concert_name"
+						className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+							"concert_name"
+						)}`}
+						placeholder="Rocking Band"
 						required
+						{...register("concert_name", {
+							required: "Enter Concert Name",
+						})}
 					/>
-				</section>
 
-				<section>
-					<label for="band_name" class="block mb-2 text-sm font-medium text-gray-900 text-left">
-						Band Name
+					<ErrorMessage error={errors} field="concert_name"></ErrorMessage>
+				</div>
+
+				<div className="form-group">
+					<label
+						htmlFor="description"
+						className="block mb-2 text-sm font-medium text-left text-gray-900"
+					>
+						Concert Details
 					</label>
-					<input
-						type="text"
-						id="band_name"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primaryGreen focus:border-primaryGreen block w-full p-3"
-						placeholder="Swift Band"
-						required
-					/>
-				</section>
-			</div>
+					<textarea
+						id="description"
+						rows="4"
+						className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-sm border ${errorBorder(
+							"description"
+						)}`}
+						placeholder="Write your thoughts here..."
+						{...register("description", {
+							required: "Enter Concert Description",
+						})}
+					></textarea>
 
-			<div className="form-group grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-5">
-				<section>
-					<label for="seats_no" class="block mb-2 text-sm font-medium text-gray-900 text-left">
-						Seat Number
-					</label>
-					<input
-						type="number"
-						id="seats_no"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primaryGreen focus:border-primaryGreen block w-full p-3"
-						placeholder="000"
-						required
-					/>
-				</section>
+					<ErrorMessage error={errors} field="description"></ErrorMessage>
+				</div>
 
-				<section>
-					<label class="block mb-2 text-sm font-medium text-gray-900 text-left" for="file_input">
-						Concert Image
-					</label>
-					<input
-						class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-						id="file_input"
-						type="file"
-					/>
-				</section>
-			</div>
+				<div className="grid grid-cols-1 gap-5 form-group sm:grid-cols-1 md:grid-cols-2">
+					<section>
+						<label
+							htmlFor="artist_name"
+							className="block mb-2 text-sm font-medium text-left text-gray-900"
+						>
+							Name of Artist
+						</label>
+						<input
+							type="text"
+							id="artist_name"
+							className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+								"artist_name"
+							)}`}
+							placeholder="Taylor Swift"
+							required
+							{...register("artist_name", {
+								required: "Enter Artist Name",
+							})}
+						/>
+						<ErrorMessage error={errors} field="artist_name"></ErrorMessage>
+					</section>
 
-			<div className="form-group flex items-center justify-center">
-				<Button
-					className="bg-primaryGreen py-[0.3rem] hover:!bg-lime-600 px-4"
-					pill
-					onClick={() => handleSubmit()}
-				>
-					<p className="text-[0.79rem]">Continue</p>
-					<PiCaretCircleRightLight className="ml-3 h-6 w-6" />
-				</Button>
-			</div>
-		</form>
+					<section>
+						<label
+							htmlFor="band_name"
+							className="block mb-2 text-sm font-medium text-left text-gray-900"
+						>
+							Band Name
+						</label>
+						<input
+							type="text"
+							id="band_name"
+							className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+								"band_name"
+							)}`}
+							placeholder="Swift Band"
+							required
+							{...register("band_name", {
+								required: "Enter band name",
+							})}
+						/>
+						<ErrorMessage error={errors} field="band_name"></ErrorMessage>
+					</section>
+				</div>
+
+				<div className="grid grid-cols-1 gap-5 form-group sm:grid-cols-1 md:grid-cols-2">
+					<section>
+						<label
+							htmlFor="seats_no"
+							className="block mb-2 text-sm font-medium text-left text-gray-900"
+						>
+							Seat Number
+						</label>
+						<input
+							type="number"
+							id="seats_no"
+							className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+								"seats_no"
+							)}`}
+							placeholder="000"
+							required
+							{...register("seats_no", {
+								required: "Enter seat number",
+								min: {
+									value: 5,
+									message: "Enter at least 5 seats",
+								},
+							})}
+						/>
+						<ErrorMessage error={errors} field="seats_no"></ErrorMessage>
+					</section>
+
+					<section>
+						<label
+							className="block mb-2 text-sm font-medium text-left text-gray-900"
+							htmlFor="image"
+						>
+							Concert Image
+						</label>
+						<input
+							className={`block w-full text-sm text-gray-900 border rounded-sm cursor-pointer bg-gray-50 ${errorBorder(
+								"image"
+							)}`}
+							id="image"
+							type="file"
+							{...register("image", {
+								required: "Upload concert image",
+								onChange: (event) => {
+									console.log(event);
+									setImage(event.target.files[0]);
+								},
+							})}
+						/>
+						<ErrorMessage error={errors} field="image"></ErrorMessage>
+					</section>
+				</div>
+
+				<div className="flex items-center justify-center form-group">
+					<Button
+						type="submit"
+						className="bg-primaryGreen py-[0.3rem] hover:!bg-lime-600 px-4"
+						pill
+					>
+						<p className="text-[0.79rem]">Continue</p>
+						<PiCaretCircleRightLight className="w-6 h-6 ml-3" />
+					</Button>
+				</div>
+			</form>
+			<DevTool control={control} />
+		</>
 	);
 };
 

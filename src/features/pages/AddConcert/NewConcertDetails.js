@@ -29,7 +29,7 @@ const NewConcertDetails = ({ setStep }) => {
 			image,
 		};
 		console.log(newData, "submit");
-		// setStep(2);
+		setStep(2);
 	};
 
 	const errorBorder = (field) => {
@@ -154,6 +154,7 @@ const NewConcertDetails = ({ setStep }) => {
 							required
 							{...register("seats_no", {
 								required: "Enter seat number",
+								valueAsNumber: true,
 								min: {
 									value: 5,
 									message: "Enter at least 5 seats",

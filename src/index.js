@@ -8,12 +8,16 @@ import "./index.css";
 import "swiper/css";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes/routes";
+import { store } from "./store/store";
+import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<Provider store={store}>
+			<RouterProvider router={router} />
+		</Provider>
 	</React.StrictMode>
 );
 

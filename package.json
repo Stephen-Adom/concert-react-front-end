@@ -11,6 +11,7 @@
 		"date-fns": "^2.30.0",
 		"flowbite": "^1.7.0",
 		"flowbite-react": "^0.4.11",
+		"localforage": "^1.10.0",
 		"primereact": "^9.6.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",

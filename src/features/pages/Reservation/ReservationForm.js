@@ -16,7 +16,7 @@ const ReservationForm = () => {
   const [selectedConcert, setSelectedConcert] = useState(null);
   const [selectedCity, setSelectedCity] = useState("");
   const [concertDetails, setConcertDetails] = useState(null);
-  const [selectedConcertHall, setSelectedConcertHall] = useState(null); // New state variable to store selected concert hall
+  const [selectedConcertHall, setSelectedConcertHall] = useState(null); 
   const [reservationStatus, setReservationStatus] = useState(null);
 
 
@@ -69,7 +69,6 @@ const ReservationForm = () => {
 
   const handleCityChange = (selectedCityName) => {
     setSelectedCity(selectedCityName);
-    // Find the concert hall ID based on the selected city name
     const selectedConcertHall = concertDetails?.concert_halls.find(
       (hall) => hall.city_name === selectedCityName
     );
@@ -233,9 +232,6 @@ const ReservationForm = () => {
             <ErrorMessage error={errors} field="band_name" />
           </section>
         </div>
-
-
-              {/* City selection */}
               <div className="mb-5">
                 <label htmlFor="city_name" className="block mb-2 text-sm font-medium text-left text-gray-900">
                   Select City

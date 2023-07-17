@@ -11,11 +11,9 @@ const Home = () => {
 					LATEST CONCERTS
 				</h1>
 				<p className="mt-2 text-sm font-semibold text-primaryGrey">Please select a concert</p>
-
-				<ConcertSliderList></ConcertSliderList>
-			</section>
-		</div>
-	);
-};
+      <ConcertSliderList />
+    </section>
+  </div>
+);
 
 export default Home;

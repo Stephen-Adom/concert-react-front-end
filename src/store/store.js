@@ -1,8 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './userSlice';
 import { concertSlice } from "../features";
 
-export const store = configureStore({
-	reducer: {
-		concert: concertSlice,
-	},
+const store = configureStore({
+  reducer: {
+    users: userReducer,
+    concert: concertSlice,
+  },
 });
+
+export default store;

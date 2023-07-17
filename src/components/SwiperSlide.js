@@ -40,5 +40,4 @@ const SwiperSlide = () => {
 		</div>
 	);
 };
-
 export default SwiperSlide;

@@ -1,74 +1,58 @@
-import { createBrowserRouter } from 'react-router-dom';
-import App from '../App';
+import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
+import { AppLayout, AuthLayout } from "../features";
 import { Home, ConcertDetails, AddConcert, ManageConcert } from "../pages";
-import SignIn from '../features/pages/authentication/SignIn';
-import SignUp from '../features/pages/authentication/SignUp';
-import Welcome from '../pages/Welcome';
+import SignIn from "../features/pages/authentication/SignIn";
+import SignUp from "../features/pages/authentication/SignUp";
+import Welcome from "../pages/Welcome";
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Welcome />,
-    children: [
-      {
-        index: true,
-        element: <Welcome />,
-      },
-    ],
-  },
-  {
-    path: '/home',
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-    ],
-  },
-  {
-    path: '/signin',
-    element: <SignIn />,
-    children: [
-      {
-        index: true,
-        element: <SignIn />,
-      },
-    ],
-  },
-  {
-    path: '/signup',
-    element: <SignUp />,
-    children: [
-      {
-        index: true,
-        element: <SignUp />,
-      },
-    ],
-  },
-   	{
+	{
 		path: "/",
-		element: <App />,
+		element: <AppLayout />,
 		children: [
 			{
+				index: true,
+				element: <Welcome />,
+			},
+			{
+				path: "auth",
+				element: <AuthLayout />,
+				children: [
+					{
+						path: "signin",
+						element: <SignIn />,
+					},
+					{
+						path: "signup",
+						element: <SignUp />,
+					},
+				],
+			},
+			{
 				path: "home",
-				element: <Home />,
-			},
-			{
-				path: "concerts/:id",
-				element: <ConcertDetails />,
-			},
-			{
-				path: "concert/add",
-				element: <AddConcert />,
-			},
-			{
-				path: "concert/update",
-				element: <ManageConcert />,
+				element: <App />,
+				children: [
+					{
+						index: true,
+						element: <Home />,
+					},
+					{
+						path: "concerts/:id",
+						element: <ConcertDetails />,
+					},
+					{
+						path: "concert/add",
+						element: <AddConcert />,
+					},
+					{
+						path: "concert/update",
+						element: <ManageConcert />,
+					},
+				],
 			},
 		],
 	},
-                                   
 ]);
 
 export default router;

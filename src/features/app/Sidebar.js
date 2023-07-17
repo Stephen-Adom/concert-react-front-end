@@ -15,19 +15,19 @@ const Sidebar = () => {
 		},
 		{
 			label: "MAKE RESERVATION",
-			path: "/home/make-reservation",
+			path: "/make-reservation",
 		},
 		{
 			label: "MY RESERVATIONS",
-			path: "/home/my-reservations",
+			path: "/my-reservations",
 		},
 		{
 			label: "ADD CONCERT",
-			path: "/home/concert/add",
+			path: "/concert/add",
 		},
 		{
 			label: "DELETE CONCERT",
-			path: "/home/concert/update",
+			path: "/concert/update",
 		},
 	];
 

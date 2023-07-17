@@ -158,7 +158,7 @@ const ManageConcert = () => {
 					MANAGE CONCERTS
 				</h1>
 
-				<section className="mt-5 concert-list">
+				<section className="w-full mt-5 overflow-x-auto concert-list">
 					<div className="block w-full bg-white border border-gray-200 rounded-lg shadow">
 						<DataTable
 							value={concerts}

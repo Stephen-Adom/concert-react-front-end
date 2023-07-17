@@ -50,7 +50,7 @@ const AddConcert = () => {
 					CREATE CONCERT EVENT
 				</h1>
 
-				<div className="w-full md:!w-[95%] lg:!w-[75%] xl:!w-[75%] mx-auto mt-10">
+				<div className="w-full md:!w-[95%] lg:!w-[80%] xl:!w-[80%] mx-auto mt-10">
 					<ol className="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
 						<li
 							className={`${setStepperLinkStyle()} ${

@@ -6,14 +6,12 @@ import { DevTool } from "@hookform/devtools";
 import { ErrorMessage } from "../../../components";
 
 const NewConcertDetails = ({ setStep }) => {
-	const [image, setImage] = useState(null);
 	const form = useForm({
 		defaultValues: {
 			concert_name: "",
 			description: "",
 			band_name: "",
-			artist_name: "",
-			seats_no: "",
+			artist: "",
 			image: "",
 		},
 	});
@@ -40,8 +38,6 @@ const NewConcertDetails = ({ setStep }) => {
 		}
 	};
 
-	// console.log(errors);
-	console.log(image);
 	return (
 		<>
 			<form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -93,24 +89,24 @@ const NewConcertDetails = ({ setStep }) => {
 				<div className="grid grid-cols-1 gap-5 form-group sm:grid-cols-1 md:grid-cols-2">
 					<section>
 						<label
-							htmlFor="artist_name"
+							htmlFor="artist"
 							className="block mb-2 text-sm font-medium text-left text-gray-900"
 						>
 							Name of Artist
 						</label>
 						<input
 							type="text"
-							id="artist_name"
+							id="artist"
 							className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-								"artist_name"
+								"artist"
 							)}`}
 							placeholder="Taylor Swift"
 							required
-							{...register("artist_name", {
+							{...register("artist", {
 								required: "Enter Artist Name",
 							})}
 						/>
-						<ErrorMessage error={errors} field="artist_name"></ErrorMessage>
+						<ErrorMessage error={errors} field="artist"></ErrorMessage>
 					</section>
 
 					<section>
@@ -136,58 +132,23 @@ const NewConcertDetails = ({ setStep }) => {
 					</section>
 				</div>
 
-				<div className="grid grid-cols-1 gap-5 form-group sm:grid-cols-1 md:grid-cols-2">
-					<section>
-						<label
-							htmlFor="seats_no"
-							className="block mb-2 text-sm font-medium text-left text-gray-900"
-						>
-							Seat Number
-						</label>
-						<input
-							type="number"
-							id="seats_no"
-							className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-								"seats_no"
-							)}`}
-							placeholder="000"
-							required
-							{...register("seats_no", {
-								required: "Enter seat number",
-								valueAsNumber: true,
-								min: {
-									value: 5,
-									message: "Enter at least 5 seats",
-								},
-							})}
-						/>
-						<ErrorMessage error={errors} field="seats_no"></ErrorMessage>
-					</section>
-
-					<section>
-						<label
-							className="block mb-2 text-sm font-medium text-left text-gray-900"
-							htmlFor="image"
-						>
-							Concert Image
-						</label>
-						<input
-							className={`block w-full text-sm text-gray-900 border rounded-sm cursor-pointer bg-gray-50 ${errorBorder(
-								"image"
-							)}`}
-							id="image"
-							type="file"
-							{...register("image", {
-								required: "Upload concert image",
-								onChange: (event) => {
-									console.log(event);
-									setImage(event.target.files[0]);
-								},
-							})}
-						/>
-						<ErrorMessage error={errors} field="image"></ErrorMessage>
-					</section>
-				</div>
+				<section className="form-group">
+					<label className="block mb-2 text-sm font-medium text-left text-gray-900" htmlFor="image">
+						Concert Image(Url)
+					</label>
+					<input
+						className={`block w-full text-sm text-gray-900 border rounded-sm cursor-pointer bg-gray-50 ${errorBorder(
+							"image"
+						)}`}
+						id="image"
+						type="text"
+						placeholder="https://example.com/image.jpg"
+						{...register("image", {
+							required: "Upload concert image",
+						})}
+					/>
+					<ErrorMessage error={errors} field="image"></ErrorMessage>
+				</section>
 
 				<div className="flex items-center justify-center form-group">
 					<Button

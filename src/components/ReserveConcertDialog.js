@@ -39,7 +39,7 @@ const ReserveConcertDialog = ({ visible, setVisible }) => {
 			header="Make a Reservation"
 			visible={visible}
 			position="bottom"
-			style={{ width: "30vw" }}
+			className="w-[100vw] sm:w-[100vw] md:w-[40vw] lg:w-[30vw]"
 			onHide={setVisible}
 			footer={footerContent}
 			draggable={false}

@@ -8,6 +8,7 @@
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
 		"axios": "^1.4.0",
+		"date-fns": "^2.30.0",
 		"flowbite": "^1.7.0",
 		"flowbite-react": "^0.4.11",
 		"primereact": "^9.6.0",

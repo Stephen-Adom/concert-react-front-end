@@ -7,8 +7,15 @@ import { format } from "date-fns";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { SidebarLink } from "../../components";
 import localforage from "localforage";
+import { authSelector, clearStore } from "../../features/storeSlice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+	const { currentUser } = useSelector(authSelector);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const routes = [
 		{
 			label: "CONCERTS",
@@ -39,7 +46,12 @@ const Sidebar = () => {
 			</li>
 		));
 
-	const accept = () => {};
+	const accept = () => {
+		dispatch(clearStore());
+		localforage.clear().then((_) => {
+			navigate("/auth/signin");
+		});
+	};
 
 	const confirmSignout = () => {
 		confirmDialog({
@@ -86,8 +98,12 @@ const Sidebar = () => {
 							</span>
 						</div>
 						<div className="font-medium dark:text-white">
-							<div className="text-sm">Jese Leos</div>
-							<div className="text-xs text-gray-500">leos@gmail.com</div>
+							{currentUser && (
+								<>
+									<div className="text-sm">{currentUser.name}</div>
+									<div className="text-xs text-gray-500">leos@gmail.com</div>
+								</>
+							)}
 						</div>
 
 						<button

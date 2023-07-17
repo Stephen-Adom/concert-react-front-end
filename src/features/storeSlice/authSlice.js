@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	currentUser: null,
-	loggedIn: false,
 	error: null,
 	loading: false,
 	token: null,
@@ -27,10 +26,17 @@ const authSlice = createSlice({
 			console.log(action, "from slice");
 			state.error = action.payload;
 		},
+		clearStore: (state) => {
+			state.currentUser = null;
+			state.token = null;
+			state.loading = false;
+			state.error = null;
+		},
 	},
 });
 
-export const { toggleLoading, setErrors, setAuthToken, setCurrentUser } = authSlice.actions;
+export const { toggleLoading, setErrors, setAuthToken, setCurrentUser, clearStore } =
+	authSlice.actions;
 
 export const authSelector = (state) => state.auth;
 

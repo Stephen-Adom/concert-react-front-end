@@ -1,18 +1,21 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentUser, setAuthToken } from "../../features/storeSlice/authSlice";
-import { Toast } from "primereact/toast";
+import { setCurrentUser, setAuthToken, authSelector } from "../../features/storeSlice/authSlice";
+import toast, { Toaster } from "react-hot-toast";
 import localforage from "localforage";
 
 const AppLayout = () => {
 	const dispatch = useDispatch();
 
-	const error = useSelector((state) => state.auth.error);
-	const toast = useRef(null);
+	const { error } = useSelector(authSelector);
+	// const toast = useRef(null);
 	const show = (errors) => {
 		errors.forEach((error) => {
-			toast?.current?.show({ severity: "error", summary: "Error", detail: error, life: 4000 });
+			toast.error(error, {
+				position: "top-center",
+				duration: 4000,
+			});
 		});
 	};
 
@@ -40,7 +43,7 @@ const AppLayout = () => {
 
 	return (
 		<>
-			<Toast ref={toast} />
+			<Toaster />
 			<Outlet />
 		</>
 	);

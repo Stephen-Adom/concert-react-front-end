@@ -6,6 +6,7 @@ import { LiaGoogle } from "react-icons/lia";
 import { format } from "date-fns";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { SidebarLink } from "../../components";
+import localforage from "localforage";
 
 const Sidebar = () => {
 	const routes = [

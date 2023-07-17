@@ -5,14 +5,20 @@ import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { ErrorMessage } from "../../../components";
 import { regiserUser } from "../../../services/services";
-import { setErrors, toggleLoading, setAuthToken, setCurrentUser } from "../../storeSlice/authSlice";
+import {
+	setErrors,
+	toggleLoading,
+	setAuthToken,
+	setCurrentUser,
+	authSelector,
+} from "../../storeSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import localforage from "localforage";
 
 const SignUp = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const isLoading = useSelector((state) => state.auth.loading);
+	const { isLoading } = useSelector(authSelector);
 
 	const form = useForm({
 		defaultValues: {

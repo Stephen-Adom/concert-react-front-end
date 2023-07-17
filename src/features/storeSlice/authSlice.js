@@ -32,4 +32,6 @@ const authSlice = createSlice({
 
 export const { toggleLoading, setErrors, setAuthToken, setCurrentUser } = authSlice.actions;
 
+export const authSelector = (state) => state.auth;
+
 export default authSlice.reducer;

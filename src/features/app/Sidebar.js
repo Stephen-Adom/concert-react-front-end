@@ -10,6 +10,7 @@ import localforage from "localforage";
 import { authSelector, clearStore } from "../../features/storeSlice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
 	const { currentUser } = useSelector(authSelector);
@@ -50,6 +51,10 @@ const Sidebar = () => {
 		dispatch(clearStore());
 		localforage.clear().then((_) => {
 			navigate("/auth/signin");
+			toast.success("You have signed out", {
+				position: "top-center",
+				duration: 4000,
+			});
 		});
 	};
 

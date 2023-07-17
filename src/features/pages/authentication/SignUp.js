@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import { ErrorMessage } from "../../../components";
 import { regiserUser } from "../../../services/services";
 import {
@@ -18,7 +17,7 @@ import localforage from "localforage";
 const SignUp = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { isLoading } = useSelector(authSelector);
+	const { loading } = useSelector(authSelector);
 
 	const form = useForm({
 		defaultValues: {
@@ -66,9 +65,9 @@ const SignUp = () => {
 						dispatch(toggleLoading(false));
 						navigate("/home");
 					});
-				console.log(response, "response");
 			})
 			.catch((error) => {
+				dispatch(toggleLoading(false));
 				dispatch(setErrors(error.response.data));
 			});
 	};
@@ -202,16 +201,16 @@ const SignUp = () => {
 							<ErrorMessage error={errors} field="password_confirmation"></ErrorMessage>
 						</div>
 						<button
-							disabled={isLoading}
+							disabled={loading}
 							type="submit"
 							className="text-white bg-primaryGreen hover:bg-primaryGreenDark focus:ring-4 focus:outline-none font-medium rounded-sm text-sm w-full sm:w-auto px-5 py-2.5 text-center"
 						>
-							{isLoading ? (
+							{loading ? (
 								<>
 									<svg
 										aria-hidden="true"
 										role="status"
-										class="inline w-4 h-4 mr-3 text-white animate-spin"
+										className="inline w-4 h-4 mr-3 text-white animate-spin"
 										viewBox="0 0 100 101"
 										fill="none"
 										xmlns="http://www.w3.org/2000/svg"
@@ -237,7 +236,6 @@ const SignUp = () => {
 					</form>
 				</div>
 			</div>
-			<DevTool control={control} />
 		</>
 	);
 };

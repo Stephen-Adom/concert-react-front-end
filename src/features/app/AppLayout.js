@@ -11,12 +11,19 @@ const AppLayout = () => {
 	const { error } = useSelector(authSelector);
 	// const toast = useRef(null);
 	const show = (errors) => {
-		errors.forEach((error) => {
-			toast.error(error, {
+		if (typeof errors === "string") {
+			toast.error(errors, {
 				position: "top-center",
 				duration: 4000,
 			});
-		});
+		} else {
+			errors.forEach((error) => {
+				toast.error(error, {
+					position: "top-center",
+					duration: 4000,
+				});
+			});
+		}
 	};
 
 	useEffect(() => {

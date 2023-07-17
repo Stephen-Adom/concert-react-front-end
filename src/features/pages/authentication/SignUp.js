@@ -2,43 +2,39 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import {useForm} from 'react-hook-form'
+import { DevTool } from "@hookform/devtools";
+import { ErrorMessage } from "../../../components";
 
 const SignUp = () => {
 	const navigate = useNavigate();
-	const [formData, setFormData] = useState({
-		name: "",
-		userName: "",
-		email: "",
-		password: "",
-		confirmPassword: "",
+	const form = useForm({
+		defaultValues: {
+			name: "",
+			username: "",
+			email: "",
+			password: "",
+			password_confirmation: "",
+		}
 	});
-	const [error] = useState(true);
 
-	const handleChange = (e) => {
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
+	const {register, control, formState: {errors}, handleSubmit} = form
 
-	const handleFormSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const response = await axios.post("http://localhost:3000/api/v1/register", {
-				user: {
-					name: formData.name,
-					username: formData.userName,
-					email: formData.email,
-					password: formData.password,
-					password_confirmation: formData.confirmPassword,
-				},
-			});
-			navigate("/home");
-		} catch (error) {
-			const { message } = error.response.data;
-			document.getElementById("show-error").innerHTML = message;
+	const errorBorder = (field) => {
+		if (errors && errors[field]) {
+			return `!border-red-500 !focus:ring-red-500 !focus:border-red-500 !placeholder-red-700`;
+		} else {
+			return `border-gray-300 focus:ring-primaryGreen focus:border-primaryGreen`;
 		}
 	};
 
+	const handleFormSubmit = (formData) => {
+		console.log(formData);
+	};
+
 	return (
-		<div
+		<>
+				<div
 			className="bg-center bg-no-repeat bg-cover"
 			style={{
 				backgroundImage:
@@ -49,97 +45,117 @@ const SignUp = () => {
 				<h1 className="mb-8 text-4xl font-bold text-white">Sign Up</h1>
 				<form
 					className="w-full max-w-lg p-12 bg-gray-100 border border-gray-300 rounded-lg bg-opacity-10"
-					onSubmit={handleFormSubmit}
+					onSubmit={handleSubmit(handleFormSubmit)}
+					noValidate
 				>
 					<div className="mb-4">
 						<label
 							htmlFor="name"
 							className="block mb-2 font-bold text-white text-md dark:text-white"
 						>
-							Your Name
+							Full Name
 						</label>
 						<input
 							type="text"
 							id="name"
-							name="name"
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primaryGreen focus:border-primaryGreen block w-full p-2.5"
-							placeholder="Your name here"
-							required
-							value={formData.name}
-							onChange={handleChange}
+							className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
+								"name"
+							)}`}
+							placeholder="Your full name"
+							{...register("name", { required: 'Enter your full name' })}
 						/>
+						<ErrorMessage error={errors} field="name"></ErrorMessage>
 					</div>
 					<div className="mb-4">
 						<label
 							htmlFor="username"
 							className="block mb-2 font-bold text-white text-md dark:text-white"
 						>
-							Your Username
+							Username
 						</label>
 						<input
 							type="text"
 							id="username"
-							name="userName"
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primaryGreen focus:border-primaryGreen block w-full p-2.5"
+							className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
+								"username"
+							)}`}
 							placeholder="UserName00"
-							value={formData.userName}
-							onChange={handleChange}
-							required
+							{...register("username", { required: 'Enter your username' })}
 						/>
+
+							<ErrorMessage error={errors} field="username"></ErrorMessage>
 					</div>
 					<div className="mb-4">
 						<label
 							htmlFor="email"
 							className="block mb-2 font-bold text-white text-md dark:text-white"
 						>
-							Your Email
+							Email
 						</label>
 						<input
 							type="email"
 							id="email"
-							name="email"
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primaryGreen focus:border-primaryGreen block w-full p-2.5"
-							placeholder="name@gmail.com"
-							value={formData.email}
-							onChange={handleChange}
-							required
+							className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
+								"email"
+							)}`}
+							placeholder="example@domain.com"
+							{...register("email", { required: 'Enter your email address',
+								pattern: {
+									value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+									message: 'Enter a valid email address'
+								}
+							 })}
 						/>
+						<ErrorMessage error={errors} field="email"></ErrorMessage>
 					</div>
 					<div className="mb-4">
 						<label
 							htmlFor="password"
 							className="block mb-2 font-bold text-white text-md dark:text-white"
 						>
-							Your Password
+							Password
 						</label>
 						<input
 							type="password"
 							id="password"
-							name="password"
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primaryGreen focus:border-primaryGreen block w-full p-2.5"
+							className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
+								"password"
+							)}`}
 							placeholder="••••••••"
-							value={formData.password}
-							onChange={handleChange}
-							required
+							{...register("password", { required: 'Enter your password',
+							 minLength: {
+								 value: 8,
+								 message: 'Password must be at least 8 characters'
+							 }
+							 })}
 						/>
+						<ErrorMessage error={errors} field="password"></ErrorMessage>
 					</div>
 					<div className="mb-4">
 						<label
-							htmlFor="confirm-password"
+							htmlFor="password_confirmation"
 							className="block mb-2 font-bold text-white text-md dark:text-white"
 						>
-							Confirm Your Password
+							Confirm Password
 						</label>
 						<input
 							type="password"
-							id="confirm-password"
-							name="confirmPassword"
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primaryGreen focus:border-primaryGreen block w-full p-2.5"
+							id="password_confirmation"
+							className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
+								"password_confirmation"
+							)}`}
 							placeholder="••••••••"
-							value={formData.confirmPassword}
-							onChange={handleChange}
-							required
+							{...register("password_confirmation", { required: 'Confirm your password',
+							 minLength: {
+								 value: 8,
+								 message: 'Password must be at least 8 characters'
+							 },
+							 validate: (fieldValue) => {
+								return fieldValue === control._formValues.password ||	'Passwords do not match'
+							 }
+							 })}
 						/>
+						<ErrorMessage error={errors} field="password_confirmation"></ErrorMessage>
 					</div>
 					<button
 						type="submit"
@@ -147,14 +163,15 @@ const SignUp = () => {
 					>
 						Submit
 					</button>
-					<Link to="/" class="text-primaryGreen font-medium py-2 flex items-center gap-2">
+					<Link to="/" className="flex items-center gap-2 py-2 font-medium text-primaryGreen">
 						<FaArrowLeft /> Go Back
 					</Link>
 				</form>
-				{error === true && <p id="show-error" />}
-				{error === false && <p>Please enter valid username and password</p>}
 			</div>
 		</div>
+			<DevTool control={control} />
+		</>
+
 	);
 };
 

@@ -7,20 +7,28 @@ import { LiaGoogle } from 'react-icons/lia';
 import { SidebarLink } from '../../components';
 
 const Sidebar = () => {
-  const routes = [
-    {
-      label: 'CONCERTS',
-      path: '/home',
-    },
-    {
-      label: 'MAKE RESERVATION',
-      path: 'make-reservation',
-    },
-    {
-      label: 'MY RESERVATIONS',
-      path: 'my-reservations',
-    },
-  ];
+	const routes = [
+		{
+			label: "CONCERTS",
+			path: "home",
+		},
+		{
+			label: "MAKE RESERVATION",
+			path: "make-reservation",
+		},
+		{
+			label: "MY RESERVATIONS",
+			path: "my-reservations",
+		},
+		{
+			label: "ADD CONCERT",
+			path: "concert/add",
+		},
+		{
+			label: "DELETE CONCERT",
+			path: "concert/update",
+		},
+	];
 
   const renderRoutes = () => routes.map((route, index) => (
     <li key={index}>

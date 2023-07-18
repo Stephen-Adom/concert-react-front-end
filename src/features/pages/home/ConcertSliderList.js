@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { CustomSwiperSlide, SwiperNextButton, SwiperPrevButton } from "../../../components";
+import {
+	CustomSwiperSlide,
+	SwiperNextButton,
+	SwiperPrevButton,
+	LatestConcertLoader,
+} from "../../../components";
 import { useSelector } from "react-redux";
 import { concertSelector } from "../../storeSlice/concertSlice";
 
@@ -57,7 +62,7 @@ const ConcertSliderList = () => {
 			<SwiperNextButton swiper={swiperInstance} disableNextButton={disableNextButton} />
 
 			<div className="flex items-center justify-center swiper-wrapper w-full md:!w-[70%] lg:!w-[70%] xl:!w-[70%] mx-auto">
-				{latestConcerts.length && (
+				{latestConcerts.length ? (
 					<Swiper
 						spaceBetween={40}
 						slidesPerView={toggleSlidesPerView()}
@@ -72,6 +77,8 @@ const ConcertSliderList = () => {
 							);
 						})}
 					</Swiper>
+				) : (
+					<LatestConcertLoader></LatestConcertLoader>
 				)}
 			</div>
 		</div>

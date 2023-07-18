@@ -10,6 +10,7 @@ const ConcertLocationDetails = ({ setStep }) => {
 	const [hallInfo] = useState({
 		hall_name: "",
 		city: "",
+		seats_no: 0,
 		event_date: "",
 	});
 
@@ -65,6 +66,9 @@ const ConcertLocationDetails = ({ setStep }) => {
 							</th>
 							<th scope="col" className="px-6 py-3">
 								City
+							</th>
+							<th scope="col" className="px-6 py-3">
+								Total Seats
 							</th>
 							<th scope="col" className="px-6 py-3">
 								Event Date & Time
@@ -134,6 +138,37 @@ const ConcertLocationDetails = ({ setStep }) => {
 											field="city"
 										></ErrorMessage>
 									</td>
+									<td className="px-6 py-4 min-w-[200px]">
+										<section>
+											<input
+												type="number"
+												id="seats_no"
+												className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+													"seats_no",
+													index
+												)}`}
+												placeholder="000"
+												required
+												{...register("seats_no", {
+													required: "Enter seat number",
+													valueAsNumber: true,
+													min: {
+														value: 5,
+														message: "Enter at least 5 seats",
+													},
+												})}
+											/>
+											<ErrorMessage
+												error={
+													Object.keys(errors).length &&
+													errors?.concert_halls?.[index] !== undefined &&
+													errors?.concert_halls?.[index]
+												}
+												field="seats_no"
+											></ErrorMessage>
+										</section>
+									</td>
+
 									<td className="px-6 py-4">
 										<input
 											type="datetime-local"

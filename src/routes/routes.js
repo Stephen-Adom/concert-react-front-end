@@ -11,6 +11,7 @@ import SignUp from "../features/pages/authentication/SignUp";
 import Welcome from "../pages/Welcome";
 import ReservationForm from "../features/pages/Reservation/ReservationForm";
 import { LoadingPage } from "../components";
+import MyReservations from "../features/pages/Reservation/MyReservations";
 
 const router = createBrowserRouter([
 	{
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
 					{
 						path: "concert/make-reservation",
 						element: <ReservationForm />,
+					},
+					{
+						path: "concert/my-reservations",
+						element: <MyReservations />,
 					},
 					{
 						path: "concert/update",

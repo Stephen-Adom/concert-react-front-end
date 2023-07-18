@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { CustomSwiperSlide, SwiperNextButton, SwiperPrevButton } from '../../../components';
 
 const ConcertSliderList = () => {
+  const [concerts, setConcerts] = useState([]);
   const [swiperInstance, setSwiperInstance] = useState();
   const [disablePrevButton, setDisablePrevButton] = useState(true);
   const [disableNextButton, setDisableNextButton] = useState(false);
@@ -22,18 +23,13 @@ const ConcertSliderList = () => {
     }
   };
 
-  const toggleSlidesPerView = () => {
-    if (screenWidth === 'xsmall') {
-      return 1;
-    } if (screenWidth === 'small') {
-      return 1;
-    } if (screenWidth === 'medium') {
-      return 2;
-    }
-    return 3;
-  };
-
   useEffect(() => {
+    // Fetch concert data from API
+    fetch('http://localhost:3000/api/v1/concerts')
+      .then(response => response.json())
+      .then(data => setConcerts(data))
+      .catch(error => console.error('Error fetching concerts:', error));
+
     // check screen sizes
     if (window.innerWidth < 320) {
       setScreenWidth('xsmall');
@@ -45,6 +41,17 @@ const ConcertSliderList = () => {
       setScreenWidth('large');
     }
   }, []);
+
+  const toggleSlidesPerView = () => {
+    if (screenWidth === 'xsmall') {
+      return 1;
+    } if (screenWidth === 'small') {
+      return 1;
+    } if (screenWidth === 'medium') {
+      return 2;
+    }
+    return 3;
+  };
 
   return (
     <div className="relative w-full gap-5 mt-10 concert-swiper-container">
@@ -64,27 +71,11 @@ const ConcertSliderList = () => {
           onSlideChange={(e) => slideChange(e)}
           onSwiper={(swiper) => setSwiperInstance(swiper)}
         >
-          <SwiperSlide>
-            <CustomSwiperSlide />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CustomSwiperSlide />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CustomSwiperSlide />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CustomSwiperSlide />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CustomSwiperSlide />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CustomSwiperSlide />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CustomSwiperSlide />
-          </SwiperSlide>
+          {concerts.map(concert => (
+            <SwiperSlide key={concert.id}>
+              <CustomSwiperSlide concert={concert} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

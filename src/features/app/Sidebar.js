@@ -24,7 +24,7 @@ const Sidebar = () => {
 		},
 		{
 			label: "MAKE RESERVATION",
-			path: "/make-reservation",
+			path: "/concert/make-reservation",
 		},
 		{
 			label: "MY RESERVATIONS",

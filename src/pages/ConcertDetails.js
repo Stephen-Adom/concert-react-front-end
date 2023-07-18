@@ -1,11 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "flowbite-react";
 import { PiCaretCircleRightLight } from "react-icons/pi";
 import { TbCalendarPlus } from "react-icons/tb";
+import { useParams } from "react-router-dom";
 import { ConcertTableDetails, BackButton, MenuButton, ReserveConcertDialog } from "../components";
+import { fetchConcert } from "../services/services";
 
 const ConcertDetails = () => {
+	const { id } = useParams();
 	const [visible, setVisible] = useState(false);
+
+	useEffect(() => {
+		if (id) {
+			fetchConcert(id)
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
+	}, [id]);
 
 	return (
 		<div className="relative w-full h-screen px-5 md:px-10">

@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ConcertSliderList } from "../features";
 import { MenuButton } from "../components";
+import { fetchAllConcerts } from "../services/services";
+import { useDispatch } from "react-redux";
+import { saveLatestConcerts, setErrors } from "../features/storeSlice/concertSlice";
 
 const Home = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		fetchAllConcerts()
+			.then((response) => {
+				dispatch(saveLatestConcerts(response));
+			})
+			.catch((error) => {
+				dispatch(setErrors(error));
+			});
+	}, []);
 	return (
 		<div className="w-full h-screen">
 			<section className="flex flex-col items-center justify-start h-full py-10 text-center md:justify-center md:py-0">

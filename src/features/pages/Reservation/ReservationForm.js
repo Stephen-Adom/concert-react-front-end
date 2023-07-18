@@ -1,35 +1,38 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { MenuButton } from "../../../components";
 import { Button } from "flowbite-react";
 import { PiCaretCircleRightLight } from "react-icons/pi";
 import { format } from 'date-fns';
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "../../../components";
+import { authSelector, setAuthToken } from "../../storeSlice/authSlice";
+import toast from "react-hot-toast";
 
 const ReservationForm = () => {
-  // State variables
+  const navigate = useNavigate();
   const [concerts, setConcerts] = useState([]);
   const [selectedConcert, setSelectedConcert] = useState(null);
   const [selectedCity, setSelectedCity] = useState("");
   const [concertDetails, setConcertDetails] = useState(null);
+  const [selectedConcertHall, setSelectedConcertHall] = useState(null); // New state variable to store selected concert hall
+  const [reservationStatus, setReservationStatus] = useState(null);
 
-  // Initialize the form using react-hook-form
-  const form = useForm({
-    defaultValues: {
-      concert_name: "",
-      description: "",
-      band_name: "",
-      artist: "",
-      image: "",
-    },
-  });
+
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+  } = useForm();
+
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return format(date, 'MMM dd yyyy hh:mm a'); // Customize the date format as needed
+    return format(date, 'MMM dd yyyy hh:mm a'); 
   };
 
-  // Fetch concert data from API
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/concerts")
       .then((response) => response.json())
@@ -37,13 +40,12 @@ const ReservationForm = () => {
       .catch((error) => console.error("Error fetching concerts:", error));
   }, []);
 
-  // Function to fetch concert details for the selected concert
   const fetchConcertDetails = (concertId) => {
     fetch(`http://localhost:3000/api/v1/concerts/${concertId}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log("Fetched concert details:", data);
         setConcertDetails(data);
-        // When the concert details are fetched, automatically select the first city
         if (data.concert_halls && data.concert_halls.length > 0) {
           setSelectedCity(data.concert_halls[0].city);
         }
@@ -51,39 +53,93 @@ const ReservationForm = () => {
       .catch((error) => console.error("Error fetching concert details:", error));
   };
 
-  // Function to handle the concert selection change
-  const handleConcertChange = (selectedConcertName) => {
-    const selectedConcertData = concerts.find((concert) => concert.name === selectedConcertName);
-    if (selectedConcertData) {
-      setSelectedConcert(selectedConcertData);
-      setSelectedCity(""); // Reset selected city when concert changes
-      fetchConcertDetails(selectedConcertData.id); // Fetch the concert details including the list of cities
+ const handleConcertChange = (selectedConcertName) => {
+  const selectedConcertData = concerts.find((concert) => concert.name === selectedConcertName);
+  if (selectedConcertData) {
+    setSelectedConcert(selectedConcertData);
+    setSelectedCity(""); 
+    fetchConcertDetails(selectedConcertData.id); 
+
+    setValue("concert_name", selectedConcertData.name);
+    setValue("description", concertDetails?.description || "");
+    setValue("artist", concertDetails?.artist || "");
+    setValue("band_name", concertDetails?.band || "");
+  }
+};
+
+  const handleCityChange = (selectedCityName) => {
+    setSelectedCity(selectedCityName);
+    // Find the concert hall ID based on the selected city name
+    const selectedConcertHall = concertDetails?.concert_halls.find(
+      (hall) => hall.city_name === selectedCityName
+    );
+    if (selectedConcertHall) {
+      setValue("concert_hall_id", selectedConcertHall.id);
+      console.log("Selected concert hall:", selectedConcertHall);
+      setSelectedConcertHall(selectedConcertHall);
     }
   };
 
-  // Function to handle the city selection change
-  const handleCityChange = (selectedCityName) => {
-    setSelectedCity(selectedCityName);
-  };
+  const { currentUser } = useSelector(authSelector);
+  const userId = currentUser ? currentUser.id : null;
+  const dispatch = useDispatch();
+  const authToken = useSelector((state) => state.auth.token);
+  const onSubmit = async (formData, event) => {
+    event.preventDefault();
+  
+    try {
+      if (!userId) {
+        console.error("User ID not available. Please check authentication.");
+        return;
+      }
+      const reservationData = {
+        user_id: userId,
+        concert_hall_id: selectedConcertHall.id, 
+        ...formData,
+      };
+       dispatch(setAuthToken(authToken));
+  
+       if (!selectedConcertHall) {
+        console.error("Concert hall not found with the selected city name:", selectedCity);
+        return;
+      }
+      const response = await fetch("http://localhost:3000/api/v1/reservations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`, 
+        },
+        body: JSON.stringify(reservationData), 
+      });
 
-  // Function to handle form submission
-  const handleSubmit = (formData) => {
-    console.log(formData); // Handle the form submission here
+      if (response.status === 201) {
+        console.log("Reservation created successfully!");
+        setReservationStatus("success");
+      } else {
+        console.error("Failed to create reservation:", response.statusText);
+        setReservationStatus("error");
+      }
+    } catch (error) {
+      console.error("Reservation failed:", error);
+      setReservationStatus("error");
+    }
   };
-
-  // Function to set error border class for input fields
+  
   const errorBorder = (field) => {
     return errors[field]
       ? "!border-red-500 !focus:ring-red-500 !focus:border-red-500 !placeholder-red-700"
       : "border-gray-300 focus:ring-primaryGreen focus:border-primaryGreen";
   };
 
-  const {
-    control,
-    formState: { errors },
-  } = form;
-
-  // ... (rest of the form code)
+  useEffect(() => {
+    if (reservationStatus === "success") {
+      navigate("/home");
+      toast.success("You successfully made a reservation", {
+				position: "top-center",
+				duration: 4000,
+			});
+    }
+  }, [reservationStatus]);
 
   return (
     <div className="relative w-full h-screen px-5 md:px-20">
@@ -93,7 +149,7 @@ const ReservationForm = () => {
       </h1> */}
      <div className="flex flex-col items-center justify-center h-full py-10 text-center md:justify-center md:py-0">
     
-    <form onSubmit={handleSubmit} noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="form-group">
         <label htmlFor="concert_name" className="block mb-2 text-sm font-medium text-left text-gray-900">
           Name of Concert
@@ -204,6 +260,7 @@ const ReservationForm = () => {
                     ))}
                 </select>
                 <ErrorMessage error={errors} field="city" />
+                
               </div>
             </>
           )}
@@ -255,6 +312,15 @@ const ReservationForm = () => {
             <PiCaretCircleRightLight className="w-6 h-6 ml-3" />
           </Button>
         </form>
+        {reservationStatus === "success" && (
+        <div className="absolute top-0 left-0 w-full h-full bg-green-500 opacity-80 flex items-center justify-center">
+          <p className="text-white text-2xl font-bold">Reservation Successful!</p>
+        </div>
+      )}
+      {reservationStatus === "error" && (
+        <div className="absolute top-0 left-0 w-full h-full bg-red-500 opacity-80 flex items-center justify-center">
+          <p className="text-white text-2xl font-bold">Reservation Failed. Please try again.</p>
+        </div>)}
       </div>
     </div>
   );

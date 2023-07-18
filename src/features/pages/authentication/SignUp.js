@@ -242,22 +242,6 @@ const SignUp = () => {
 							<FaArrowLeft /> Go Back
 						</Link>
 					</form>
-					<div className="relative w-full h-screen px-5 md:px-20">
-      {/* ... (existing code) */}
-
-      {reservationStatus === "success" && (
-        <div className="absolute top-0 left-0 w-full h-full bg-green-500 opacity-80 flex items-center justify-center">
-          <p className="text-white text-2xl font-bold">Reservation Successful!</p>
-        </div>
-      )}
-      {reservationStatus === "error" && (
-        <div className="absolute top-0 left-0 w-full h-full bg-red-500 opacity-80 flex items-center justify-center">
-          <p className="text-white text-2xl font-bold">Reservation Failed. Please try again.</p>
-        </div>
-      )}
-
-      {/* ... (existing code) */}
-    </div>
 				</div>
 			</div>
 		</>

@@ -9,7 +9,7 @@ const SwiperSlide = ({ concert }) => {
 	return (
 		<div
 			className="swiper-slide hover:cursor-pointer p-[10px]"
-			onClick={() => navigate(`/concerts/${concert.id}`)}
+			onClick={() => navigate(`/home/concerts/${concert.id}`)}
 		>
 			<figure className="overflow-hidden rounded-full">
 				<img src={concert.image} width="100%" alt={concert.name} />

@@ -5,7 +5,6 @@ import { TbCalendarCheck } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
-import { DevTool } from "@hookform/devtools";
 import toast from "react-hot-toast";
 import { confirmDialog } from "primereact/confirmdialog";
 import { authSelector, toggleLoading, setErrors } from "../features/storeSlice/authSlice";
@@ -31,7 +30,6 @@ const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetail
 
 	const {
 		register,
-		control,
 		formState: { errors },
 		handleSubmit,
 		reset,
@@ -177,7 +175,6 @@ const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetail
 						{footerContent()}
 					</form>
 				</div>
-				<DevTool control={control} />
 			</Dialog>
 		</>
 	);

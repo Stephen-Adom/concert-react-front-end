@@ -81,7 +81,7 @@ const SignIn = () => {
 			<div className="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-60">
 				<h1 className="mb-8 text-4xl font-bold text-white">Sign In</h1>
 				<form
-					className="w-full max-w-lg p-12 bg-gray-100 border border-gray-300 rounded-lg bg-opacity-10"
+					className="w-[90%] max-w-lg p-12 bg-gray-100 border border-gray-300 rounded-lg bg-opacity-10"
 					onSubmit={handleSubmit(handleFormSubmit)}
 					noValidate
 				>

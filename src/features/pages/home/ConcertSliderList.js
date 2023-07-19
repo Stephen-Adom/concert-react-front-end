@@ -56,33 +56,33 @@ const ConcertSliderList = () => {
 		}
 	}, []);
 
-	return (
-		<div className="relative w-full gap-5 mt-10 concert-swiper-container">
-			<SwiperPrevButton swiper={swiperInstance} disablePrevButton={disablePrevButton} />
-			<SwiperNextButton swiper={swiperInstance} disableNextButton={disableNextButton} />
+  return (
+    <div className="relative w-full gap-5 mt-10 concert-swiper-container">
+      <SwiperPrevButton
+        swiper={swiperInstance}
+        disablePrevButton={disablePrevButton}
+      />
+      <SwiperNextButton
+        swiper={swiperInstance}
+        disableNextButton={disableNextButton}
+      />
 
-			<div className="flex items-center justify-center swiper-wrapper w-full md:!w-[70%] lg:!w-[70%] xl:!w-[70%] mx-auto">
-				{latestConcerts.length ? (
-					<Swiper
-						spaceBetween={40}
-						slidesPerView={toggleSlidesPerView()}
-						onSlideChange={(e) => slideChange(e)}
-						onSwiper={(swiper) => setSwiperInstance(swiper)}
-					>
-						{latestConcerts.map((concert) => {
-							return (
-								<SwiperSlide key={concert.id}>
-									<CustomSwiperSlide concert={concert} />
-								</SwiperSlide>
-							);
-						})}
-					</Swiper>
-				) : (
-					<LatestConcertLoader></LatestConcertLoader>
-				)}
-			</div>
-		</div>
-	);
+      <div className="flex items-center justify-center swiper-wrapper w-full md:!w-[70%] lg:!w-[70%] xl:!w-[70%] mx-auto">
+        <Swiper
+          spaceBetween={40}
+          slidesPerView={toggleSlidesPerView()}
+          onSlideChange={(e) => slideChange(e)}
+          onSwiper={(swiper) => setSwiperInstance(swiper)}
+        >
+          {concerts.map(concert => (
+            <SwiperSlide key={concert.id}>
+              <CustomSwiperSlide concert={concert} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </div>
+  );
 };
 
 export default ConcertSliderList;

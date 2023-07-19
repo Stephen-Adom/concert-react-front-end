@@ -70,6 +70,7 @@ const ConcertSliderList = () => {
           slidesPerView={toggleSlidesPerView()}
           onSlideChange={(e) => slideChange(e)}
           onSwiper={(swiper) => setSwiperInstance(swiper)}
+          resizeObserver={false}
         >
           {concerts.map(concert => (
             <SwiperSlide key={concert.id}>

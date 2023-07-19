@@ -4,9 +4,15 @@ import { PiCaretCircleRightLight, PiCaretCircleLeftLight } from "react-icons/pi"
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BsTrash3 } from "react-icons/bs";
 import { useFieldArray, useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { concertSelector, setConcertLocations } from "../../storeSlice/concertSlice";
 import { ErrorMessage } from "../../../components";
 
 const ConcertLocationDetails = ({ setStep }) => {
+	const dispatch = useDispatch();
+	const { concertLocations } = useSelector(concertSelector);
+	const cityNames = ["New York", "Los Angeles", "London", "Paris", "Tokyo", "Sydney"];
+
 	const [hallInfo] = useState({
 		hall_name: "",
 		city: "",
@@ -16,7 +22,7 @@ const ConcertLocationDetails = ({ setStep }) => {
 
 	const form = useForm({
 		defaultValues: {
-			concert_halls: [hallInfo],
+			concert_halls: concertLocations.length ? concertLocations : [hallInfo],
 		},
 	});
 
@@ -42,7 +48,7 @@ const ConcertLocationDetails = ({ setStep }) => {
 	};
 
 	const onSubmit = (formData) => {
-		console.log(formData);
+		dispatch(setConcertLocations(formData["concert_halls"]));
 		setStep(3);
 	};
 
@@ -118,16 +124,17 @@ const ConcertLocationDetails = ({ setStep }) => {
 												"city",
 												index
 											)}`}
-											defaultValue="Choose a country"
 											{...register(`concert_halls.${index}.city`, {
 												required: "Select City",
 											})}
 										>
-											{/* <option selected>Choose a country</option> */}
-											<option value="US">United States</option>
-											<option value="CA">Canada</option>
-											<option value="FR">France</option>
-											<option value="DE">Germany</option>
+											{cityNames.map((city) => {
+												return (
+													<option key={city} value={city}>
+														{city}
+													</option>
+												);
+											})}
 										</select>
 										<ErrorMessage
 											error={
@@ -148,8 +155,7 @@ const ConcertLocationDetails = ({ setStep }) => {
 													index
 												)}`}
 												placeholder="000"
-												required
-												{...register("seats_no", {
+												{...register(`concert_halls.${index}.seats_no`, {
 													required: "Enter seat number",
 													valueAsNumber: true,
 													min: {

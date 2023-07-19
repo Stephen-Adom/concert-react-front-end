@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineTwitter, AiOutlineCopyrightCircle, AiOutlineLogout } from "react-icons/ai";
 import { BiLogoFacebook, BiLogoPinterestAlt } from "react-icons/bi";
 import { BsVimeo } from "react-icons/bs";
@@ -17,7 +17,7 @@ const Sidebar = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const routes = [
+	let routes = [
 		{
 			label: "CONCERTS",
 			path: "/home",
@@ -30,22 +30,28 @@ const Sidebar = () => {
 			label: "MY RESERVATIONS",
 			path: "/my-reservations",
 		},
-		{
-			label: "ADD CONCERT",
-			path: "/concert/add",
-		},
-		{
-			label: "DELETE CONCERT",
-			path: "/concert/update",
-		},
 	];
 
-	const renderRoutes = () =>
-		routes.map((route, index) => (
+	const renderRoutes = () => {
+		if (currentUser && currentUser.role === "admin") {
+			routes = [
+				...routes,
+				{
+					label: "ADD CONCERT",
+					path: "/concert/add",
+				},
+				{
+					label: "DELETE CONCERT",
+					path: "/concert/update",
+				},
+			];
+		}
+		return routes.map((route, index) => (
 			<li key={index}>
 				<SidebarLink label={route.label} path={route.path} />
 			</li>
 		));
+	};
 
 	const accept = () => {
 		dispatch(clearStore());
@@ -67,6 +73,7 @@ const Sidebar = () => {
 			accept,
 		});
 	};
+
 	return (
 		<>
 			<aside
@@ -118,7 +125,7 @@ const Sidebar = () => {
 						<button
 							onClick={confirmSignout}
 							type="button"
-							className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg font-medium rounded-sm text-sm py-2.5 px-3 text-center !ml-auto"
+							className="text-white bg-gradient-to-r from-gray-400 via-gray-500 to-gray-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-gray-300 shadow-lg font-medium rounded-sm text-sm py-2.5 px-3 text-center !ml-auto"
 						>
 							<AiOutlineLogout></AiOutlineLogout>
 						</button>

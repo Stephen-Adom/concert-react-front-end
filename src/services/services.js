@@ -58,3 +58,14 @@ export const reserveConcert = async (postBody) => {
 		throw error;
 	}
 };
+
+export const createConcert = async (postBody) => {
+	try {
+		const token = await localforage.getItem("token");
+		axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+		const response = await axiosInstance.post(`/concerts`, JSON.stringify(postBody));
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
+};

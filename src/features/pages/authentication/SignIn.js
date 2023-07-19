@@ -119,10 +119,10 @@ const SignIn = () => {
 							placeholder="••••••••"
 							{...register("password", {
 								required: "Enter your password",
-								minLength: {
-									value: 8,
-									message: "Password must be at least 8 characters long",
-								},
+								// minLength: {
+								// 	value: 8,
+								// 	message: "Password must be at least 8 characters long",
+								// },
 							})}
 						/>
 						<ErrorMessage error={errors} field="password"></ErrorMessage>

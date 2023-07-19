@@ -1,32 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "flowbite-react";
 import { PiCaretCircleRightLight } from "react-icons/pi";
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
+import { useSelector, useDispatch } from "react-redux";
 import { ErrorMessage } from "../../../components";
+import { setNewConcertInfo, concertSelector } from "../../storeSlice/concertSlice";
 
 const NewConcertDetails = ({ setStep }) => {
+	const { newConcertInfo } = useSelector(concertSelector);
+	const dispatch = useDispatch();
+
 	const form = useForm({
-		defaultValues: {
-			concert_name: "",
-			description: "",
-			band_name: "",
-			artist: "",
-			image: "",
-		},
+		defaultValues: { ...newConcertInfo },
 	});
 	const {
 		register,
-		control,
 		handleSubmit,
 		formState: { errors },
 	} = form;
 	const onSubmit = (formData) => {
-		const newData = {
-			...formData,
-			image,
-		};
-		console.log(newData, "submit");
+		dispatch(setNewConcertInfo(formData));
 		setStep(2);
 	};
 
@@ -111,24 +104,24 @@ const NewConcertDetails = ({ setStep }) => {
 
 					<section>
 						<label
-							htmlFor="band_name"
+							htmlFor="band"
 							className="block mb-2 text-sm font-medium text-left text-gray-900"
 						>
 							Band Name
 						</label>
 						<input
 							type="text"
-							id="band_name"
+							id="band"
 							className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-								"band_name"
+								"band"
 							)}`}
 							placeholder="Swift Band"
 							required
-							{...register("band_name", {
+							{...register("band", {
 								required: "Enter band name",
 							})}
 						/>
-						<ErrorMessage error={errors} field="band_name"></ErrorMessage>
+						<ErrorMessage error={errors} field="band"></ErrorMessage>
 					</section>
 				</div>
 
@@ -137,7 +130,7 @@ const NewConcertDetails = ({ setStep }) => {
 						Concert Image(Url)
 					</label>
 					<input
-						className={`block w-full text-sm text-gray-900 border rounded-sm cursor-pointer bg-gray-50 ${errorBorder(
+						className={`block w-full text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
 							"image"
 						)}`}
 						id="image"
@@ -161,7 +154,6 @@ const NewConcertDetails = ({ setStep }) => {
 					</Button>
 				</div>
 			</form>
-			<DevTool control={control} />
 		</>
 	);
 };

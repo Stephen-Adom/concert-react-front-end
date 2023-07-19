@@ -65,7 +65,7 @@ const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetail
 			})
 			.catch((error) => {
 				dispatch(toggleLoading(false));
-				setErrors(error);
+				dispatch(setErrors(error));
 			});
 	};
 

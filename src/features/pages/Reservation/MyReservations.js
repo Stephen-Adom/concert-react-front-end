@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { format } from 'date-fns';
+import { MenuButton } from "../../../components";
+import  Sidebar  from "./../../app/Sidebar";
 
 const MyReservations = () => {
   const [userReservations, setUserReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); 
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prevOpen) => !prevOpen);
+  };
 
   const authToken = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.currentUser?.id);
@@ -33,7 +39,6 @@ const MyReservations = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("API Response:", data);
           setUserReservations(data.reservations);
         } else {
           setError("Failed to fetch reservations.");
@@ -41,26 +46,30 @@ const MyReservations = () => {
       } catch (error) {
         setError("Error fetching reservations.");
       } finally {
-        setLoading(false); // Whether successful or error, set loading to false to indicate data is ready to display.
+        setLoading(false); 
       }
     };
 
     if (userId && authToken) {
-      fetchData(); // Fetch data only if userId and authToken are available.
+      fetchData(); 
     }
   }, [userId, authToken]);
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading spinner or placeholder while fetching data.
+    return <div>Loading...</div>; 
   }
 
   if (error) {
-    return <div>Error: {error}</div>; // Show error message if there was an error fetching data.
+    return <div>Error: {error}</div>; 
   }
 
-  return (
+  return (<>
+    <h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
+        <MenuButton onClick={toggleSidebar} />
+      </h1>
+      {isSidebarOpen && <Sidebar />}
     <div className="px-5 md:px-20 py-10">
-      <h1 className="text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl mb-6">Your Reservations</h1>
+      <h1 className="text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl mb-6">My Reservations</h1>
       {Array.isArray(userReservations) && userReservations.length === 0 ? (
         <p>No reservations found.</p>
       ) : (
@@ -76,6 +85,7 @@ const MyReservations = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

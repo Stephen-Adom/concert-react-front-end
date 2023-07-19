@@ -52,6 +52,9 @@ const SignUp = () => {
 				const current_user = {
 					id: response.user_id,
 					name: response.name,
+					email: response.email,
+					role: response.role,
+					username: response.username,
 				};
 
 				dispatch(setAuthToken(token));

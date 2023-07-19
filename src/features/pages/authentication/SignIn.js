@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -48,6 +48,9 @@ const SignIn = () => {
 				const current_user = {
 					id: response.user_id,
 					name: response.name,
+					email: response.email,
+					role: response.role,
+					username: response.username,
 				};
 				dispatch(setAuthToken(token));
 				dispatch(setCurrentUser(current_user));
@@ -66,8 +69,6 @@ const SignIn = () => {
 				dispatch(setErrors(error.response.data));
 			});
 	};
-
-	console.log(loading);
 
 	return (
 		<div

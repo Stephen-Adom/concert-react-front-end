@@ -9,3 +9,4 @@ export { default as MenuButton } from "./MenuButton";
 export { default as ErrorMessage } from "./ErrorMessage";
 export { default as ReserveConcertDialog } from "./ReserveConcertDialog";
 export { default as LatestConcertLoader } from "./LatestConcertLoader";
+export { default as LocationDetails } from "./LocationDetails";

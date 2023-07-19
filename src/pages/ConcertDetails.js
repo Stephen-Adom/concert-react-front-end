@@ -18,16 +18,20 @@ const ConcertDetails = () => {
 	const [concert, setConcert] = useState(null);
 	const [visible, setVisible] = useState(false);
 
+	const fetchConcertDetails = () => {
+		fetchConcert(id)
+			.then((response) => {
+				setConcert(response);
+				console.log(response);
+			})
+			.catch((error) => {
+				setErrors(error);
+			});
+	};
+
 	useEffect(() => {
 		if (id) {
-			fetchConcert(id)
-				.then((response) => {
-					setConcert(response);
-					console.log(response);
-				})
-				.catch((error) => {
-					setErrors(error);
-				});
+			fetchConcertDetails();
 		}
 	}, [id]);
 
@@ -89,6 +93,7 @@ const ConcertDetails = () => {
 						visible={visible}
 						setVisible={setVisible}
 						concert={concert}
+						fetchConcertDetails={fetchConcertDetails}
 					></ReserveConcertDialog>
 				</>
 			)}

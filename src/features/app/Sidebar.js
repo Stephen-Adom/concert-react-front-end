@@ -4,7 +4,7 @@ import { BiLogoFacebook, BiLogoPinterestAlt } from "react-icons/bi";
 import { BsVimeo } from "react-icons/bs";
 import { LiaGoogle } from "react-icons/lia";
 import { format } from "date-fns";
-import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { confirmDialog } from "primereact/confirmdialog";
 import { SidebarLink } from "../../components";
 import localforage from "localforage";
 import { authSelector, clearStore } from "../../features/storeSlice/authSlice";
@@ -151,7 +151,6 @@ const Sidebar = () => {
 					</div>
 				</div>
 			</aside>
-			<ConfirmDialog />
 		</>
 	);
 };

@@ -7,11 +7,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
 import { DevTool } from "@hookform/devtools";
 import toast from "react-hot-toast";
+import { confirmDialog } from "primereact/confirmdialog";
 import { authSelector, toggleLoading, setErrors } from "../features/storeSlice/authSlice";
 import { ErrorMessage } from "../components";
 import { reserveConcert } from "../services/services";
 
-const ReserveConcertDialog = ({ visible, setVisible, concert }) => {
+const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetails }) => {
 	const dispatch = useDispatch();
 
 	const {
@@ -19,7 +20,7 @@ const ReserveConcertDialog = ({ visible, setVisible, concert }) => {
 		loading,
 	} = useSelector(authSelector);
 
-	const [initialForm, _] = useState({
+	const [initialForm, setInitialForm] = useState({
 		user_id: id,
 		concert_hall_id: 5,
 	});
@@ -37,8 +38,23 @@ const ReserveConcertDialog = ({ visible, setVisible, concert }) => {
 	} = form;
 
 	const onSubmit = (formData) => {
+		setInitialForm(formData);
+		confirmReservation();
+	};
+
+	const confirmReservation = () => {
+		confirmDialog({
+			message: "Are you sure you want book this concert?",
+			header: "Confirmation",
+			icon: "pi pi-exclamation-triangle",
+			acceptClassName: "p-button-primary",
+			accept,
+		});
+	};
+
+	const accept = () => {
 		dispatch(toggleLoading(true));
-		reserveConcert(formData)
+		reserveConcert(initialForm)
 			.then((response) => {
 				dispatch(toggleLoading(false));
 				setVisible(false);
@@ -47,7 +63,7 @@ const ReserveConcertDialog = ({ visible, setVisible, concert }) => {
 					position: "top-center",
 					duration: 4000,
 				});
-				console.log(response);
+				fetchConcertDetails();
 			})
 			.catch((error) => {
 				dispatch(toggleLoading(false));
@@ -104,7 +120,6 @@ const ReserveConcertDialog = ({ visible, setVisible, concert }) => {
 					type="submit"
 					className="border bg-primaryGreen border-primaryGreen hover:!bg-lime-600 hover:!border-lime-600"
 					autoFocus
-					onClick={onSubmit}
 				/>
 			</div>
 		);
@@ -118,53 +133,53 @@ const ReserveConcertDialog = ({ visible, setVisible, concert }) => {
 		}
 	};
 
-	console.log(control);
-
 	return (
-		<Dialog
-			header="Make a Reservation"
-			visible={visible}
-			position="bottom"
-			className="w-[100vw] sm:w-[100vw] md:w-[40vw] lg:w-[30vw]"
-			onHide={setVisible}
-			draggable={false}
-			resizable={false}
-		>
-			<div>
-				<form onSubmit={handleSubmit(onSubmit)} noValidate>
-					<div className="form-group">
-						<label
-							htmlFor="concert_hall_id"
-							className="block mb-2 text-sm font-medium text-left text-gray-900"
-						>
-							Select Concert Hall / City / Time
-						</label>
-						<select
-							id="concert_hall_id"
-							className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-								"concert_hall_id"
-							)}`}
-							{...register("concert_hall_id", {
-								required: "Choose a city & concert hall",
-							})}
-						>
-							{concert.concert_halls.map((hall) => {
-								return (
-									<React.Fragment key={hall.id}>
-										<option value={hall.id}>{formatHallName(hall)}</option>
-									</React.Fragment>
-								);
-							})}
-						</select>
+		<>
+			<Dialog
+				header="Make a Reservation"
+				visible={visible}
+				position="bottom"
+				className="w-[100vw] sm:w-[100vw] md:w-[40vw] lg:w-[30vw]"
+				onHide={setVisible}
+				draggable={false}
+				resizable={false}
+			>
+				<div>
+					<form onSubmit={handleSubmit(onSubmit)} noValidate>
+						<div className="form-group">
+							<label
+								htmlFor="concert_hall_id"
+								className="block mb-2 text-sm font-medium text-left text-gray-900"
+							>
+								Select Concert Hall / City / Time
+							</label>
+							<select
+								id="concert_hall_id"
+								className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+									"concert_hall_id"
+								)}`}
+								{...register("concert_hall_id", {
+									required: "Choose a city & concert hall",
+								})}
+							>
+								{concert.concert_halls.map((hall) => {
+									return (
+										<React.Fragment key={hall.id}>
+											<option value={hall.id}>{formatHallName(hall)}</option>
+										</React.Fragment>
+									);
+								})}
+							</select>
 
-						<ErrorMessage error={errors} field="concert_hall_id"></ErrorMessage>
-					</div>
+							<ErrorMessage error={errors} field="concert_hall_id"></ErrorMessage>
+						</div>
 
-					{footerContent()}
-				</form>
-			</div>
-			<DevTool control={control} />
-		</Dialog>
+						{footerContent()}
+					</form>
+				</div>
+				<DevTool control={control} />
+			</Dialog>
+		</>
 	);
 };
 

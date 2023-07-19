@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser, setAuthToken, authSelector } from "../../features/storeSlice/authSlice";
 import toast, { Toaster } from "react-hot-toast";
+import { ConfirmDialog } from "primereact/confirmdialog";
 import localforage from "localforage";
 
 const AppLayout = () => {
@@ -50,6 +51,7 @@ const AppLayout = () => {
 
 	return (
 		<>
+			<ConfirmDialog />
 			<Toaster />
 			<Outlet />
 		</>

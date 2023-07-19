@@ -1,5 +1,7 @@
+// router.js
+import React from "react";
 import { Suspense } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Route, Routes } from "react-router-dom";
 import App from "../App";
 import { AppLayout, AuthLayout } from "../features";
 import { Home, ConcertDetails, AddConcert, ManageConcert } from "../pages";
@@ -7,6 +9,7 @@ import { AuthWrapper, NoAuthWrapper } from "../components";
 import SignIn from "../features/pages/authentication/SignIn";
 import SignUp from "../features/pages/authentication/SignUp";
 import Welcome from "../pages/Welcome";
+import ReservationForm from "../features/pages/Reservation/ReservationForm";
 import { LoadingPage } from "../components";
 
 const router = createBrowserRouter([
@@ -55,6 +58,10 @@ const router = createBrowserRouter([
 					{
 						path: "concert/add",
 						element: <AddConcert />,
+					},
+					{
+						path: "concert/make-reservation",
+						element: <ReservationForm />,
 					},
 					{
 						path: "concert/update",

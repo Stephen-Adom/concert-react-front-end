@@ -37,4 +37,5 @@ const SwiperSlide = ({ concert }) => {
 		</div>
 	);
 };
+
 export default SwiperSlide;

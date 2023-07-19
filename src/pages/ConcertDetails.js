@@ -57,7 +57,7 @@ const ConcertDetails = () => {
 								</section>
 
 								<section className="mt-5">
-									<p className="mt-1 text-xs font-semibold text-center lg:text-right">
+									<p className="mt-1 text-sm font-semibold text-center lg:text-right">
 										Location Details
 									</p>
 

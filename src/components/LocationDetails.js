@@ -2,9 +2,15 @@ import React from "react";
 import { BiMap } from "react-icons/bi";
 
 const LocationDetails = ({ hall }) => {
+	const numberWithCommas = (number) => {
+		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	};
+
 	return (
 		<div className="max-w-sm pt-2 px-4 py-4 bg-white border border-gray-200 rounded-sm hover:shadow hover:cursor-pointer">
-			<h5 className="mb-1 text-base font-bold tracking-tight text-gray-900">{hall.city_name}</h5>
+			<h5 className="mb-1 text-sm md:text-base font-bold tracking-tight text-gray-900">
+				{hall.city_name}
+			</h5>
 
 			<hr />
 
@@ -15,8 +21,8 @@ const LocationDetails = ({ hall }) => {
 				</p>
 
 				<p className="text-sm text-gray-700">
-					<span className="block">Total Seats: {hall.total_seats}</span>
-					<span className="block">Reserved: {hall.reserved_seats}</span>
+					<span className="block">Total Seats: {numberWithCommas(hall.total_seats)}</span>
+					<span className="block">Reserved: {numberWithCommas(hall.reserved_seats)}</span>
 				</p>
 			</div>
 		</div>

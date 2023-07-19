@@ -9,6 +9,7 @@ const initialState = {
 		artist: "",
 		image: "",
 	},
+	allConcerts: [],
 	concertLocations: [],
 	errors: null,
 };
@@ -17,6 +18,9 @@ export const concertSlice = createSlice({
 	name: "concert",
 	initialState,
 	reducers: {
+		setAllConcerts: (state, action) => {
+			state.allConcerts = action.payload;
+		},
 		saveLatestConcerts: (state, action) => {
 			state.latestConcerts = action.payload;
 		},
@@ -49,6 +53,7 @@ export const {
 	setNewConcertInfo,
 	setConcertLocations,
 	resetConcertForm,
+	setAllConcerts,
 } = concertSlice.actions;
 
 export const concertSelector = (state) => state.concert;

@@ -69,3 +69,26 @@ export const createConcert = async (postBody) => {
 		throw error;
 	}
 };
+
+export const adminAllConcert = async () => {
+	try {
+		const token = await localforage.getItem("token");
+		axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+		const response = await axiosInstance.get(`/all_concerts`);
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const deleteConcert = async (id) => {
+	try {
+		const token = await localforage.getItem("token");
+		axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+		axiosInstance.defaults.headers.common["X-Permitted-Cross-Origin"] = "*";
+		const response = await axiosInstance.delete(`/concerts/${id}`);
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
+};

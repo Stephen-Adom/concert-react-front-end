@@ -1,10 +1,13 @@
+import { Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import { AppLayout, AuthLayout } from "../features";
 import { Home, ConcertDetails, AddConcert, ManageConcert } from "../pages";
+import { AuthWrapper, NoAuthWrapper } from "../components";
 import SignIn from "../features/pages/authentication/SignIn";
 import SignUp from "../features/pages/authentication/SignUp";
 import Welcome from "../pages/Welcome";
+import { LoadingPage } from "../components";
 
 const router = createBrowserRouter([
 	{
@@ -17,7 +20,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "auth",
-				element: <AuthLayout />,
+				element: (
+					<NoAuthWrapper>
+						<AuthLayout />
+					</NoAuthWrapper>
+				),
 				children: [
 					{
 						path: "signin",
@@ -31,7 +38,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "",
-				element: <App />,
+				element: (
+					<AuthWrapper>
+						<App />
+					</AuthWrapper>
+				),
 				children: [
 					{
 						path: "home",

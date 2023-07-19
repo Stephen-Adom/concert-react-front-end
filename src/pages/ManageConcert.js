@@ -2,20 +2,19 @@ import React, { useState, useEffect } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
-import { ConfirmPopup, confirmPopup } from "primereact/confirmpopup";
+import { confirmDialog } from "primereact/confirmdialog";
+import { useDispatch, useSelector } from "react-redux";
+import { format } from "date-fns";
+import toast from "react-hot-toast";
 import { MenuButton, BackButton } from "../components";
+import { adminAllConcert, deleteConcert } from "../services/services";
+import { setErrors, toggleLoading, authSelector } from "../features/storeSlice/authSlice";
+import { concertSelector, setAllConcerts } from "../features/storeSlice/concertSlice";
 
 const ManageConcert = () => {
-	const [concerts, setConcerts] = useState([
-		{
-			name: "Concert 1",
-			description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.",
-			band: "Band 1",
-			artist: "Artist 1",
-			total_seats: 100,
-			status: "active",
-		},
-	]);
+	const dispatch = useDispatch();
+	const { allConcerts } = useSelector(concertSelector);
+	const { loading } = useSelector(authSelector);
 	const [globalFilterValue, setGlobalFilterValue] = useState("");
 	const [filters, setFilters] = useState(null);
 
@@ -50,18 +49,25 @@ const ManageConcert = () => {
 		setGlobalFilterValue("");
 	};
 
+	const fetchAllConcerts = () => {
+		adminAllConcert()
+			.then((response) => {
+				dispatch(setAllConcerts(response));
+			})
+			.catch((error) => {
+				dispatch(setErrors(error));
+			});
+	};
+
 	useEffect(() => {
 		initFilters();
+		fetchAllConcerts();
 	}, []);
 
 	const formatConcertName = (concert) => {
 		return (
 			<div className="flex gap-2 item-center">
-				<img
-					className="w-16 h-16 rounded-full"
-					src="https://picsum.photos/500/500"
-					alt="Bonnie image"
-				/>
+				<img className="w-16 h-16 rounded-full" src={concert.image} alt={concert.name} />
 				<span className="flex items-center font-bold">{concert.name}</span>
 			</div>
 		);
@@ -69,22 +75,32 @@ const ManageConcert = () => {
 
 	const formatConcertStatus = (concert) => {
 		return (
-			<span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">
-				{concert.status}
+			<span
+				className={`text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full ${
+					concert.active ? "text-primaryGreen bg-lime-100" : "text-red-600 bg-red-100"
+				}`}
+			>
+				{concert.active ? "Active" : "Deleted"}
 			</span>
 		);
 	};
 
+	const formatCreatedDate = (concert) => {
+		return format(new Date(concert.created_at), "PPP");
+	};
+
 	const concertAction = (concert) => {
-		return (
-			<button
-				type="button"
-				className="text-sm font-medium text-red-600 hover:underline"
-				onClick={confirmDeletion}
-			>
-				remove
-			</button>
-		);
+		if (concert.active) {
+			return (
+				<button
+					type="button"
+					className="text-sm font-medium text-red-600 hover:underline"
+					onClick={() => confirmDeletion(concert)}
+				>
+					Remove
+				</button>
+			);
+		}
 	};
 
 	const onGlobalFilterChange = (e) => {
@@ -99,7 +115,28 @@ const ManageConcert = () => {
 
 	const renderHeader = () => {
 		return (
-			<div className="flex justify-end">
+			<div className="flex justify-end gap-2">
+				{loading && (
+					<div
+						class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+						role="alert"
+					>
+						<svg
+							class="flex-shrink-0 inline w-4 h-4 mr-3"
+							aria-hidden="true"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+						>
+							<path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+						</svg>
+						<span class="sr-only">Info</span>
+						<div>
+							<span class="font-medium">Info alert!</span> Deleting concert, please wait...
+						</div>
+					</div>
+				)}
+
 				<div className="relative">
 					<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 						<svg
@@ -133,25 +170,33 @@ const ManageConcert = () => {
 
 	const header = renderHeader();
 
-	const confirmDeletion = (event) => {
-		confirmPopup({
-			target: event.currentTarget,
+	const confirmDeletion = (concert) => {
+		confirmDialog({
 			message: "Do you want to delete this event?",
-			icon: "pi pi-info-circle",
+			header: "Confirmation",
+			icon: "pi pi-exclamation-triangle",
 			acceptClassName: "p-button-danger",
-			accept,
+			accept: () => {
+				dispatch(toggleLoading(true));
+				deleteConcert(concert.id)
+					.then((_) => {
+						dispatch(toggleLoading(false));
+						toast.success("Selected Concert has been marked deleted", {
+							position: "top-center",
+							duration: 4000,
+						});
+						fetchAllConcerts();
+					})
+					.catch((error) => {
+						dispatch(toggleLoading(false));
+						dispatch(setErrors(error));
+					});
+			},
 		});
-	};
-
-	const accept = () => {
-		console.log("delete event");
-		// toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
 	};
 
 	return (
 		<div className="relative w-full h-screen px-5 md:px-10">
-			<ConfirmPopup />
-
 			<section className="flex flex-col items-center justify-start h-full py-10 text-center md:justify-center md:py-0">
 				<h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
 					<MenuButton></MenuButton>
@@ -161,9 +206,10 @@ const ManageConcert = () => {
 				<section className="w-full mt-5 overflow-x-auto concert-list">
 					<div className="block w-full bg-white border border-gray-200 rounded-lg shadow">
 						<DataTable
-							value={concerts}
+							value={allConcerts}
 							paginator
 							rows={5}
+							dataKey="id"
 							rowsPerPageOptions={[5, 10, 25, 50]}
 							tableStyle={{ minWidth: "60rem" }}
 							stripedRows
@@ -176,8 +222,8 @@ const ManageConcert = () => {
 							<Column header="Description" field="description"></Column>
 							<Column field="band" header="Band Name"></Column>
 							<Column field="artist" header="Artist"></Column>
-							<Column field="total_seats" header="Total Seats"></Column>
 							<Column header="Status" body={formatConcertStatus}></Column>
+							<Column header="Published At" body={formatCreatedDate}></Column>
 							<Column header="Action" body={concertAction}></Column>
 						</DataTable>
 					</div>

@@ -130,7 +130,7 @@ const NewConcertDetails = ({ setStep }) => {
 						Concert Image(Url)
 					</label>
 					<input
-						className={`block w-full text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+						className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
 							"image"
 						)}`}
 						id="image"

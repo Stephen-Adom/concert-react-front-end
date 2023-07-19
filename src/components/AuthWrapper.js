@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import localforage from "localforage";
+import LoadingPage from "./LoadingPage";
 
 const AuthWrapper = ({ children }) => {
 	const [authenticated, setAuthenticated] = useState(null);
@@ -12,8 +13,17 @@ const AuthWrapper = ({ children }) => {
 		});
 	}, []);
 
+	useEffect(() => {
+		if (authenticated === false) {
+			toast.success("Sign in to have access", {
+				position: "top-center",
+				duration: 4000,
+			});
+		}
+	}, [authenticated]);
+
 	if (authenticated === null) {
-		return <Loading />;
+		return <LoadingPage />;
 	}
 
 	if (!authenticated) {
@@ -21,10 +31,6 @@ const AuthWrapper = ({ children }) => {
 	}
 
 	return children;
-};
-
-export const Loading = () => {
-	return <h2>🌀 Loading...</h2>;
 };
 
 export default AuthWrapper;

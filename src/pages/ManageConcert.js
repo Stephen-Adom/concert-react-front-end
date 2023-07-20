@@ -55,7 +55,7 @@ const ManageConcert = () => {
 				dispatch(setAllConcerts(response));
 			})
 			.catch((error) => {
-				dispatch(setErrors(error));
+				dispatch(setErrors(error.response.data));
 			});
 	};
 

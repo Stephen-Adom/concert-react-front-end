@@ -3,6 +3,7 @@ import { Button } from "flowbite-react";
 import { PiCaretCircleRightLight } from "react-icons/pi";
 import { TbCalendarPlus } from "react-icons/tb";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
 	ConcertTableDetails,
 	BackButton,
@@ -18,6 +19,7 @@ const ConcertDetails = () => {
 	const { id } = useParams();
 	const [concert, setConcert] = useState(null);
 	const [visible, setVisible] = useState(false);
+	const dispatch = useDispatch();
 
 	const fetchConcertDetails = () => {
 		fetchConcert(id)
@@ -25,7 +27,7 @@ const ConcertDetails = () => {
 				setConcert(response);
 			})
 			.catch((error) => {
-				setErrors(error);
+				dispatch(setErrors(error.response.data));
 			});
 	};
 

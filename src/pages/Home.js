@@ -14,9 +14,10 @@ const Home = () => {
 				dispatch(saveLatestConcerts(response));
 			})
 			.catch((error) => {
-				dispatch(setErrors(error));
+				dispatch(setErrors(error.response.data));
 			});
 	}, []);
+
 	return (
 		<div className="w-full h-screen">
 			<section className="flex flex-col items-center justify-start h-full py-10 text-center md:justify-center md:py-0">

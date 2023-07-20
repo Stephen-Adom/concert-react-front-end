@@ -5,5 +5,6 @@ export { default as ConcertLocationDetails } from "./pages/AddConcert/ConcertLoc
 export { default as ConfirmSubmissionDetails } from "./pages/AddConcert/ConfirmSubmissionDetails";
 export { default as concertSlice } from "./storeSlice/concertSlice";
 export { default as authSlice } from "./storeSlice/authSlice";
+export { default as reservationSlice } from "./storeSlice/reservationSlice";
 export { default as AppLayout } from "./app/AppLayout";
 export { default as AuthLayout } from "./app/AuthLayout";

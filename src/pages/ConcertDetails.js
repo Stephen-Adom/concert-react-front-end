@@ -43,7 +43,12 @@ const ConcertDetails = () => {
 						<MenuButton></MenuButton>
 						<div className="flex flex-col items-start justify-start w-full gap-5 sm:flex-col lg:flex-row lg:gap-14">
 							<div className="concert-image-container w-full lg:w-[70%]">
-								<img src={concert.image} width="100%" alt={concert.name} />
+								<div
+									style={{
+										backgroundImage: `url(${concert.image})`,
+									}}
+									className="image-container w-full h-[250px] sm:h-[250px] md:h-[600px] bg-center bg-no-repeat"
+								></div>
 							</div>
 							<div className="concert-details w-full md:w-[70%] md:mx-auto lg:w-[30%]">
 								<h3 className="font-bold text-center lg:text-right">{concert.name}</h3>

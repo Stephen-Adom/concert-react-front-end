@@ -1,7 +1,7 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setAllReservations } from '../features/storeSlice/reservationSlice';
 import { fetchAllUserReservations } from '../services/services';
+import { setErrors } from '../features/storeSlice/authSlice';
 
 const useFetchReservations = () => {
   const dispatch = useDispatch();

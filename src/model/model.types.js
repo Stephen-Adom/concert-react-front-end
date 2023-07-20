@@ -1,5 +1,17 @@
 import PropTypes from 'prop-types';
 
+const hallType = PropTypes.shape({
+  id: PropTypes.number,
+  concert_id: PropTypes.number,
+  hall_name: PropTypes.string,
+  city_name: PropTypes.string,
+  date: PropTypes.string,
+  total_seats: PropTypes.number,
+  reserved_seats: PropTypes.number,
+  created_at: PropTypes.string,
+  updated_at: PropTypes.string,
+}).isRequired;
+
 const concertType = PropTypes.shape({
   artist: PropTypes.string,
   band: PropTypes.string,
@@ -10,7 +22,9 @@ const concertType = PropTypes.shape({
   description: PropTypes.string,
   created_at: PropTypes.string,
   updated_at: PropTypes.string,
-  concert_halls: PropTypes.array,
+  concert_halls: PropTypes.arrayOf(
+    PropTypes.shape(hallType),
+  ),
 }).isRequired;
 
 const setStepType = PropTypes.func.isRequired;
@@ -29,17 +43,7 @@ export const ErrorMessageProp = {
 };
 
 export const LocationDetailsProp = {
-  hall: PropTypes.shape({
-    id: PropTypes.number,
-    concert_id: PropTypes.number,
-    hall_name: PropTypes.string,
-    city_name: PropTypes.string,
-    date: PropTypes.string,
-    total_seats: PropTypes.number,
-    reserved_seats: PropTypes.number,
-    created_at: PropTypes.string,
-    updated_at: PropTypes.string,
-  }).isRequired,
+  hall: hallType,
 };
 
 export const MobileSidebarProp = {

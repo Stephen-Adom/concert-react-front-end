@@ -55,7 +55,7 @@ export const SidebarTemplate = () => {
 
   const accept = () => {
     dispatch(clearStore());
-    localforage.clear().then((_) => {
+    localforage.clear().then(() => {
       navigate('/auth/signin');
       toast.success('You have signed out', {
         position: 'top-center',

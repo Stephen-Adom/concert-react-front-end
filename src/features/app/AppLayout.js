@@ -39,6 +39,7 @@ const AppLayout = () => {
         return null;
       }
       dispatch(setCurrentUser(JSON.parse(value)));
+      return null;
     });
 
     localforage.getItem('token', (err, value) => {
@@ -46,6 +47,7 @@ const AppLayout = () => {
         return null;
       }
       dispatch(setAuthToken(value));
+      return null;
     });
   }, []);
 

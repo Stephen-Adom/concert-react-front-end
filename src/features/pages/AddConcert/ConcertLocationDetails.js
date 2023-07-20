@@ -107,8 +107,7 @@ const ConcertLocationDetails = ({ setStep }) => {
                   <ErrorMessage
                     error={Object.keys(errors).length
 											&& errors?.concert_halls?.[index] !== undefined
-												&& errors?.concert_halls?.[index]
-											}
+												&& errors?.concert_halls?.[index]}
                     field="hall_name"
                   />
                 </th>

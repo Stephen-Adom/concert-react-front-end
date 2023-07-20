@@ -22,7 +22,7 @@ const ReserveConcertDialog = ({
 
   const { currentUser, loading } = useSelector(authSelector);
 
-  const [initialForm, _] = useState({
+  const [initialForm] = useState({
     user_id: currentUser?.id,
     concert_hall_id: null,
   });
@@ -145,11 +145,9 @@ const ReserveConcertDialog = ({
               </label>
               <select
                 id="concert_hall_id"
-                className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-								  'concert_hall_id',
-                )}`}
+                className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder('concert_hall_id')}`}
                 {...register('concert_hall_id', {
-								  required: 'Choose a city & concert hall',
+                  required: 'Choose a city & concert hall',
                 })}
               >
                 {concert.concert_halls.map((hall) => (

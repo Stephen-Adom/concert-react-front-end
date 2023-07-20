@@ -38,7 +38,7 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
 
     dispatch(toggleLoading(true));
     createConcert(postBody)
-      .then((_) => {
+      .then(() => {
         dispatch(toggleLoading(false));
         dispatch(resetConcertForm());
         setStep(1);
@@ -111,20 +111,29 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
         <span className="block font-semibold text-lg text-left">Available Time and Location</span>
 
         <ul className="mt-3">
-          {concertLocations.length && concertLocations.map((location, index) => (
-            <li className="flex items-center gap-1 text-sm flex-wrap mb-2" key={index}>
+          {concertLocations.length && concertLocations.map((location) => (
+            <li className="flex items-center gap-1 text-sm flex-wrap mb-2" key={`location-${location.event_date}`}>
               <TbCalendarCheck className="text-primaryGreen text-xl" />
               {location.hall_name}
-              <span className="font-semibold"> - 
-                {location.city} - </span>
-    {formatDate(location.event_date)} - 
-    <span className="font-semibold flex items-center gap-x-1">
-      <MdChair className="text-xl text-primaryGreen" />
-      Total Seats:
-      <span className="ml-1">{location.seats_no}</span>
-    </span>
-  </li>
-						))}
+              <span className="font-semibold">
+                {' '}
+                -
+                {location.city}
+                {' '}
+                -
+                {' '}
+
+              </span>
+              {formatDate(location.event_date)}
+              {' '}
+              -
+              <span className="font-semibold flex items-center gap-x-1">
+                <MdChair className="text-xl text-primaryGreen" />
+                Total Seats:
+                <span className="ml-1">{location.seats_no}</span>
+              </span>
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -199,6 +208,6 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
   );
 };
 
-ConfirmSubmissionDetails.propType = ConfirmSubmissionDetailsProp;
+ConfirmSubmissionDetails.propTypes = ConfirmSubmissionDetailsProp;
 
 export default ConfirmSubmissionDetails;

@@ -6,7 +6,7 @@ import { PiCaretCircleRightLight } from 'react-icons/pi';
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { ErrorMessage, MenuButton } from '../../../components';
+import { ErrorMessage } from '../../../components';
 import { authSelector, setAuthToken } from '../../storeSlice/authSlice';
 
 const ReservationForm = () => {
@@ -15,11 +15,10 @@ const ReservationForm = () => {
   const [selectedConcert, setSelectedConcert] = useState(null);
   const [selectedCity, setSelectedCity] = useState('');
   const [concertDetails, setConcertDetails] = useState(null);
-  const [selectedConcertHall, setSelectedConcertHall] = useState(null); // New state variable to store selected concert hall
+  const [selectedConcertHall, setSelectedConcertHall] = useState(null);
   const [reservationStatus, setReservationStatus] = useState(null);
 
   const {
-    control,
     formState: { errors },
     handleSubmit,
     setValue,

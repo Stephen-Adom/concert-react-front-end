@@ -200,7 +200,7 @@ const ManageConcert = () => {
 			<section className="flex flex-col items-center justify-start h-full py-10 text-center md:justify-center md:py-0">
 				<h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
 					<MenuButton></MenuButton>
-					MANAGE CONCERTS
+					MANAGE CONCERTS ({allConcerts.length})
 				</h1>
 
 				<section className="w-full mt-5 overflow-x-auto concert-list">

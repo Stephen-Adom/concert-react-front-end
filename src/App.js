@@ -1,21 +1,13 @@
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { Sidebar } from "./features";
-import { setAllReservations } from "./features/storeSlice/reservationSlice";
-import { fetchAllUserReservations } from "./services/services";
+import useFetchReservations from "./hooks/useFetchReservations";
 
 function App() {
-	const dispatch = useDispatch();
+	const [fetchReservations] = useFetchReservations();
 
 	useEffect(() => {
-		fetchAllUserReservations()
-			.then((response) => {
-				dispatch(setAllReservations(response["reservations"]));
-			})
-			.catch((error) => {
-				dispatch(setErrors(error.response.data));
-			});
+		fetchReservations();
 	}, []);
 
 	return (

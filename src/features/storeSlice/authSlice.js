@@ -23,7 +23,6 @@ const authSlice = createSlice({
 			state.loading = action.payload;
 		},
 		setErrors: (state, action) => {
-			console.log(action, "from slice");
 			state.error = action.payload;
 		},
 		clearStore: (state) => {

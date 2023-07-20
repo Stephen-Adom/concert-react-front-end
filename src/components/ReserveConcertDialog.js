@@ -10,13 +10,16 @@ import { confirmDialog } from "primereact/confirmdialog";
 import { authSelector, toggleLoading, setErrors } from "../features/storeSlice/authSlice";
 import { ErrorMessage } from "../components";
 import { reserveConcert } from "../services/services";
+import useFetchReservations from "../hooks/useFetchReservations";
 
 const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetails }) => {
 	const dispatch = useDispatch();
 
+	const [fetchReservations] = useFetchReservations();
+
 	const { currentUser, loading } = useSelector(authSelector);
 
-	const [initialForm, setInitialForm] = useState({
+	const [initialForm, _] = useState({
 		user_id: currentUser?.id,
 		concert_hall_id: null,
 	});
@@ -54,6 +57,7 @@ const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetail
 							duration: 4000,
 						});
 						fetchConcertDetails();
+						fetchReservations();
 					})
 					.catch((error) => {
 						dispatch(toggleLoading(false));

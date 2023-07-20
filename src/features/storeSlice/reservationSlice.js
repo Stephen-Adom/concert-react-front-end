@@ -1,17 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-	allReservations: [],
+  allReservations: [],
 };
 
 export const reservationSlice = createSlice({
-	name: "reservation",
-	initialState,
-	reducers: {
-		setAllReservations: (state, action) => {
-			state.allReservations = action.payload;
-		},
-	},
+  name: 'reservation',
+  initialState,
+  reducers: {
+    setAllReservations: (state, action) => {
+      state.allReservations = action.payload;
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function

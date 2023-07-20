@@ -18,7 +18,7 @@ const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetail
 
 	const [initialForm, setInitialForm] = useState({
 		user_id: currentUser?.id,
-		concert_hall_id: 5,
+		concert_hall_id: null,
 	});
 
 	const form = useForm({
@@ -33,37 +33,34 @@ const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetail
 	} = form;
 
 	const onSubmit = (formData) => {
-		setInitialForm(formData);
-		confirmReservation();
+		confirmReservation(formData);
 	};
 
-	const confirmReservation = () => {
+	const confirmReservation = (formData) => {
 		confirmDialog({
 			message: "Are you sure you want book this concert?",
 			header: "Confirmation",
 			icon: "pi pi-exclamation-triangle",
 			acceptClassName: "p-button-primary",
-			accept,
+			accept: () => {
+				dispatch(toggleLoading(true));
+				reserveConcert(formData)
+					.then((response) => {
+						dispatch(toggleLoading(false));
+						setVisible(false);
+						reset();
+						toast.success(response.message, {
+							position: "top-center",
+							duration: 4000,
+						});
+						fetchConcertDetails();
+					})
+					.catch((error) => {
+						dispatch(toggleLoading(false));
+						dispatch(setErrors(error.response.data));
+					});
+			},
 		});
-	};
-
-	const accept = () => {
-		dispatch(toggleLoading(true));
-		reserveConcert(initialForm)
-			.then((response) => {
-				dispatch(toggleLoading(false));
-				setVisible(false);
-				reset();
-				toast.success(response.message, {
-					position: "top-center",
-					duration: 4000,
-				});
-				fetchConcertDetails();
-			})
-			.catch((error) => {
-				dispatch(toggleLoading(false));
-				dispatch(setErrors(error.response.data));
-			});
 	};
 
 	const formatHallName = (hall) => {

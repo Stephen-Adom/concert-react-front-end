@@ -78,31 +78,33 @@ const ReservationForm = () => {
   const { currentUser } = useSelector(authSelector);
   const userId = currentUser ? currentUser.id : null;
 
-
- const onSubmit = async (formData, event) => {
-  event.preventDefault();
-  try {
-    if (!selectedConcertHall) {
-      console.error("Concert hall not found with the selected city name:", selectedCity);
-      return;
-    }
-
-    const isAlreadyReserved = await reserveConcert({
-      user_id: userId,
-      concert_hall_id: selectedConcertHall.id,
-      ...formData,
-    })
-      .then(() => false) 
-      .catch((error) => {
-        console.error("Failed to create reservation:", error);
-        if (error?.response?.status === 422) {
-          toast.error("You have already reserved this concert.");
-          return true; 
-        }
-        return false;
-      });
-
-    if (!isAlreadyReserved) {
+  const onSubmit = async (formData, event) => {
+    event.preventDefault();
+    try {
+      if (!selectedConcertHall) {
+        console.error("Concert hall not found with the selected city name:", selectedCity);
+        return;
+      }
+  
+      const isAlreadyReserved = await reserveConcert({
+        user_id: userId,
+        concert_hall_id: selectedConcertHall.id,
+        ...formData,
+      })
+        .then(() => false) 
+        .catch((error) => {
+          console.error("Failed to create reservation:", error);
+          if (error?.response?.status === 422) {
+            return true; 
+          }
+          return false;
+        });
+  
+      if (isAlreadyReserved) {
+        toast.error("You have already reserved this concert.");
+        return;
+      }
+  
       const confirmed = await toast.promise(
         new Promise((resolve) => {
           confirmDialog({
@@ -120,35 +122,30 @@ const ReservationForm = () => {
           error: "Reservation canceled.",
         }
       );
-
+  
       if (confirmed) {
         try {
-          reserveConcert({
+          await reserveConcert({
             user_id: userId,
             concert_hall_id: selectedConcertHall.id,
             ...formData,
-          })
-            .then(() => {
-              console.log("Reservation created successfully!");
-              setReservationStatus("success");
-            })
-            .catch((error) => {
-              console.error("Failed to create reservation:", error);
-              setReservationStatus("error");
-              if (error?.response?.status === 422) {
-                toast.error("You have already reserved to this concert.");
-              }
-            });
+          });
+          console.log("Reservation created successfully!");
+          setReservationStatus("success");
+          toast.success("Reservation completed!");
         } catch (error) {
-          console.error("Reservation failed:", error);
+          console.error("Failed to create reservation:", error);
+          setReservationStatus("error");
+          toast.error("Reservation failed.");
         }
       }
+    } catch (error) {
+      console.error("Reservation failed:", error);
+      setReservationStatus("error");
+      toast.error("Reservation failed.");
     }
-  } catch (error) {
-    console.error("Reservation failed:", error);
-    setReservationStatus("error");
-  }
-};
+  };
+  
 
   
   const errorBorder = (field) => {

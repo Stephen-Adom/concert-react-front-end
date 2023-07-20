@@ -44,13 +44,11 @@ const NewConcertDetails = ({ setStep }) => {
           <input
             type="text"
             id="concert_name"
-            className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-						  'concert_name',
-            )}`}
+            className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder('concert_name')}`}
             placeholder="Rocking Band"
             required
             {...register('concert_name', {
-						  required: 'Enter Concert Name',
+              required: 'Enter Concert Name',
             })}
           />
 
@@ -67,12 +65,10 @@ const NewConcertDetails = ({ setStep }) => {
           <textarea
             id="description"
             rows="4"
-            className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-sm border ${errorBorder(
-						  'description',
-            )}`}
+            className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-sm border ${errorBorder('description')}`}
             placeholder="Write your thoughts here..."
             {...register('description', {
-						  required: 'Enter Concert Description',
+              required: 'Enter Concert Description',
             })}
           />
 
@@ -90,14 +86,10 @@ const NewConcertDetails = ({ setStep }) => {
             <input
               type="text"
               id="artist"
-              className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-							  'artist',
-              )}`}
+              className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder('artist')}`}
               placeholder="Taylor Swift"
               required
-              {...register('artist', {
-							  required: 'Enter Artist Name',
-              })}
+              {...register('artist', { required: 'Enter Artist Name' })}
             />
             <ErrorMessage error={errors} field="artist" />
           </section>
@@ -112,14 +104,10 @@ const NewConcertDetails = ({ setStep }) => {
             <input
               type="text"
               id="band"
-              className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-							  'band',
-              )}`}
+              className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder('band')}`}
               placeholder="Swift Band"
               required
-              {...register('band', {
-							  required: 'Enter band name',
-              })}
+              {...register('band', { required: 'Enter band name' })}
             />
             <ErrorMessage error={errors} field="band" />
           </section>
@@ -130,14 +118,12 @@ const NewConcertDetails = ({ setStep }) => {
             Concert Image(Url)
           </label>
           <input
-            className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-						  'image',
-            )}`}
+            className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder('image')}`}
             id="image"
             type="text"
             placeholder="https://example.com/image.jpg"
             {...register('image', {
-						  required: 'Upload concert image',
+              required: 'Upload concert image',
             })}
           />
           <ErrorMessage error={errors} field="image" />

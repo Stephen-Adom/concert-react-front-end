@@ -137,10 +137,6 @@ const ReservationForm = () => {
 
   return (
     <div className="relative w-full h-screen px-5 md:px-20">
-      {/* <h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
-        <MenuButton></MenuButton>
-        RESERVE CONCERT
-      </h1> */}
       <div className="flex flex-col items-center justify-center h-full py-10 text-center md:justify-center md:py-0">
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -284,8 +280,8 @@ const ReservationForm = () => {
               </thead>
               <tbody>
                 {concertDetails
-                    && concertDetails.concert_halls.map((hall, index) => (
-                      <tr key={index} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    && concertDetails.concert_halls.map((hall) => (
+                      <tr key={hall.id} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                         <td className="px-6 py-4">{concertDetails.name}</td>
                         <td className="px-6 py-4">{hall.hall_name}</td>
                         <td className="px-6 py-4">{hall.city_name}</td>

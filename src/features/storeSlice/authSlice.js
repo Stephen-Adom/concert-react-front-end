@@ -36,7 +36,7 @@ const authSlice = createSlice({
 
 export const {
   toggleLoading, setErrors, setAuthToken, setCurrentUser, clearStore,
-} =	authSlice.actions;
+} = authSlice.actions;
 
 export const authSelector = (state) => state.auth;
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import localforage from 'localforage';
 
-const BASEURL = 'http://localhost:4000/api/v1';
+const BASEURL = 'http://localhost:3000/api/v1';
 
 const axiosInstance = axios.create({
   baseURL: BASEURL,

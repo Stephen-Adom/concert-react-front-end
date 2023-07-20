@@ -33,8 +33,10 @@ const SignUp = () => {
     register,
     formState: { errors },
     handleSubmit,
-    formValues,
+    watch,
   } = form;
+
+  const formValues = watch();
 
   const errorBorder = (field) => {
     if (errors && errors[field]) {

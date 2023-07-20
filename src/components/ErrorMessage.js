@@ -12,7 +12,7 @@ const ErrorMessage = ({ error, field }) => {
     }
     return null;
   };
-  return errorMessage;
+  return errorMessage();
 };
 
 ErrorMessage.propTypes = ErrorMessageProp;

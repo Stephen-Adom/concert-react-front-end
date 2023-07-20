@@ -159,8 +159,7 @@ const ReserveConcertDialog = ({
 
               <ErrorMessage error={errors} field="concert_hall_id" />
             </div>
-
-            {footerContent()}
+            { footerContent() }
           </form>
         </div>
       </Dialog>

@@ -30,7 +30,7 @@ const concertType = PropTypes.shape({
 const setStepType = PropTypes.func.isRequired;
 
 export const AuthWrapperProp = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export const ConcertTableDetailsProp = {
@@ -38,7 +38,11 @@ export const ConcertTableDetailsProp = {
 };
 
 export const ErrorMessageProp = {
-  error: PropTypes.shape({}).isRequired,
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.shape({}),
+  ]),
   field: PropTypes.string.isRequired,
 };
 
@@ -47,30 +51,30 @@ export const LocationDetailsProp = {
 };
 
 export const MobileSidebarProp = {
-  visible: PropTypes.bool.isRequired,
-  setVisible: PropTypes.func.isRequired,
+  visible: PropTypes.bool,
+  setVisible: PropTypes.func,
 };
 
 export const ReserveConcertDialogProp = {
-  visible: PropTypes.bool.isRequired,
-  setVisible: PropTypes.func.isRequired,
+  visible: PropTypes.bool,
+  setVisible: PropTypes.func,
   concert: concertType,
-  fetchConcertDetails: PropTypes.func.isRequired,
+  fetchConcertDetails: PropTypes.func,
 };
 
 export const SidebarLinkProp = {
-  label: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  path: PropTypes.string,
 };
 
 export const SwiperNextButtonProps = {
-  disableNextButton: PropTypes.bool.isRequired,
-  swiper: PropTypes.shape({}).isRequired,
+  disableNextButton: PropTypes.bool,
+  swiper: PropTypes.shape({}),
 };
 
 export const SwiperPrevButtonProps = {
-  disablePrevButton: PropTypes.bool.isRequired,
-  swiper: PropTypes.shape({}).isRequired,
+  disablePrevButton: PropTypes.bool,
+  swiper: PropTypes.shape({}),
 };
 
 export const SwiperSlideProp = {

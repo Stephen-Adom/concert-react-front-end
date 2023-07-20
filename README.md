@@ -34,6 +34,7 @@ ConcertHub is a platform where music enthusiasts can discover upcoming concerts,
 <img src="./assets/desktop.png" height="500px" />
 <img src="./assets/mobile.png" height="400px" />
 </div>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### 🎶 Built With 🎶
 
@@ -57,6 +58,7 @@ ConcertHub is a platform where music enthusiasts can discover upcoming concerts,
     <li><a href="https://redux.js.org/">Redux</a></li>
   </ul>
 </details>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 #### Key Features 🎶
 
@@ -64,14 +66,15 @@ ConcertHub is a platform where music enthusiasts can discover upcoming concerts,
 - Book tickets for your favorite artists' performances.
 - See to what concerts you have reserved.
 - At the admin side, the admin can create a new concert and also delete a concert previously created.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
----
 
 ## 🚀 Live Demo 🎸
 
 Visit the [Live Demo](https://www.concerthub.com) of ConcertHub to experience the joy of music!
 
 ---
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 💻 Getting Started 🎹
 
@@ -90,6 +93,7 @@ $ git --version
 $ node --version
 $ npm --version
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Setup 🎹 
 
@@ -109,6 +113,7 @@ $ cd concert-react-front-end.git
 $ npm start
 ```
 The website will automatically start on your default web browser.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 👥 Authors 🎷  <a name="authors"></a>
 
@@ -133,6 +138,7 @@ The website will automatically start on your default web browser.
 - Twitter: [@Aman_on_Twitter](https://twitter.com/Amexworku)
 - LinkedIn: [@Aman_on_LinkedIn](https://www.linkedin.com/in/aman-worku-tsegaw/)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
 

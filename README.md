@@ -29,6 +29,11 @@
 
 ConcertHub is a platform where music enthusiasts can discover upcoming concerts, book tickets, and explore their favorite artists. Experience the world of music like never before with ConcertHub!
 
+<div style="display: flex; align-items: center;">
+<img src="./assets/desktop.png" height="500px" />
+<img src="./assets/mobile.png" height="400px" />
+</div>
+
 ### 🎶 Built With 🎶
 
 #### Tech Stack 🎶

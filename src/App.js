@@ -5,6 +5,19 @@ import useFetchReservations from './hooks/useFetchReservations';
 
 function App() {
   const [fetchReservations] = useFetchReservations();
+    const [showSidebar, setShowSidebar] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShowSidebar(window.innerWidth >= 768);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     fetchReservations();
@@ -12,8 +25,8 @@ function App() {
 
   return (
     <div className="App">
-      <Sidebar />
-      <main className="ml-0 md:ml-56">
+      {showSidebar && <Sidebar />}
+      <main className={showSidebar ? 'ml-0 md:ml-56' : 'ml-0'}>
         <Outlet />
       </main>
     </div>

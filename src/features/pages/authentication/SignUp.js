@@ -71,11 +71,6 @@ const SignUp = () => {
       .catch((error) => {
         dispatch(toggleLoading(false));
         dispatch(setErrors(error.response.data));
-        // if (error.response && error.response.data) {
-        //   dispatch(setErrors(error.response.data));
-        // } else {
-        //   console.error('An error occurred:', error);
-        // }
       });
   };
 
@@ -125,7 +120,6 @@ const SignUp = () => {
                 placeholder="UserName00"
                 {...register('username', { required: 'Enter your username' })}
               />
-
               <ErrorMessage error={errors} field="username" />
             </div>
             <div className="mb-4">

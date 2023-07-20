@@ -16,21 +16,21 @@ export const SidebarTemplate = () => {
   const { currentUser } = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  let routes = [
-    {
-      label: 'CONCERTS',
-      path: '/home',
-    },
-    {
-      label: 'MAKE RESERVATION',
-      path: '/concert/make-reservation',
-    },
-    {
-      label: 'MY RESERVATIONS',
-      path: '/my-reservations',
-    },
-  ];
+  
+	let routes = [
+		{
+			label: "CONCERTS",
+			path: "/home",
+		},
+		{
+			label: "MAKE RESERVATION",
+			path: "/concert/make-reservation",
+		},
+		{
+			label: "MY RESERVATIONS",
+			path: "/concert/my-reservations",
+		},
+	];
 
   const renderRoutes = () => {
     if (currentUser && currentUser.role === 'admin') {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AiOutlineTwitter, AiOutlineCopyrightCircle, AiOutlineLogout } from 'react-icons/ai';
 import { BiLogoFacebook, BiLogoPinterestAlt } from 'react-icons/bi';
 import { BsVimeo } from 'react-icons/bs';
@@ -11,18 +11,6 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { authSelector, clearStore } from '../storeSlice/authSlice';
 import { SidebarLink } from '../../components';
-
-const Sidebar = () => (
-  <>
-    <aside
-      id="default-sidebar"
-      className="fixed top-0 left-0 z-40 w-56 h-screen transition-transform -translate-x-full sm:translate-x-0"
-      aria-label="Sidebar"
-    >
-      {SidebarTemplate()}
-    </aside>
-  </>
-);
 
 export const SidebarTemplate = () => {
   const { currentUser } = useSelector(authSelector);
@@ -58,8 +46,8 @@ export const SidebarTemplate = () => {
         },
       ];
     }
-    return routes.map((route, index) => (
-      <li key={index}>
+    return routes.map((route) => (
+      <li key={route.path}>
         <SidebarLink label={route.label} path={route.path} />
       </li>
     ));
@@ -119,9 +107,7 @@ export const SidebarTemplate = () => {
           {currentUser && (
           <>
             <div className="text-sm">
-              {currentUser.name.length > 12
-								  ? `${currentUser.name.slice(0, 10)}...`
-								  : currentUser.name}
+              {currentUser.name.length > 12 ? `${currentUser.name.slice(0, 10)}...` : currentUser.name}
             </div>
             <div className="text-xs text-gray-500">leos@gmail.com</div>
           </>
@@ -141,19 +127,19 @@ export const SidebarTemplate = () => {
 
       <div className="mt-auto footer">
         <div className="flex items-center justify-center gap-1">
-          <a href="#">
+          <a href="twitter">
             <AiOutlineTwitter />
           </a>
-          <a href="#">
+          <a href="facebook">
             <BiLogoFacebook />
           </a>
-          <a href="#">
+          <a href="google">
             <LiaGoogle />
           </a>
-          <a href="#">
+          <a href="vimeo">
             <BsVimeo />
           </a>
-          <a href="#">
+          <a href="pinterest">
             <BiLogoPinterestAlt />
           </a>
         </div>
@@ -167,5 +153,17 @@ export const SidebarTemplate = () => {
     </div>
   );
 };
+
+const Sidebar = () => (
+  <>
+    <aside
+      id="default-sidebar"
+      className="fixed top-0 left-0 z-40 w-56 h-screen transition-transform -translate-x-full sm:translate-x-0"
+      aria-label="Sidebar"
+    >
+      {SidebarTemplate()}
+    </aside>
+  </>
+);
 
 export default Sidebar;

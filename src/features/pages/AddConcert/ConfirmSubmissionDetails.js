@@ -18,19 +18,6 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
   const { newConcertInfo, concertLocations } = useSelector(concertSelector);
   const { loading } = useSelector(authSelector);
   const dispatch = useDispatch();
-  const handleSubmit = () => {
-    confirmSubmission();
-  };
-
-  const confirmSubmission = () => {
-    confirmDialog({
-      message: 'Are you sure you want to new concert event?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      acceptClassName: 'p-button-primary',
-      accept,
-    });
-  };
 
   const accept = () => {
     const postBody = {
@@ -65,12 +52,25 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
         dispatch(setErrors(error.response.data));
       });
   };
+  const confirmSubmission = () => {
+    confirmDialog({
+      message: 'Are you sure you want to new concert event?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptClassName: 'p-button-primary',
+      accept,
+    });
+  };
+
+  const handleSubmit = () => {
+    confirmSubmission();
+  };
 
   const stepBack = () => {
     setStep(2);
   };
 
-  const formatDate = (event_date) => format(new Date(event_date), 'cccc, MMMM dd, yyyy');
+  const formatDate = (eventDate) => format(new Date(eventDate), 'cccc, MMMM dd, yyyy');
 
   return (
     <div className="">
@@ -111,23 +111,13 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
         <span className="block font-semibold text-lg text-left">Available Time and Location</span>
 
         <ul className="mt-3">
-          {concertLocations.length
-						&& concertLocations.map((location, index) => (
-  <li className="flex items-center gap-1 text-sm flex-wrap mb-2" key={index}>
-    <TbCalendarCheck className="text-primaryGreen text-xl" />
-    {location.hall_name}
-    {' '}
-    <span className="font-semibold">
-      -
-      {location.city}
-      {' '}
-      -
-    </span>
-    {' '}
-    {formatDate(location.event_date)}
-    {' '}
-    -
-    {' '}
+          {concertLocations.length && concertLocations.map((location, index) => (
+            <li className="flex items-center gap-1 text-sm flex-wrap mb-2" key={index}>
+              <TbCalendarCheck className="text-primaryGreen text-xl" />
+              {location.hall_name}
+              <span className="font-semibold"> - 
+                {location.city} - </span>
+    {formatDate(location.event_date)} - 
     <span className="font-semibold flex items-center gap-x-1">
       <MdChair className="text-xl text-primaryGreen" />
       Total Seats:

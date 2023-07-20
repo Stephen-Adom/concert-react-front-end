@@ -5,8 +5,7 @@ const Welcome = () => (
   <div
     className="bg-center bg-no-repeat bg-cover"
     style={{
-		  backgroundImage:
-				'url(https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cm9jayUyMGNvbmNlcnR8ZW58MHx8MHx8fDA%3D&w=1000&q=80)',
+      backgroundImage: 'url(https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cm9jayUyMGNvbmNlcnR8ZW58MHx8MHx8fDA%3D&w=1000&q=80)',
     }}
   >
     <div className="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-60">

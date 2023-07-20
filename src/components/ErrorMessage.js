@@ -10,6 +10,7 @@ const ErrorMessage = ({ error, field }) => {
         </p>
       );
     }
+    return null;
   };
   return errorMessage;
 };

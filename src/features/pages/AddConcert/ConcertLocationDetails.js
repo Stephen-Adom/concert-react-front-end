@@ -97,10 +97,7 @@ const ConcertLocationDetails = ({ setStep }) => {
                   <input
                     type="text"
                     id="hall_name"
-                    className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50  ${errorBorder(
-											  'hall_name',
-											  index,
-                    )}`}
+                    className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50  ${errorBorder('hall_name', index)}`}
                     placeholder="Main Town Hall"
                     required
                     {...register(`concert_halls.${index}.hall_name`, {
@@ -108,9 +105,8 @@ const ConcertLocationDetails = ({ setStep }) => {
                     })}
                   />
                   <ErrorMessage
-                    error={
-												Object.keys(errors).length
-												&& errors?.concert_halls?.[index] !== undefined
+                    error={Object.keys(errors).length
+											&& errors?.concert_halls?.[index] !== undefined
 												&& errors?.concert_halls?.[index]
 											}
                     field="hall_name"
@@ -119,10 +115,7 @@ const ConcertLocationDetails = ({ setStep }) => {
                 <td className="px-6 py-4 min-w-[200px]">
                   <select
                     id="city"
-                    className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50  ${errorBorder(
-											  'city',
-											  index,
-                    )}`}
+                    className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50  ${errorBorder('city', index)}`}
                     {...register(`concert_halls.${index}.city`, {
 											  required: 'Select City',
                     })}

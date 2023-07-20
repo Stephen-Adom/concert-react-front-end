@@ -73,8 +73,7 @@ const ManageConcert = () => {
 
   const formatConcertStatus = (concert) => (
     <span
-      className={`text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full ${
-				  concert.active ? 'text-primaryGreen bg-lime-100' : 'text-red-600 bg-red-100'
+      className={`text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full ${concert.active ? 'text-primaryGreen bg-lime-100' : 'text-red-600 bg-red-100'
       }`}
     >
       {concert.active ? 'Active' : 'Deleted'}
@@ -83,27 +82,13 @@ const ManageConcert = () => {
 
   const formatCreatedDate = (concert) => format(new Date(concert.created_at), 'PPP');
 
-  const concertAction = (concert) => {
-    if (concert.active) {
-      return (
-        <button
-          type="button"
-          className="text-sm font-medium text-red-600 hover:underline"
-          onClick={() => confirmDeletion(concert)}
-        >
-          Remove
-        </button>
-      );
-    }
-  };
-
   const onGlobalFilterChange = (e) => {
     const { value } = e.target;
-    const _filters = { ...filters };
+    const newFilters = { ...filters };
 
-    _filters.global.value = value;
+    newFilters.global.value = value;
 
-    setFilters(_filters);
+    setFilters(newFilters);
     setGlobalFilterValue(value);
   };
 
@@ -173,7 +158,7 @@ const ManageConcert = () => {
       accept: () => {
         dispatch(toggleLoading(true));
         deleteConcert(concert.id)
-          .then((_) => {
+          .then(() => {
             dispatch(toggleLoading(false));
             toast.success('Selected Concert has been marked deleted', {
               position: 'top-center',
@@ -187,6 +172,22 @@ const ManageConcert = () => {
           });
       },
     });
+  };
+
+  const concertAction = (concert) => {
+    if (concert.active) {
+      return (
+        <button
+          type="button"
+          className="text-sm font-medium text-red-600 hover:underline"
+          onClick={() => confirmDeletion(concert)}
+        >
+          Remove
+        </button>
+      );
+    }
+
+    return null;
   };
 
   return (

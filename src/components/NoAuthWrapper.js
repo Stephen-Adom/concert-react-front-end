@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import localforage from 'localforage';
 import LoadingPage from './LoadingPage';

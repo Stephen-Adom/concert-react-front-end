@@ -48,7 +48,7 @@ const SignUp = () => {
     regiserUser(formData)
       .then((response) => {
         const token = response.authentication_token;
-        const current_user = {
+        const currentUser = {
           id: response.user_id,
           name: response.name,
           email: response.email,
@@ -57,22 +57,23 @@ const SignUp = () => {
         };
 
         dispatch(setAuthToken(token));
-        dispatch(setCurrentUser(current_user));
+        dispatch(setCurrentUser(currentUser));
         localforage
           .setItem('token', token)
-          .then(() => localforage.setItem('user_info', JSON.stringify(current_user)))
-          .then((res) => {
+          .then(() => localforage.setItem('user_info', JSON.stringify(currentUser)))
+          .then(() => {
             dispatch(toggleLoading(false));
             navigate('/home');
           });
       })
       .catch((error) => {
         dispatch(toggleLoading(false));
-        if (error.response && error.response.data) {
-          dispatch(setErrors(error.response.data));
-        } else {
-          console.error('An error occurred:', error);
-        }
+        dispatch(setErrors(error.response.data));
+        // if (error.response && error.response.data) {
+        //   dispatch(setErrors(error.response.data));
+        // } else {
+        //   console.error('An error occurred:', error);
+        // }
       });
   };
 

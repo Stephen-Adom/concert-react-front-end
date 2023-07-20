@@ -37,11 +37,6 @@ const ReserveConcertDialog = ({
     handleSubmit,
     reset,
   } = form;
-
-  const onSubmit = (formData) => {
-    confirmReservation(formData);
-  };
-
   const confirmReservation = (formData) => {
     confirmDialog({
       message: 'Are you sure you want book this concert?',
@@ -68,6 +63,10 @@ const ReserveConcertDialog = ({
           });
       },
     });
+  };
+
+  const onSubmit = (formData) => {
+    confirmReservation(formData);
   };
 
   const formatHallName = (hall) => `${hall.city_name} - ${hall.hall_name} on ${format(new Date(hall.date), 'PPpp')}`;

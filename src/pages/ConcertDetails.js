@@ -46,9 +46,7 @@ const ConcertDetails = () => {
             <div className="flex flex-col items-start justify-start w-full gap-5 sm:flex-col lg:flex-row lg:gap-14">
               <div className="concert-image-container w-full lg:w-[70%]">
                 <div
-                  style={{
-									  backgroundImage: `url(${concert.image})`,
-                  }}
+                  style={{ backgroundImage: `url(${concert.image})` }}
                   className="image-container w-full h-[250px] sm:h-[250px] md:h-[600px] bg-center bg-no-repeat"
                 />
               </div>

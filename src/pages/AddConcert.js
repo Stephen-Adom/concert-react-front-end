@@ -13,6 +13,8 @@ const AddConcert = () => {
         return <ConcertLocationDetails setStep={setStep} />;
       case 3:
         return <ConfirmSubmissionDetails setStep={setStep} />;
+      default:
+        return null;
     }
   };
 
@@ -50,8 +52,7 @@ const AddConcert = () => {
         <div className="w-full md:!w-[95%] lg:!w-[80%] xl:!w-[80%] mx-auto mt-10">
           <ol className="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
             <li
-              className={`${setStepperLinkStyle()} ${
-							  step === 1 ? 'text-primaryGreen' : 'text-gray-500'
+              className={`${setStepperLinkStyle()} ${step === 1 ? 'text-primaryGreen' : 'text-gray-500'
               }`}
             >
               <span className="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
@@ -62,8 +63,7 @@ const AddConcert = () => {
               </span>
             </li>
             <li
-              className={`${setStepperLinkStyle()} ${
-							  step === 2 ? 'text-primaryGreen' : 'text-gray-500'
+              className={`${setStepperLinkStyle()} ${step === 2 ? 'text-primaryGreen' : 'text-gray-500'
               }`}
             >
               <span className="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
@@ -74,8 +74,7 @@ const AddConcert = () => {
               </span>
             </li>
             <li
-              className={`${setStepperLinkStyle()} ${
-							  step === 3 ? 'text-primaryGreen' : 'text-gray-500'
+              className={`${setStepperLinkStyle()} ${step === 3 ? 'text-primaryGreen' : 'text-gray-500'
               }`}
             >
               {renderStepStatus(3)}

@@ -23,6 +23,8 @@ const LocationDetails = ({ hall }) => {
         );
       }
     }
+
+    return null;
   }, [allReservations]);
 
   return (

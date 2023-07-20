@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'flowbite/dist/flowbite.css';
-import 'flowbite/dist/flowbite.js';
+import 'flowbite/dist/flowbite';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import './index.css';

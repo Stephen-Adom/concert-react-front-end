@@ -2,7 +2,7 @@
   <img src="./assets/music%20gif.gif" alt="ConcertHub Form" width="250">
 </div>
 
-<h1 style="text-align: center; font-size: 40px;"> ConcertHub 🎵🎤🎶 </h1>
+<h1 style="font-size: 40px;" align="center"> ConcertHub 🎵🎤🎶 </h1>
 
 ## 🎵 Table of Contents 🎵
 
@@ -32,7 +32,7 @@ ConcertHub is a platform where music enthusiasts can discover upcoming concerts,
 
 <div style="display: flex; align-items: center;">
 <img src="./assets/desktop.png" height="500px" />
-<img src="./assets/mobile.png" height="400px" />
+<img src="./assets/mobile.png" height="450px" />
 </div>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

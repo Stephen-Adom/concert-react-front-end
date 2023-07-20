@@ -5,9 +5,9 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BsTrash3 } from "react-icons/bs";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
 import { concertSelector, setConcertLocations } from "../../storeSlice/concertSlice";
 import { ErrorMessage } from "../../../components";
+import { ConcertLocationDetailsProp } from "../../../model/model.types";
 
 const ConcertLocationDetails = ({ setStep }) => {
 	const dispatch = useDispatch();
@@ -246,8 +246,6 @@ const ConcertLocationDetails = ({ setStep }) => {
 	);
 };
 
-ConcertLocationDetails.propTypes = {
-	setStep: PropTypes.func.isRequired,
-};
+ConcertLocationDetails.propTypes = ConcertLocationDetailsProp;
 
 export default ConcertLocationDetails;

@@ -8,11 +8,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { PiCaretCircleRightLight, PiCaretCircleLeftLight } from "react-icons/pi";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
-import PropTypes from "prop-types";
 import { confirmDialog } from "primereact/confirmdialog";
 import { authSelector, toggleLoading, setErrors } from "../../storeSlice/authSlice";
 import { concertSelector, resetConcertForm } from "../../storeSlice/concertSlice";
 import { createConcert } from "../../../services/services";
+import { ConfirmSubmissionDetailsProp } from "../../../model/model.types";
 
 const ConfirmSubmissionDetails = ({ setStep }) => {
 	const { newConcertInfo, concertLocations } = useSelector(concertSelector);
@@ -196,8 +196,6 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
 	);
 };
 
-ConfirmSubmissionDetails.propType = {
-	setStep: PropTypes.func.isRequired,
-};
+ConfirmSubmissionDetails.propType = ConfirmSubmissionDetailsProp;
 
 export default ConfirmSubmissionDetails;

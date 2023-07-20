@@ -13,6 +13,8 @@ const concertType = PropTypes.shape({
 	concert_halls: PropTypes.array,
 }).isRequired;
 
+const setStepType = PropTypes.func.isRequired;
+
 export const AuthWrapperProp = {
 	children: PropTypes.element.isRequired,
 };
@@ -69,4 +71,16 @@ export const SwiperPrevButtonProps = {
 
 export const SwiperSlideProp = {
 	concert: concertType,
+};
+
+export const ConcertLocationDetailsProp = {
+	setStep: setStepType,
+};
+
+export const ConfirmSubmissionDetailsProp = {
+	setStep: setStepType,
+};
+
+export const NewConcertDetailsProp = {
+	setStep: setStepType,
 };

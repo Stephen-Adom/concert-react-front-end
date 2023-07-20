@@ -3,9 +3,9 @@ import { Button } from "flowbite-react";
 import { PiCaretCircleRightLight } from "react-icons/pi";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
 import { ErrorMessage } from "../../../components";
 import { setNewConcertInfo, concertSelector } from "../../storeSlice/concertSlice";
+import { NewConcertDetailsProp } from "../../../model/model.types";
 
 const NewConcertDetails = ({ setStep }) => {
 	const { newConcertInfo } = useSelector(concertSelector);
@@ -159,8 +159,6 @@ const NewConcertDetails = ({ setStep }) => {
 	);
 };
 
-NewConcertDetails.propTypes = {
-	setStep: PropTypes.func.isRequired,
-};
+NewConcertDetails.propTypes = NewConcertDetailsProp;
 
 export default NewConcertDetails;

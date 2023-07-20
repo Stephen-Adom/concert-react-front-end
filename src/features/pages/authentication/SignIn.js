@@ -66,7 +66,11 @@ const SignIn = () => {
 			})
 			.catch((error) => {
 				dispatch(toggleLoading(false));
-				dispatch(setErrors(error.response.data));
+				if (error.response && error.response.data) {
+					dispatch(setErrors(error.response.data));
+				} else {
+					console.error("An error occurred:", error);
+				}
 			});
 	};
 

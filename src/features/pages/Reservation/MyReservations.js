@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { format } from 'date-fns';
-import { MenuButton } from "../../../components";
+import { MenuButton, BackButton } from "../../../components";
 import  Sidebar  from "./../../app/Sidebar";
 
 const MyReservations = () => {
@@ -63,7 +63,7 @@ const MyReservations = () => {
     return <div>Error: {error}</div>; 
   }
 
-  return (<>
+  return (<div className="relative w-full h-screen px-5 md:px-10">
     <h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
         <MenuButton onClick={toggleSidebar} />
       </h1>
@@ -84,8 +84,10 @@ const MyReservations = () => {
           ))}
         </div>
       )}
+      
     </div>
-    </>
+    <BackButton></BackButton>
+    </div>
   );
 };
 

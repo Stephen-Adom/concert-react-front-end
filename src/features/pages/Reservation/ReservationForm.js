@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { MenuButton } from "../../../components";
+import { MenuButton, BackButton } from "../../../components";
 import { Button } from "flowbite-react";
 import { PiCaretCircleRightLight } from "react-icons/pi";
 import { format } from 'date-fns';
@@ -142,12 +142,11 @@ const ReservationForm = () => {
 
   return (
     <div className="relative w-full h-screen px-5 md:px-20">
-      {/* <h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
+      <h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
         <MenuButton></MenuButton>
         RESERVE CONCERT
-      </h1> */}
-     <div className="flex flex-col items-center justify-center h-full py-10 text-center md:justify-center md:py-0">
-    
+      </h1> 
+     <div className="flex flex-col items-center h-full py-10 text-center md:justify-center md:py-0">
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="form-group">
         <label htmlFor="concert_name" className="block mb-2 text-sm font-medium text-left text-gray-900">
@@ -318,6 +317,7 @@ const ReservationForm = () => {
           <p className="text-white text-2xl font-bold">Reservation Failed. Please try again.</p>
         </div>)}
       </div>
+      <BackButton></BackButton>
     </div>
   );
 };

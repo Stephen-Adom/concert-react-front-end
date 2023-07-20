@@ -78,75 +78,53 @@ const ReservationForm = () => {
   const { currentUser } = useSelector(authSelector);
   const userId = currentUser ? currentUser.id : null;
 
-  const onSubmit = async (formData, event) => {
-    event.preventDefault();
+const onSubmit = async (formData, event) => {
+  event.preventDefault();
+
+  try {
+    if (!selectedConcertHall) {
+      console.error("Concert hall not found with the selected city name:", selectedCity);
+      return;
+    }
+
+    const confirmed = await new Promise((resolve) => {
+      confirmDialog({
+        message: "Are you sure you want to book this concert?",
+        header: "Confirmation",
+        icon: "pi pi-exclamation-triangle",
+        acceptClassName: "p-button-primary",
+        accept: () => resolve(true),
+        reject: () => resolve(false),
+      });
+    });
+
+    if (!confirmed) {
+      console.log("Reservation canceled.");
+      return;
+    }
+
     try {
-      if (!selectedConcertHall) {
-        console.error("Concert hall not found with the selected city name:", selectedCity);
-        return;
-      }
-  
-      const isAlreadyReserved = await reserveConcert({
+      await reserveConcert({
         user_id: userId,
         concert_hall_id: selectedConcertHall.id,
         ...formData,
-      })
-        .then(() => false) 
-        .catch((error) => {
-          console.error("Failed to create reservation:", error);
-          if (error?.response?.status === 422) {
-            return true; 
-          }
-          return false;
-        });
-  
-      if (isAlreadyReserved) {
-        toast.error("You have already reserved this concert.");
-        return;
-      }
-  
-      const confirmed = await toast.promise(
-        new Promise((resolve) => {
-          confirmDialog({
-            message: "Are you sure you want to book this concert?",
-            header: "Confirmation",
-            icon: "pi pi-exclamation-triangle",
-            acceptClassName: "p-button-primary",
-            accept: () => resolve(true),
-            reject: () => resolve(false),
-          });
-        }),
-        {
-          loading: "Confirming...",
-          success: "Reservation confirmed!",
-          error: "Reservation canceled.",
-        }
-      );
-  
-      if (confirmed) {
-        try {
-          await reserveConcert({
-            user_id: userId,
-            concert_hall_id: selectedConcertHall.id,
-            ...formData,
-          });
-          console.log("Reservation created successfully!");
-          setReservationStatus("success");
-          toast.success("Reservation completed!");
-        } catch (error) {
-          console.error("Failed to create reservation:", error);
-          setReservationStatus("error");
-          toast.error("Reservation failed.");
-        }
-      }
-    } catch (error) {
-      console.error("Reservation failed:", error);
-      setReservationStatus("error");
-      toast.error("Reservation failed.");
-    }
-  };
-  
+      });
 
+      console.log("Reservation created successfully!");
+      setReservationStatus("success");
+      toast.success("Reservation completed!");
+    } catch (error) {
+      console.error("Failed to create reservation:", error);
+      setReservationStatus("error");
+      toast.error("Failed to create reservation.");
+    }
+  } catch (error) {
+    console.error("Reservation failed:", error);
+    setReservationStatus("error");
+    toast.error("Reservation failed.");
+  }
+};
+  
   
   const errorBorder = (field) => {
     return errors[field]

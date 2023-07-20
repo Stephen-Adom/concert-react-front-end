@@ -84,9 +84,8 @@ const MyReservations = () => {
           ))}
         </div>
       )}
-      
     </div>
-    <BackButton></BackButton>
+      <BackButton></BackButton>
     </div>
   );
 };

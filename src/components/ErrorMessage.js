@@ -1,4 +1,5 @@
 import React from "react";
+import { ErrorMessageProp } from "../model/model.types";
 
 const ErrorMessage = ({ error, field }) => {
 	const errorMessage = () => {
@@ -12,5 +13,7 @@ const ErrorMessage = ({ error, field }) => {
 	};
 	return errorMessage();
 };
+
+ErrorMessage.propTypes = ErrorMessageProp;
 
 export default ErrorMessage;

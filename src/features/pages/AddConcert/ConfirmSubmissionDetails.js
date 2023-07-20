@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { PiCaretCircleRightLight, PiCaretCircleLeftLight } from "react-icons/pi";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
+import PropTypes from "prop-types";
 import { confirmDialog } from "primereact/confirmdialog";
 import { authSelector, toggleLoading, setErrors } from "../../storeSlice/authSlice";
 import { concertSelector, resetConcertForm } from "../../storeSlice/concertSlice";
@@ -193,6 +194,10 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
 			</div>
 		</div>
 	);
+};
+
+ConfirmSubmissionDetails.propType = {
+	setStep: PropTypes.func.isRequired,
 };
 
 export default ConfirmSubmissionDetails;

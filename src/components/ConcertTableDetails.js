@@ -1,5 +1,6 @@
 import React from "react";
 import { Table } from "flowbite-react";
+import { ConcertTableDetailsProp } from "../model/model.types";
 
 const ConcertTableDetails = ({ concert }) => {
 	return (
@@ -26,5 +27,7 @@ const ConcertTableDetails = ({ concert }) => {
 		</Table>
 	);
 };
+
+ConcertTableDetails.propTypes = ConcertTableDetailsProp;
 
 export default ConcertTableDetails;

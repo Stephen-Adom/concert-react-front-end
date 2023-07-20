@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { BiMap } from "react-icons/bi";
 import { BsCheckAll } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import { LocationDetailsProp } from "../model/model.types";
 import { reservationSelector } from "../features/storeSlice/reservationSlice";
 
 const LocationDetails = ({ hall }) => {
@@ -52,5 +53,7 @@ const LocationDetails = ({ hall }) => {
 		</div>
 	);
 };
+
+LocationDetails.propTypes = LocationDetailsProp;
 
 export default LocationDetails;

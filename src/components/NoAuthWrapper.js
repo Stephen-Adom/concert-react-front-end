@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import localforage from "localforage";
 import LoadingPage from "./LoadingPage";
+import { AuthWrapperProp } from "../model/model.types";
 
 const NoAuthWrapper = ({ children }) => {
 	const [authenticated, setAuthenticated] = useState(null);
@@ -32,5 +33,7 @@ const NoAuthWrapper = ({ children }) => {
 
 	return children;
 };
+
+NoAuthWrapper.propTypes = AuthWrapperProp;
 
 export default NoAuthWrapper;

@@ -3,6 +3,7 @@ import { GiDrumKit } from "react-icons/gi";
 import { CgUserList } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from "flowbite-react";
+import { SwiperSlideProp } from "../model/model.types";
 
 const SwiperSlide = ({ concert }) => {
 	const navigate = useNavigate();
@@ -37,5 +38,7 @@ const SwiperSlide = ({ concert }) => {
 		</div>
 	);
 };
+
+SwiperSlide.propTypes = SwiperSlideProp;
 
 export default SwiperSlide;

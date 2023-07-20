@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { confirmDialog } from "primereact/confirmdialog";
+import { ReserveConcertDialogProp } from "../model/model.types";
 import { authSelector, toggleLoading, setErrors } from "../features/storeSlice/authSlice";
 import { ErrorMessage } from "../components";
 import { reserveConcert } from "../services/services";
@@ -178,5 +179,7 @@ const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetail
 		</>
 	);
 };
+
+ReserveConcertDialog.propTypes = ReserveConcertDialogProp;
 
 export default ReserveConcertDialog;

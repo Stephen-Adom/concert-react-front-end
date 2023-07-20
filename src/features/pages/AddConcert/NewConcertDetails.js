@@ -3,6 +3,7 @@ import { Button } from "flowbite-react";
 import { PiCaretCircleRightLight } from "react-icons/pi";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import { ErrorMessage } from "../../../components";
 import { setNewConcertInfo, concertSelector } from "../../storeSlice/concertSlice";
 
@@ -156,6 +157,10 @@ const NewConcertDetails = ({ setStep }) => {
 			</form>
 		</>
 	);
+};
+
+NewConcertDetails.propTypes = {
+	setStep: PropTypes.func.isRequired,
 };
 
 export default NewConcertDetails;

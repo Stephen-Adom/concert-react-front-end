@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import localforage from "localforage";
+import { AuthWrapperProp } from "../model/model.types";
 import LoadingPage from "./LoadingPage";
 
 const AuthWrapper = ({ children }) => {
@@ -32,5 +33,7 @@ const AuthWrapper = ({ children }) => {
 
 	return children;
 };
+
+AuthWrapper.propTypes = AuthWrapperProp;
 
 export default AuthWrapper;

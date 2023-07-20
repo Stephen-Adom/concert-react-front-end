@@ -92,3 +92,14 @@ export const deleteConcert = async (id) => {
 		throw error;
 	}
 };
+
+export const fetchAllReservations = async () => {
+	try {
+		const token = await localforage.getItem("token");
+		axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+		const response = await axiosInstance.get(`/reservations`);
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
+};

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { format } from 'date-fns';
 import { MenuButton, BackButton } from "../../../components";
 import  Sidebar  from "./../../app/Sidebar";
+import { fetchAllReservations } from "../../../services/services";
 
 const MyReservations = () => {
   const [userReservations, setUserReservations] = useState([]);
@@ -29,16 +30,9 @@ const MyReservations = () => {
           return;
         }
 
-        const response = await fetch(`http://localhost:3000/api/v1/reservations`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
+        const data = await fetchAllReservations(authToken);
 
-        if (response.ok) {
-          const data = await response.json();
+        if (data) {
           setUserReservations(data.reservations);
         } else {
           setError("Failed to fetch reservations.");

@@ -48,7 +48,13 @@ ConcertHub is a platform where music enthusiasts can discover upcoming concerts,
 <details>
  <summary>Styling</summary>
   <ul>
-    <li><a href="https://tailwindcss.com//">Tailwind CSS</a></li>
+    <li><a href="https://tailwindcss.com/">Tailwind CSS</a></li>
+  </ul>
+</details>
+<details>
+ <summary>State Management</summary>
+  <ul>
+    <li><a href="https://redux.js.org/">Redux</a></li>
   </ul>
 </details>
 

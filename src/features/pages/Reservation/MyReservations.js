@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
-import { MenuButton, BackButton } from "../../../components";
-import  Sidebar  from "./../../app/Sidebar";
-import { fetchAllReservations } from "../../../services/services";
+import toast from 'react-hot-toast';
+import { MenuButton, BackButton } from '../../../components';
+import Sidebar from '../../app/Sidebar';
+import { fetchAllUserReservations } from '../../../services/services';
 
 const MyReservations = () => {
   const [userReservations, setUserReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => {
     setIsSidebarOpen((prevOpen) => !prevOpen);
   };
@@ -19,67 +20,82 @@ const MyReservations = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return format(date, 'MMM dd yyyy hh:mm a'); 
+    return format(date, 'MMM dd yyyy hh:mm a');
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (!userId || !authToken) {
-          console.error("User ID or Auth Token not available. Please check authentication.");
+          toast.error('User ID or Auth Token not available. Please check authentication.');
           return;
         }
 
-        const data = await fetchAllReservations(authToken);
+        const data = await fetchAllUserReservations(authToken);
 
         if (data) {
           setUserReservations(data.reservations);
         } else {
-          setError("Failed to fetch reservations.");
+          setError('Failed to fetch reservations.');
         }
       } catch (error) {
-        setError("Error fetching reservations.");
+        setError('Error fetching reservations.');
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     if (userId && authToken) {
-      fetchData(); 
+      fetchData();
     }
   }, [userId, authToken]);
 
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>; 
+    return (
+      <div>
+        Error:
+        {error}
+      </div>
+    );
   }
 
-  return (<div className="relative w-full h-screen px-5 md:px-10">
-    <h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
+  return (
+    <div className="relative w-full h-screen px-5 md:px-10">
+      <h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
         <MenuButton onClick={toggleSidebar} />
       </h1>
       {isSidebarOpen && <Sidebar />}
-    <div className="px-5 md:px-20 py-10">
-      <h1 className="text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl mb-6">My Reservations</h1>
-      {Array.isArray(userReservations) && userReservations.length === 0 ? (
-        <p>No reservations found.</p>
-      ) : (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {userReservations.map((reservation) => (
-            <div key={reservation.id} className="bg-white rounded-lg shadow-md p-4">
-              <p className="text-lg font-semibold">{reservation.concert_name}</p>
-              <p className="text-gray-600">Concert Date: {formatDate(reservation.concert_date)}</p>
-              <p className="text-gray-600">Concert Hall: {reservation.hall_name}</p>
-              <p className="text-gray-600">City: {reservation.city_name}</p>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-      <BackButton></BackButton>
+      <div className="px-5 md:px-20 py-10">
+        <h1 className="text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl mb-6">My Reservations</h1>
+        {Array.isArray(userReservations) && userReservations.length === 0 ? (
+          <p>No reservations found.</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {userReservations.map((reservation) => (
+              <div key={reservation.id} className="bg-white rounded-lg shadow-md p-4">
+                <p className="text-lg font-semibold">{reservation.concert_name}</p>
+                <p className="text-gray-600">
+                  Concert Date:
+                  {formatDate(reservation.concert_date)}
+                </p>
+                <p className="text-gray-600">
+                  Concert Hall:
+                  {reservation.hall_name}
+                </p>
+                <p className="text-gray-600">
+                  City:
+                  {reservation.city_name}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      <BackButton />
     </div>
   );
 };

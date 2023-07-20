@@ -1,6 +1,7 @@
-import axios from "axios";
-import localforage from "localforage";
-const BASEURL = "http://localhost:3000/api/v1";
+import axios from 'axios';
+import localforage from 'localforage';
+
+const BASEURL = 'http://localhost:4000/api/v1';
 
 const axiosInstance = axios.create({
   baseURL: BASEURL,
@@ -67,11 +68,4 @@ export const fetchAllUserReservations = async () => {
   axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
   const response = await axiosInstance.get('/reservations');
   return response.data;
-};
-
-export const fetchAllReservations = async () => {
-		const token = await localforage.getItem("token");
-		axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-		const response = await axiosInstance.get(`/reservations`);
-		return response.data;
 };

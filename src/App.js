@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './features';
 import useFetchReservations from './hooks/useFetchReservations';
 
 function App() {
   const [fetchReservations] = useFetchReservations();
-    const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {

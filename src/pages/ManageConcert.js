@@ -189,7 +189,7 @@ const ManageConcert = () => {
 					})
 					.catch((error) => {
 						dispatch(toggleLoading(false));
-						dispatch(setErrors(error));
+						dispatch(setErrors(error.response.data));
 					});
 			},
 		});

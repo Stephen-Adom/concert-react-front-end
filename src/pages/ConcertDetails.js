@@ -23,7 +23,6 @@ const ConcertDetails = () => {
 		fetchConcert(id)
 			.then((response) => {
 				setConcert(response);
-				console.log(response);
 			})
 			.catch((error) => {
 				setErrors(error);

@@ -14,13 +14,10 @@ import { reserveConcert } from "../services/services";
 const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetails }) => {
 	const dispatch = useDispatch();
 
-	const {
-		currentUser: { id },
-		loading,
-	} = useSelector(authSelector);
+	const { currentUser, loading } = useSelector(authSelector);
 
 	const [initialForm, setInitialForm] = useState({
-		user_id: id,
+		user_id: currentUser?.id,
 		concert_hall_id: 5,
 	});
 
@@ -65,7 +62,7 @@ const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetail
 			})
 			.catch((error) => {
 				dispatch(toggleLoading(false));
-				dispatch(setErrors(error));
+				dispatch(setErrors(error.response.data));
 			});
 	};
 
@@ -106,6 +103,7 @@ const ReserveConcertDialog = ({ visible, setVisible, concert, fetchConcertDetail
 		return (
 			<div className="flex justify-end">
 				<Button
+					type="button"
 					label="No"
 					icon="pi pi-times"
 					onClick={() => setVisible(false)}

@@ -63,7 +63,7 @@ const ConfirmSubmissionDetails = ({ setStep }) => {
 			})
 			.catch((error) => {
 				dispatch(toggleLoading(false));
-				dispatch(setErrors(error));
+				dispatch(setErrors(error.response.data));
 			});
 	};
 

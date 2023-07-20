@@ -3,6 +3,7 @@
 </div>
 
 <h1 style="text-align: center; font-size: 40px;"> ConcertHub 🎵🎤🎶 </h1>
+
 ## 🎵 Table of Contents 🎵
 
 - [🎵 Table of Contents 🎵](#-table-of-contents-)
@@ -42,6 +43,12 @@ ConcertHub is a platform where music enthusiasts can discover upcoming concerts,
   <summary>Client</summary>
   <ul>
     <li><a href="https://reactjs.org/">React.js</a></li>
+  </ul>
+</details>
+<details>
+ <summary>Styling</summary>
+  <ul>
+    <li><a href="https://tailwindcss.com//">Tailwind CSS</a></li>
   </ul>
 </details>
 

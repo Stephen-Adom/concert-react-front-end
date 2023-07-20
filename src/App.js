@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import {Sidebar} from './features';
+import { Sidebar } from './features';
+import useFetchReservations from './hooks/useFetchReservations';
 
 function App() {
+  const [fetchReservations] = useFetchReservations();
   const [showSidebar, setShowSidebar] = useState(true);
 
   useEffect(() => {
@@ -16,6 +18,10 @@ function App() {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    fetchReservations();
+  }, [fetchReservations]);
 
   return (
     <div className="App">

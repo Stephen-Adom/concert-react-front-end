@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { MenuButton } from "../../../components";
+import { MenuButton, BackButton, ErrorMessage, ReserveConcertDialog } from "../../../components";
 import { Button } from "flowbite-react";
 import { PiCaretCircleRightLight } from "react-icons/pi";
+import { confirmDialog } from "primereact/confirmdialog";
 import { format } from 'date-fns';
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "../../../components";
-import { authSelector, setAuthToken } from "../../storeSlice/authSlice";
+import { authSelector } from "../../storeSlice/authSlice";
+import { reserveConcert, fetchAllConcerts, fetchConcert } from "../../../services/services";
 import toast from "react-hot-toast";
 
 const ReservationForm = () => {
@@ -16,10 +17,8 @@ const ReservationForm = () => {
   const [selectedConcert, setSelectedConcert] = useState(null);
   const [selectedCity, setSelectedCity] = useState("");
   const [concertDetails, setConcertDetails] = useState(null);
-  const [selectedConcertHall, setSelectedConcertHall] = useState(null); // New state variable to store selected concert hall
+  const [selectedConcertHall, setSelectedConcertHall] = useState(null); 
   const [reservationStatus, setReservationStatus] = useState(null);
-
-
   const {
     control,
     formState: { errors },
@@ -34,15 +33,13 @@ const ReservationForm = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/concerts")
-      .then((response) => response.json())
+    fetchAllConcerts()
       .then((data) => setConcerts(data))
       .catch((error) => console.error("Error fetching concerts:", error));
   }, []);
 
   const fetchConcertDetails = (concertId) => {
-    fetch(`http://localhost:3000/api/v1/concerts/${concertId}`)
-      .then((response) => response.json())
+    fetchConcert(concertId)
       .then((data) => {
         console.log("Fetched concert details:", data);
         setConcertDetails(data);
@@ -52,7 +49,6 @@ const ReservationForm = () => {
       })
       .catch((error) => console.error("Error fetching concert details:", error));
   };
-
  const handleConcertChange = (selectedConcertName) => {
   const selectedConcertData = concerts.find((concert) => concert.name === selectedConcertName);
   if (selectedConcertData) {
@@ -69,7 +65,6 @@ const ReservationForm = () => {
 
   const handleCityChange = (selectedCityName) => {
     setSelectedCity(selectedCityName);
-    // Find the concert hall ID based on the selected city name
     const selectedConcertHall = concertDetails?.concert_halls.find(
       (hall) => hall.city_name === selectedCityName
     );
@@ -82,48 +77,54 @@ const ReservationForm = () => {
 
   const { currentUser } = useSelector(authSelector);
   const userId = currentUser ? currentUser.id : null;
-  const dispatch = useDispatch();
-  const authToken = useSelector((state) => state.auth.token);
-  const onSubmit = async (formData, event) => {
-    event.preventDefault();
-  
+
+const onSubmit = async (formData, event) => {
+  event.preventDefault();
+
+  try {
+    if (!selectedConcertHall) {
+      console.error("Concert hall not found with the selected city name:", selectedCity);
+      return;
+    }
+
+    const confirmed = await new Promise((resolve) => {
+      confirmDialog({
+        message: "Are you sure you want to book this concert?",
+        header: "Confirmation",
+        icon: "pi pi-exclamation-triangle",
+        acceptClassName: "p-button-primary",
+        accept: () => resolve(true),
+        reject: () => resolve(false),
+      });
+    });
+
+    if (!confirmed) {
+      console.log("Reservation canceled.");
+      return;
+    }
+
     try {
-      if (!userId) {
-        console.error("User ID not available. Please check authentication.");
-        return;
-      }
-      const reservationData = {
+      await reserveConcert({
         user_id: userId,
-        concert_hall_id: selectedConcertHall.id, 
+        concert_hall_id: selectedConcertHall.id,
         ...formData,
-      };
-       dispatch(setAuthToken(authToken));
-  
-       if (!selectedConcertHall) {
-        console.error("Concert hall not found with the selected city name:", selectedCity);
-        return;
-      }
-      const response = await fetch("http://localhost:3000/api/v1/reservations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`, 
-        },
-        body: JSON.stringify(reservationData), 
       });
 
-      if (response.status === 201) {
-        console.log("Reservation created successfully!");
-        setReservationStatus("success");
-      } else {
-        console.error("Failed to create reservation:", response.statusText);
-        setReservationStatus("error");
-      }
+      console.log("Reservation created successfully!");
+      setReservationStatus("success");
+      toast.success("Reservation completed!");
     } catch (error) {
-      console.error("Reservation failed:", error);
+      console.error("Failed to create reservation:", error);
       setReservationStatus("error");
+      toast.error("Failed to create reservation.");
     }
-  };
+  } catch (error) {
+    console.error("Reservation failed:", error);
+    setReservationStatus("error");
+    toast.error("Reservation failed.");
+  }
+};
+  
   
   const errorBorder = (field) => {
     return errors[field]
@@ -134,46 +135,41 @@ const ReservationForm = () => {
   useEffect(() => {
     if (reservationStatus === "success") {
       navigate("/home");
-      toast.success("You successfully made a reservation", {
-				position: "top-center",
-				duration: 4000,
-			});
     }
   }, [reservationStatus]);
 
   return (
     <div className="relative w-full h-screen px-5 md:px-20">
-      {/* <h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
+      <h1 className="flex items-center text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl gap-x-3">
         <MenuButton></MenuButton>
         RESERVE CONCERT
-      </h1> */}
-     <div className="flex flex-col items-center justify-center h-full py-10 text-center md:justify-center md:py-0">
-    
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className="form-group">
-        <label htmlFor="concert_name" className="block mb-2 text-sm font-medium text-left text-gray-900">
-          Name of Concert
-        </label>
-        <select
-          id="concert_name"
-          className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-            "concert_name"
-          )}`}
-          required
-          value={selectedConcert?.name || ""}
-          onChange={(e) => handleConcertChange(e.target.value)}
-        >
-          <option value="" disabled>
-            Select Concert
-          </option>
-          {concerts.map((concert) => (
-            <option key={concert.id} value={concert.name}>
-              {concert.name}
-            </option>
-          ))}
-        </select>
-        <ErrorMessage error={errors} field="concert_name" />
-      </div>
+      </h1>
+      <div className="flex flex-col items-center h-full py-10 text-center md:justify-center md:py-0">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <div className="form-group">
+            <label htmlFor="concert_name" className="block mb-2 text-sm font-medium text-left text-gray-900">
+              Name of Concert
+            </label>
+            <select
+              id="concert_name"
+              className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+                "concert_name"
+              )}`}
+              required
+              value={selectedConcert?.name || ""}
+              onChange={(e) => handleConcertChange(e.target.value)}
+            >
+              <option value="" disabled>
+                Select Concert
+              </option>
+              {concerts.map((concert) => (
+                <option key={concert.id} value={concert.name}>
+                  {concert.name}
+                </option>
+              ))}
+            </select>
+            <ErrorMessage error={errors} field="concert_name" />
+          </div>
           {selectedConcert && (
             <>
               <div className="form-group">
@@ -191,51 +187,47 @@ const ReservationForm = () => {
                   readOnly
                   value={concertDetails?.description || ""}
                 ></textarea>
-
+  
                 <ErrorMessage error={errors} field="description" />
               </div>
-
-                
-        <div className="grid grid-cols-1 gap-5 form-group sm:grid-cols-1 md:grid-cols-2">
-          <section>
-            <label htmlFor="artist" className="block mb-2 text-sm font-medium text-left text-gray-900">
-              Name of Artist
-            </label>
-            <input
-              type="text"
-              id="artist"
-              className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-                'artist'
-              )}`}
-              placeholder="Taylor Swift"
-              required
-              readOnly
-              value={concertDetails?.artist || ''}
-            />
-            <ErrorMessage error={errors} field="artist" />
-          </section>
-
-          <section>
-            <label htmlFor="band_name" className="block mb-2 text-sm font-medium text-left text-gray-900">
-              Band Name
-            </label>
-            <input
-              type="text"
-              id="band_name"
-              className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-                'band_name'
-              )}`}
-              placeholder="Swift Band"
-              required
-              readOnly
-              value={concertDetails?.band || ''}
-            />
-            <ErrorMessage error={errors} field="band_name" />
-          </section>
-        </div>
-
-
-              {/* City selection */}
+  
+              <div className="grid grid-cols-1 gap-5 form-group sm:grid-cols-1 md:grid-cols-2">
+                <section>
+                  <label htmlFor="artist" className="block mb-2 text-sm font-medium text-left text-gray-900">
+                    Name of Artist
+                  </label>
+                  <input
+                    type="text"
+                    id="artist"
+                    className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+                      'artist'
+                    )}`}
+                    placeholder="Taylor Swift"
+                    required
+                    readOnly
+                    value={concertDetails?.artist || ''}
+                  />
+                  <ErrorMessage error={errors} field="artist" />
+                </section>
+  
+                <section>
+                  <label htmlFor="band_name" className="block mb-2 text-sm font-medium text-left text-gray-900">
+                    Band Name
+                  </label>
+                  <input
+                    type="text"
+                    id="band_name"
+                    className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+                      'band_name'
+                    )}`}
+                    placeholder="Swift Band"
+                    required
+                    readOnly
+                    value={concertDetails?.band || ''}
+                  />
+                  <ErrorMessage error={errors} field="band_name" />
+                </section>
+              </div>
               <div className="mb-5">
                 <label htmlFor="city_name" className="block mb-2 text-sm font-medium text-left text-gray-900">
                   Select City
@@ -260,70 +252,40 @@ const ReservationForm = () => {
                     ))}
                 </select>
                 <ErrorMessage error={errors} field="city" />
-                
               </div>
             </>
           )}
-
+  
           {selectedCity && (
-            <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    <th scope="col" className="px-6 py-3">
-                      Concert Name
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Hall Name
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      City Name
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Total Seats
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Reserved Seats
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Event Date & Time
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {concertDetails &&
-                    concertDetails.concert_halls.map((hall, index) => (
-                      <tr key={index} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                        <td className="px-6 py-4">{concertDetails.name}</td>
-                        <td className="px-6 py-4">{hall.hall_name}</td>
-                        <td className="px-6 py-4">{hall.city_name}</td>
-                        <td className="px-6 py-4">{hall.total_seats}</td>
-                        <td className="px-6 py-4">{hall.reserved_seats}</td>
-                        <td className="px-6 py-4">{formatDate(hall.date)}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+            <div className="grid grid-cols-1 gap-5 form-group sm:grid-cols-1 md:grid-cols-2">
+              {concertDetails &&
+                concertDetails.concert_halls.map((hall, index) => (
+                  <div
+                    key={index}
+                    className="bg-white shadow-md dark:bg-gray-900 dark:border-gray-700 rounded-lg p-4"
+                  >
+                    <p className="font-semibold">{concertDetails.name}</p>
+                    <p>{hall.hall_name}</p>
+                    <p>{hall.city_name}</p>
+                    <p>Total Seats: {hall.total_seats}</p>
+                    <p>Reserved Seats: {hall.reserved_seats}</p>
+                    <p>Event Date & Time: {formatDate(hall.date)}</p>
+                  </div>
+                ))}
             </div>
           )}
-
           <Button type="submit" className="bg-primaryGreen py-[0.3rem] hover:!bg-lime-600 px-4 mt-4" pill>
             <p className="text-[0.79rem]">Reserve</p>
             <PiCaretCircleRightLight className="w-6 h-6 ml-3" />
           </Button>
         </form>
-        {reservationStatus === "success" && (
-        <div className="absolute top-0 left-0 w-full h-full bg-green-500 opacity-80 flex items-center justify-center">
-          <p className="text-white text-2xl font-bold">Reservation Successful!</p>
-        </div>
-      )}
-      {reservationStatus === "error" && (
-        <div className="absolute top-0 left-0 w-full h-full bg-red-500 opacity-80 flex items-center justify-center">
-          <p className="text-white text-2xl font-bold">Reservation Failed. Please try again.</p>
-        </div>)}
       </div>
+      <BackButton></BackButton>
     </div>
   );
 };
 
 export default ReservationForm;
+
+
+

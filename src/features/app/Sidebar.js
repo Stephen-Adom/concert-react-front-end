@@ -42,7 +42,7 @@ export const SidebarTemplate = () => {
 		},
 		{
 			label: "MY RESERVATIONS",
-			path: "/my-reservations",
+			path: "/concert/my-reservations",
 		},
 	];
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import localforage from "localforage";
-const BASEURL = "http://localhost:4000/api/v1";
+const BASEURL = "http://localhost:3000/api/v1";
 const axiosInstance = axios.create({
 	baseURL: BASEURL,
 	headers: {
@@ -87,6 +87,17 @@ export const deleteConcert = async (id) => {
 		axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 		axiosInstance.defaults.headers.common["X-Permitted-Cross-Origin"] = "*";
 		const response = await axiosInstance.delete(`/concerts/${id}`);
+		return response.data;
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const fetchAllReservations = async () => {
+	try {
+		const token = await localforage.getItem("token");
+		axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+		const response = await axiosInstance.get(`/reservations`);
 		return response.data;
 	} catch (error) {
 		throw error;

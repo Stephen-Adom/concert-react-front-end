@@ -92,12 +92,12 @@ const ReservationForm = () => {
       concert_hall_id: selectedConcertHall.id,
       ...formData,
     })
-      .then(() => false) // If the reservation succeeds, set isAlreadyReserved to false
+      .then(() => false) 
       .catch((error) => {
         console.error("Failed to create reservation:", error);
         if (error?.response?.status === 422) {
           toast.error("You have already reserved this concert.");
-          return true; // If the reservation fails due to duplicate reservation, set isAlreadyReserved to true
+          return true; 
         }
         return false;
       });
@@ -299,7 +299,6 @@ const ReservationForm = () => {
                 ))}
             </div>
           )}
-  
           <Button type="submit" className="bg-primaryGreen py-[0.3rem] hover:!bg-lime-600 px-4 mt-4" pill>
             <p className="text-[0.79rem]">Reserve</p>
             <PiCaretCircleRightLight className="w-6 h-6 ml-3" />
@@ -309,7 +308,6 @@ const ReservationForm = () => {
       <BackButton></BackButton>
     </div>
   );
-  
 };
 
 export default ReservationForm;

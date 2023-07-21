@@ -30,6 +30,8 @@
 
 ConcertHub is a platform where music enthusiasts can discover upcoming concerts, book tickets, and explore their favorite artists. Experience the world of music like never before with ConcertHub!
 
+### Repo for the backend can be found [HERE.](https://github.com/Stephen-Adom/concert-rails-back-end)
+
 <div style="display: flex; align-items: center;">
 <img src="./assets/desktop.png" height="500px" />
 <img src="./assets/mobile.png" height="450px" />
@@ -142,8 +144,11 @@ The website will automatically start on your default web browser.
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- Deployement
-- Add more features.
+- Light and dark theme feature
+- Integrate a payment system for buying tickets.
+- User Profile Page
+- View Artist Information.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

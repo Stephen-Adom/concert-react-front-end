@@ -1,10 +1,10 @@
-import { render, screen } from "@testing-library/react";
-import SwiperPrevButton from "./../SwiperPrevButton";
+import { render, screen } from '@testing-library/react';
+import SwiperPrevButton from '../SwiperPrevButton';
 
-test("should render correctly", () => {
-	render(<SwiperPrevButton swiper={{ slidePrev: jest.fn() }} disablePrevButton={false} />);
+test('should render correctly', () => {
+  render(<SwiperPrevButton swiper={{ slidePrev: jest.fn() }} disablePrevButton={false} />);
 
-	const button = screen.getByRole("button");
+  const button = screen.getByRole('button');
 
-	expect(button).toBeInTheDocument();
+  expect(button).toBeInTheDocument();
 });

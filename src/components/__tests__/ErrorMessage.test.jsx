@@ -1,29 +1,29 @@
-import { render, screen } from "@testing-library/react";
-import ErrorMessage from "../ErrorMessage";
+import { render, screen } from '@testing-library/react';
+import ErrorMessage from '../ErrorMessage';
 
 const testError = {
-	username: {
-		message: "Must be at least 3 characters",
-	},
+  username: {
+    message: 'Must be at least 3 characters',
+  },
 };
 
-const field = "username";
+const field = 'username';
 
-describe("Error Message", () => {
-	it("should render correctly", () => {
-		render(<ErrorMessage error={testError} field={field} />);
+describe('Error Message', () => {
+  it('should render correctly', () => {
+    render(<ErrorMessage error={testError} field={field} />);
 
-		const alertMessage = screen.getByRole("alert");
+    const alertMessage = screen.getByRole('alert');
 
-		expect(alertMessage).toBeInTheDocument();
-		expect(alertMessage.textContent).toEqual(testError[field].message);
-	});
+    expect(alertMessage).toBeInTheDocument();
+    expect(alertMessage.textContent).toEqual(testError[field].message);
+  });
 
-	it("should not display any error if no errors found", () => {
-		render(<ErrorMessage error={{}} field={field} />);
+  it('should not display any error if no errors found', () => {
+    render(<ErrorMessage error={{}} field={field} />);
 
-		const alertMessage = screen.queryByRole("alert");
+    const alertMessage = screen.queryByRole('alert');
 
-		expect(alertMessage).toBeFalsy();
-	});
+    expect(alertMessage).toBeFalsy();
+  });
 });

@@ -1,70 +1,175 @@
-# Getting Started with Create React App
+<div align="center">
+  <img src="./assets/music%20gif.gif" alt="ConcertHub Form" width="250">
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 style="font-size: 40px;" align="center"> ConcertHub 🎵🎤🎶 </h1>
 
-## Available Scripts
+## 🎵 Table of Contents 🎵
 
-In the project directory, you can run:
+- [🎵 Table of Contents 🎵](#-table-of-contents-)
+- [ConcertHub 🎵🎤🎶](#concerthub-)
+  - [🎶 Built With 🎶](#-built-with-)
+    - [Tech Stack 🎶](#tech-stack-)
+    - [Key Features 🎶](#key-features-)
+  - [🎸 Live Demo 🎸](#-live-demo-)
+  - [🎹 Getting Started 🎹](#-getting-started-)
+    - [Prerequisites 🎹](#prerequisites-)
+    - [Setup 🎹](#setup-)
+    - [Install 🎹](#install-)
+    - [Usage 🎹](#usage-)
+  - [🎷 Authors 🎷](#-authors-)
+  - [🎺 Future Features 🎺](#-future-features-)
+  - [🎻 Contributing 🎻](#-contributing-)
+  - [⭐️ Show your support ⭐️](#️-show-your-support-)
+  - [🎵 Acknowledgments 🎵](#-acknowledgments-)
+  - [🎼 License 🎼](#-license-)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ConcertHub 🎵🎤🎶
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ConcertHub is a platform where music enthusiasts can discover upcoming concerts, book tickets, and explore their favorite artists. Experience the world of music like never before with ConcertHub!
 
-### `npm test`
+<div style="display: flex; align-items: center;">
+<img src="./assets/desktop.png" height="500px" />
+<img src="./assets/mobile.png" height="450px" />
+</div>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🎶 Built With 🎶
 
-### `npm run build`
+#### Tech Stack 🎶
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<details>
+  <summary>Client</summary>
+  <ul>
+    <li><a href="https://reactjs.org/">React.js</a></li>
+  </ul>
+</details>
+<details>
+ <summary>Styling</summary>
+  <ul>
+    <li><a href="https://tailwindcss.com/">Tailwind CSS</a></li>
+  </ul>
+</details>
+<details>
+ <summary>State Management</summary>
+  <ul>
+    <li><a href="https://redux.js.org/">Redux</a></li>
+  </ul>
+</details>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Key Features 🎶
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Explore upcoming concerts and events.
+- Book tickets for your favorite artists' performances.
+- See to what concerts you have reserved.
+- At the admin side, the admin can create a new concert and also delete a concert previously created.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🚀 Live Demo 🎸
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Visit the [Live Demo](https://www.concerthub.com) of ConcertHub to experience the joy of music!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 💻 Getting Started 🎹
 
-## Learn More
+### Prerequisites 🎹
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To run this project, you need the following:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- A web browser (Safari, Chrome, Opera, etc...)
+- A code editor (Sublime Text, VS Code, WebStorm, etc...)
+- Necessary packages (git, node and npm)
 
-### Code Splitting
+Check if the packages are installed by running the following command in the terminal:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+$ git --version
+$ node --version
+$ npm --version
+```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Analyzing the Bundle Size
+## Setup 🎹 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Clone this repository into your desired folder by following the following steps.
 
-### Making a Progressive Web App
+### Install 🎹
+In the terminal, go to your file directory and run this command:
+```
+$ cd my-folder
+$ git clone https://github.com/Stephen-Adom/concert-react-front-end.git
+```
+### Initialize 🎹
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+In the terminal run this command:
+```
+$ cd concert-react-front-end.git
+$ npm start
+```
+The website will automatically start on your default web browser.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Advanced Configuration
+## 👥 Authors 🎷  <a name="authors"></a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+👤 **Stephen Addae**
 
-### Deployment
+- GitHub: [@Stephen-Adom](https://github.com/Stephen-Adom)
+- LinkedIn [Stephen Addae](https://www.linkedin.com/in/stephen-addae/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+👤 **Derbal Mohammed El Amine**
 
-### `npm run build` fails to minify
+- GitHub: [@AmineDerbal](https://github.com/AmineDerbal)
+- LinkedIn: [Mohammed El Amine Derbal](https://www.linkedin.com/in/mohammed-el-amine-derbal-4038541b6/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+👤 **Oussama Elabdioui**
+
+- GitHub: [@codedit334](https://github.com/codedit334)
+- Twitter: [@oussedit](https://twitter.com/oussedit)
+- LinkedIn: [Oussama Elabdioui](https://www.linkedin.com/in/oussama-elabdioui-4677a41b6/)
+
+### 👤 **Aman Worku**:
+- GitHub: [@Aman_on_GitHub](https://github.com/AmanWorku)
+- Twitter: [@Aman_on_Twitter](https://twitter.com/Amexworku)
+- LinkedIn: [@Aman_on_LinkedIn](https://www.linkedin.com/in/aman-worku-tsegaw/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🔭 Future Features <a name="future-features"></a>
+
+- Deployement
+- Add more features.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## 🤝 Contributing <a name="contributing"></a>
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/Stephen-Adom/concert-rails-back-end/issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- SUPPORT -->
+
+## ⭐️ Show your support <a name="support"></a>
+
+If you like this project you can give it a star, that would be nice.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+- We would really like to acknowledge Microverse for giving us this platform of working on this amazing project.
+- We would like to thank [Murat Korhmaz](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign) for the mesmerizing design.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->

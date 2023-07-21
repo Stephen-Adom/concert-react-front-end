@@ -3,7 +3,7 @@ import {
 } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import NewConcertDetails from '../NewConcertDetails.js';
+import NewConcertDetails from '../NewConcertDetails';
 
 const mockStore = configureMockStore();
 
@@ -59,7 +59,7 @@ describe('New Concert Details', () => {
   });
 
   test('form should be valid and setStep should be called', async () => {
-    setStep = jest.fn();
+    const setStep = jest.fn();
     render(
       <Provider store={store}>
         <NewConcertDetails setStep={setStep} />
@@ -100,7 +100,7 @@ describe('New Concert Details', () => {
       await fireEvent.input(imageElement, {
         target: {
           value:
-						'https://res.cloudinary.com/dt8tdf7uu/image/upload/v1688563048/samples/animals/kitten-playing.gif',
+          'https://res.cloudinary.com/dt8tdf7uu/image/upload/v1688563048/samples/animals/kitten-playing.gif',
         },
       });
     });

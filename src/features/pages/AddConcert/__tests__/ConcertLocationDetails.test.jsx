@@ -3,7 +3,7 @@ import {
 } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import ConcertLocationDetails from '../ConcertLocationDetails.js';
+import ConcertLocationDetails from '../ConcertLocationDetails';
 
 const mockStore = configureMockStore();
 
@@ -82,7 +82,7 @@ describe('Concert Location Details', () => {
   });
 
   test('form should be submitted with valid values', async () => {
-    setStep = jest.fn();
+    const setStep = jest.fn();
     render(
       <Provider store={store}>
         <ConcertLocationDetails setStep={setStep} />

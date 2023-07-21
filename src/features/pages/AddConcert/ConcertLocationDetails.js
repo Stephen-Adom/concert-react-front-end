@@ -100,21 +100,21 @@ const ConcertLocationDetails = ({ setStep }) => {
                     type="text"
                     id="hall_name"
                     className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50  ${errorBorder(
-										  'hall_name',
-										  index,
+                      'hall_name',
+                      index,
                     )}`}
                     placeholder="Main Town Hall"
                     required
                     {...register(`concert_halls.${index}.hall_name`, {
-										  required: 'Enter Hall Name',
+                      required: 'Enter Hall Name',
                     })}
                   />
                   <ErrorMessage
                     error={
-											Object.keys(errors).length
-											&& errors?.concert_halls?.[index] !== undefined
-											&& errors?.concert_halls?.[index]
-										}
+                     Object.keys(errors).length
+                     && errors?.concert_halls?.[index] !== undefined
+                     && errors?.concert_halls?.[index]
+                     }
                     field="hall_name"
                   />
                 </th>
@@ -122,11 +122,11 @@ const ConcertLocationDetails = ({ setStep }) => {
                   <select
                     id="city"
                     className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50  ${errorBorder(
-										  'city',
-										  index,
+                      'city',
+                      index,
                     )}`}
                     {...register(`concert_halls.${index}.city`, {
-										  required: 'Select City',
+                      required: 'Select City',
                     })}
                   >
                     {cityNames.map((city) => (
@@ -137,10 +137,10 @@ const ConcertLocationDetails = ({ setStep }) => {
                   </select>
                   <ErrorMessage
                     error={
-											Object.keys(errors).length
-											&& errors?.concert_halls?.[index] !== undefined
-											&& errors?.concert_halls?.[index]
-										}
+                     Object.keys(errors).length
+                     && errors?.concert_halls?.[index] !== undefined
+                     && errors?.concert_halls?.[index]
+                     }
                     field="city"
                   />
                 </td>
@@ -150,25 +150,25 @@ const ConcertLocationDetails = ({ setStep }) => {
                       type="number"
                       id="seats_no"
                       className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-											  'seats_no',
-											  index,
+                        'seats_no',
+                        index,
                       )}`}
                       placeholder="000"
                       {...register(`concert_halls.${index}.seats_no`, {
-											  required: 'Enter seat number',
-											  valueAsNumber: true,
-											  min: {
-											    value: 5,
-											    message: 'Enter at least 5 seats',
-											  },
+                        required: 'Enter seat number',
+                        valueAsNumber: true,
+                        min: {
+                          value: 5,
+                          message: 'Enter at least 5 seats',
+                        },
                       })}
                     />
                     <ErrorMessage
                       error={
-												Object.keys(errors).length
-												&& errors?.concert_halls?.[index] !== undefined
-												&& errors?.concert_halls?.[index]
-											}
+                       Object.keys(errors).length
+                       && errors?.concert_halls?.[index] !== undefined
+                       && errors?.concert_halls?.[index]
+                       }
                       field="seats_no"
                     />
                   </section>
@@ -178,21 +178,21 @@ const ConcertLocationDetails = ({ setStep }) => {
                   <input
                     type="datetime-local"
                     className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50  ${errorBorder(
-										  'event_date',
-										  index,
+                      'event_date',
+                      index,
                     )}`}
                     data-testid="datetime"
                     placeholder="Select date"
                     {...register(`concert_halls.${index}.event_date`, {
-										  required: 'Select Date and time',
+                      required: 'Select Date and time',
                     })}
                   />
                   <ErrorMessage
                     error={
-											Object.keys(errors).length
-											&& errors?.concert_halls?.[index] !== undefined
-											&& errors?.concert_halls?.[index]
-										}
+                      Object.keys(errors).length
+                      && errors?.concert_halls?.[index] !== undefined
+                      && errors?.concert_halls?.[index]
+                      }
                     field="event_date"
                   />
                 </td>

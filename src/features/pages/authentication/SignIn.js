@@ -71,8 +71,8 @@ const SignIn = () => {
     <div
       className="bg-center bg-no-repeat bg-cover"
       style={{
-			  backgroundImage:
-					'url(https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cm9jayUyMGNvbmNlcnR8ZW58MHx8MHx8fDA%3D&w=1000&q=80)',
+        backgroundImage:
+        'url(https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cm9jayUyMGNvbmNlcnR8ZW58MHx8MHx8fDA%3D&w=1000&q=80)',
       }}
     >
       <div className="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-60">
@@ -93,7 +93,7 @@ const SignIn = () => {
               type="text"
               id="username"
               className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
-							  'username',
+                'username',
               )}`}
               placeholder="UserName00"
               {...register('username', { required: 'Enter your username' })}
@@ -111,11 +111,11 @@ const SignIn = () => {
               type="password"
               id="password"
               className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
-							  'password',
+                'password',
               )}`}
               placeholder="••••••••"
               {...register('password', {
-							  required: 'Enter your password',
+                required: 'Enter your password',
               })}
             />
             <ErrorMessage error={errors} field="password" />
@@ -147,7 +147,7 @@ const SignIn = () => {
                 Loading...
               </>
             ) : (
-						  'Sign In'
+              'Sign In'
             )}
           </button>
           <br />

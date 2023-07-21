@@ -79,8 +79,8 @@ const SignUp = () => {
       <div
         className="bg-center bg-no-repeat bg-cover"
         style={{
-				  backgroundImage:
-						'url(https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cm9jayUyMGNvbmNlcnR8ZW58MHx8MHx8fDA%3D&w=1000&q=80)',
+          backgroundImage:
+          'url(https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cm9jayUyMGNvbmNlcnR8ZW58MHx8MHx8fDA%3D&w=1000&q=80)',
         }}
       >
         <div className="flex flex-col items-center justify-center min-h-screen bg-black bg-opacity-60">
@@ -101,7 +101,7 @@ const SignUp = () => {
                 type="text"
                 id="name"
                 className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
-								  'name',
+                  'name',
                 )}`}
                 placeholder="Your full name"
                 {...register('name', { required: 'Enter your full name' })}
@@ -119,7 +119,7 @@ const SignUp = () => {
                 type="text"
                 id="username"
                 className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
-								  'username',
+                  'username',
                 )}`}
                 placeholder="UserName00"
                 {...register('username', { required: 'Enter your username' })}
@@ -137,15 +137,15 @@ const SignUp = () => {
                 type="email"
                 id="email"
                 className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
-								  'email',
+                  'email',
                 )}`}
                 placeholder="example@domain.com"
                 {...register('email', {
-								  required: 'Enter your email address',
-								  pattern: {
-								    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-								    message: 'Enter a valid email address',
-								  },
+                  required: 'Enter your email address',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Enter a valid email address',
+                  },
                 })}
               />
               <ErrorMessage error={errors} field="email" />
@@ -161,15 +161,15 @@ const SignUp = () => {
                 type="password"
                 id="password"
                 className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
-								  'password',
+                  'password',
                 )}`}
                 placeholder="••••••••"
                 {...register('password', {
-								  required: 'Enter your password',
-								  minLength: {
-								    value: 8,
-								    message: 'Password must be at least 8 characters',
-								  },
+                  required: 'Enter your password',
+                  minLength: {
+                    value: 8,
+                    message: 'Password must be at least 8 characters',
+                  },
                 })}
               />
               <ErrorMessage error={errors} field="password" />
@@ -185,16 +185,16 @@ const SignUp = () => {
                 type="password"
                 id="password_confirmation"
                 className={`bg-transparent border text-white text-sm rounded-sm block w-full p-2.5 placeholder:text-gray-300 ${errorBorder(
-								  'password_confirmation',
+                  'password_confirmation',
                 )}`}
                 placeholder="••••••••"
                 {...register('password_confirmation', {
-								  required: 'Confirm your password',
-								  minLength: {
-								    value: 8,
-								    message: 'Password must be at least 8 characters',
-								  },
-								  validate: (fieldValue) => fieldValue === formValues.password || 'Passwords do not match',
+                  required: 'Confirm your password',
+                  minLength: {
+                    value: 8,
+                    message: 'Password must be at least 8 characters',
+                  },
+                  validate: (fieldValue) => fieldValue === formValues.password || 'Passwords do not match',
                 })}
               />
               <ErrorMessage error={errors} field="password_confirmation" />
@@ -226,7 +226,7 @@ const SignUp = () => {
                   Loading...
                 </>
               ) : (
-							  'Sign Up'
+                'Sign Up'
               )}
             </button>
             <Link to="/" className="flex items-center gap-2 py-2 font-medium text-primaryGreen">

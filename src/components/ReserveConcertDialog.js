@@ -146,10 +146,10 @@ const ReserveConcertDialog = ({
               <select
                 id="concert_hall_id"
                 className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-								  'concert_hall_id',
+                  'concert_hall_id',
                 )}`}
                 {...register('concert_hall_id', {
-								  required: 'Choose a city & concert hall',
+                  required: 'Choose a city & concert hall',
                 })}
               >
                 {concert.concert_halls.map((hall) => (

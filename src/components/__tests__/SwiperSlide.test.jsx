@@ -5,7 +5,7 @@ import SwiperSlide from '../SwiperSlide';
 const concert = {
   id: 1,
   image:
-		'https://res.cloudinary.com/dt8tdf7uu/image/upload/v1688563048/samples/animals/kitten-playing.gif',
+    'https://res.cloudinary.com/dt8tdf7uu/image/upload/v1688563048/samples/animals/kitten-playing.gif',
   name: 'Test name',
   description: 'Test description',
   band: 'Test band',

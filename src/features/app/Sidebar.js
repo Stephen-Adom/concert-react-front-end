@@ -108,8 +108,8 @@ export const SidebarTemplate = () => {
           <>
             <div className="text-sm">
               {currentUser.name.length > 12
-								  ? `${currentUser.name.slice(0, 10)}...`
-								  : currentUser.name}
+                ? `${currentUser.name.slice(0, 10)}...`
+                : currentUser.name}
             </div>
             <div className="text-xs text-gray-500">leos@gmail.com</div>
           </>

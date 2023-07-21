@@ -1,9 +1,7 @@
-import { render, screen, act, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, act, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 import { BrowserRouter } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
-import { useForm } from "react-hook-form";
 import SignIn from "../SignIn";
 
 const mockStore = configureMockStore();
@@ -18,13 +16,6 @@ const initialState = {
 };
 
 const store = mockStore(initialState);
-
-function setup(jsx) {
-	return {
-		user: userEvent.setup(),
-		...render(jsx),
-	};
-}
 
 describe("Sign In", () => {
 	test("should render correctly", () => {

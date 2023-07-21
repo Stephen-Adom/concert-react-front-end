@@ -8,13 +8,7 @@ const mockStore = configureMockStore();
 const initialState = {
 	concert: {
 		latestConcerts: [],
-		newConcertInfo: {
-			concert_name: "",
-			description: "",
-			band: "",
-			artist: "",
-			image: "",
-		},
+		newConcertInfo: {},
 		allConcerts: [],
 		concertLocations: [],
 		errors: null,

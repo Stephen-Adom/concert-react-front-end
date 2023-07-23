@@ -100,7 +100,7 @@ const ReserveConcertDialog = ({
     <div className="flex justify-end">
       <Button
         type="button"
-        label="No"
+        label="Cancel"
         icon="pi pi-times"
         onClick={() => setVisible(false)}
         className="p-button-text"
@@ -145,7 +145,9 @@ const ReserveConcertDialog = ({
               </label>
               <select
                 id="concert_hall_id"
-                className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder('concert_hall_id')}`}
+                className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
+                  'concert_hall_id',
+                )}`}
                 {...register('concert_hall_id', {
                   required: 'Choose a city & concert hall',
                 })}
@@ -159,7 +161,7 @@ const ReserveConcertDialog = ({
 
               <ErrorMessage error={errors} field="concert_hall_id" />
             </div>
-            { footerContent() }
+            {footerContent()}
           </form>
         </div>
       </Dialog>

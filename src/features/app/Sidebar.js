@@ -107,7 +107,9 @@ export const SidebarTemplate = () => {
           {currentUser && (
           <>
             <div className="text-sm">
-              {currentUser.name.length > 12 ? `${currentUser.name.slice(0, 10)}...` : currentUser.name}
+              {currentUser.name.length > 12
+                ? `${currentUser.name.slice(0, 10)}...`
+                : currentUser.name}
             </div>
             <div className="text-xs text-gray-500">leos@gmail.com</div>
           </>
@@ -157,6 +159,7 @@ export const SidebarTemplate = () => {
 const Sidebar = () => (
   <>
     <aside
+      role="navigation"
       id="default-sidebar"
       className="fixed top-0 left-0 z-40 w-56 h-screen transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar"

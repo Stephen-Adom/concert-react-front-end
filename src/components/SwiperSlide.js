@@ -20,7 +20,9 @@ const SwiperSlide = ({ concert }) => {
 
       <hr className="my-5 w-[50%] mx-auto h-0.5 border-t-0 bg-neutral-100 opacity-200 dark:opacity-50 border-dashed" />
 
-      <p className="text-xs text-primaryGrey">{concert.description}</p>
+      <p data-testid="description" className="text-xs text-primaryGrey">
+        {concert.description}
+      </p>
 
       <div className="flex items-center justify-center mt-4 additional-info gap-x-3">
         <Tooltip content={concert.band} style="light" placement="top">

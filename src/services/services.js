@@ -1,5 +1,5 @@
-import axios from 'axios';
 import localforage from 'localforage';
+import axios from 'axios';
 
 const BASEURL = 'http://localhost:3000/api/v1';
 

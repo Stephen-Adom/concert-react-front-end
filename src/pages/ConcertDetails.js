@@ -43,7 +43,7 @@ const ConcertDetails = () => {
         <>
           <section className="flex flex-col items-start justify-start w-full h-full py-2 md:flex-row md:items-center lg:items-center xl:items-center gap-y-2 md:justify-center lg:justify-center xl:justify-center md:py-0">
             <MenuButton />
-            <div className="flex flex-col items-start justify-start w-full gap-5 sm:flex-col lg:flex-row lg:gap-14">
+            <div className="flex flex-col items-start justify-start w-full gap-5 md:items-center sm:flex-col lg:flex-row lg:gap-14">
               <div className="concert-image-container w-full lg:w-[70%]">
                 <div
                   style={{ backgroundImage: `url(${concert.image})` }}
@@ -66,7 +66,7 @@ const ConcertDetails = () => {
                   </p>
 
                   {concert.concert_halls.length && (
-                  <div className="grid grid-cols-2 gap-4 mt-3">
+                  <div className="grid grid-cols-2 gap-2 mt-3">
                     {concert.concert_halls.map((hall) => (
                       <React.Fragment key={hall.id}>
                         <LocationDetails hall={hall} />

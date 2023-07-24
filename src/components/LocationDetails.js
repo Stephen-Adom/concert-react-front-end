@@ -12,7 +12,7 @@ const LocationDetails = ({ hall }) => {
   const checkIfReserved = useCallback(() => {
     if (allReservations.length) {
       const reservationExist = allReservations.find(
-        (reservation) => reservation.hall_name === hall.hall_name,
+        (reservation) => reservation.concert_hall.name === hall.hall_name,
       );
       if (reservationExist) {
         return (

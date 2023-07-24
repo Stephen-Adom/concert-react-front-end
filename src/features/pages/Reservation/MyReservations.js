@@ -69,26 +69,26 @@ const MyReservations = () => {
         <MenuButton onClick={toggleSidebar} />
       </h1>
       {isSidebarOpen && <Sidebar />}
-      <div className="px-5 md:px-20 py-10">
-        <h1 className="text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl mb-6">My Reservations</h1>
+      <div className="px-5 py-10 md:px-20">
+        <h1 className="mb-6 text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl">My Reservations</h1>
         {Array.isArray(userReservations) && userReservations.length === 0 ? (
           <p>No reservations found.</p>
         ) : (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {userReservations.map((reservation) => (
-              <div key={reservation.id} className="bg-white rounded-lg shadow-md p-4">
-                <p className="text-lg font-semibold">{reservation.concert_name}</p>
+              <div key={reservation.id} className="p-4 bg-white rounded-lg shadow-md">
+                <p className="text-lg font-semibold">{reservation.concert.name}</p>
                 <p className="text-gray-600">
                   Concert Date:
-                  {formatDate(reservation.concert_date)}
+                  {formatDate(reservation.concert.date)}
                 </p>
                 <p className="text-gray-600">
                   Concert Hall:
-                  {reservation.hall_name}
+                  {reservation.concert_hall.name}
                 </p>
                 <p className="text-gray-600">
                   City:
-                  {reservation.city_name}
+                  {reservation.city.name}
                 </p>
               </div>
             ))}

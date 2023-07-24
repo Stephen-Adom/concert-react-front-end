@@ -13,7 +13,7 @@ const SwiperSlide = ({ concert }) => {
       onClick={() => navigate(`/home/concerts/${concert.id}`)}
     >
       <figure className="overflow-hidden rounded-full">
-        <img src={concert.image} width="100%" alt={concert.name} />
+        <img src={concert.image} className="w-[150px] h-[150px]" alt={concert.name} />
       </figure>
 
       <h3 className="mt-8 text-lg font-bold md:text-sm">{concert.name}</h3>
@@ -21,7 +21,9 @@ const SwiperSlide = ({ concert }) => {
       <hr className="my-5 w-[50%] mx-auto h-0.5 border-t-0 bg-neutral-100 opacity-200 dark:opacity-50 border-dashed" />
 
       <p data-testid="description" className="text-xs text-primaryGrey">
-        {concert.description}
+        {concert.description.length > 120
+          ? `${concert.description.slice(0, 120)}...`
+          : concert.description}
       </p>
 
       <div className="flex items-center justify-center mt-4 additional-info gap-x-3">

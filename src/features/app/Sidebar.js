@@ -111,7 +111,11 @@ export const SidebarTemplate = () => {
                 ? `${currentUser.name.slice(0, 10)}...`
                 : currentUser.name}
             </div>
-            <div className="text-xs text-gray-500">{currentUser.email}</div>
+            <div className="text-xs text-gray-500">
+              {currentUser.email.length > 12
+                ? `${currentUser.email.slice(0, 10)}...`
+                : currentUser.email}
+            </div>
           </>
           )}
         </div>

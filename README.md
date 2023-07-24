@@ -106,6 +106,8 @@ In the terminal, go to your file directory and run this command:
 ```
 $ cd my-folder
 $ git clone https://github.com/Stephen-Adom/concert-react-front-end.git
+$ cd concert-react-front-end
+$ npm install
 ```
 ### Initialize 🎹
 
@@ -178,3 +180,8 @@ If you like this project you can give it a star, that would be nice.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
+## 📝 License <a name="license"></a>
+
+This project is [MIT](./LICENSE) licensed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>

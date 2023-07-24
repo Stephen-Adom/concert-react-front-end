@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Sidebar } from './features';
 import useFetchReservations from './hooks/useFetchReservations';
 
-function App() {
+const App = () => {
   const [fetchReservations] = useFetchReservations();
   const [showSidebar, setShowSidebar] = useState(true);
 
@@ -31,6 +31,6 @@ function App() {
       </main>
     </div>
   );
-}
+};
 
 export default App;

@@ -12,8 +12,8 @@ const SwiperSlide = ({ concert }) => {
       className="swiper-slide hover:cursor-pointer p-[10px]"
       onClick={() => navigate(`/home/concerts/${concert.id}`)}
     >
-      <figure className="overflow-hidden rounded-full">
-        <img src={concert.image} className="w-[150px] h-[150px]" alt={concert.name} />
+      <figure className="overflow-hidden w-[200px] h-[200px] md:w-[150px] md:h-[150px] rounded-full">
+        <img src={concert.image} className="w-[200px] h-[200px] md:w-[150px] md:h-[150px]" alt={concert.name} />
       </figure>
 
       <h3 className="mt-8 text-lg font-bold md:text-sm">{concert.name}</h3>

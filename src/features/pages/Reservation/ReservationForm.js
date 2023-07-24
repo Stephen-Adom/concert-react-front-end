@@ -244,6 +244,15 @@ const ReservationForm = () => {
                     && concertDetails.concert_halls.map((hall) => (
                       <option key={hall.id} value={hall.city_name}>
                         {hall.city_name}
+                        {' '}
+                        {hall.hall_name}
+                        {' '}
+                        {formatDate(hall.date)}
+                        {', '}
+                        {hall.reserved_seats}
+                        /
+                        {hall.total_seats}
+                        {' reserved.'}
                       </option>
                     ))}
                 </select>
@@ -252,36 +261,6 @@ const ReservationForm = () => {
             </>
             )}
 
-            {selectedCity && (
-            <div className="grid grid-cols-1 gap-5 form-group sm:grid-cols-1 md:grid-cols-2">
-              {concertDetails
-                && concertDetails.concert_halls.map((hall) => (
-                  <div
-                    key={hall.id}
-                    className="bg-white shadow-md dark:bg-gray-900 dark:border-gray-700 rounded-lg p-4"
-                  >
-                    <p className="font-semibold">{concertDetails.name}</p>
-                    <p>{hall.hall_name}</p>
-                    <p>{hall.city_name}</p>
-                    <p>
-                      Total Seats:
-                      {' '}
-                      {hall.total_seats}
-                    </p>
-                    <p>
-                      Reserved Seats:
-                      {' '}
-                      {hall.reserved_seats}
-                    </p>
-                    <p>
-                      Event Date & Time:
-                      {' '}
-                      {formatDate(hall.date)}
-                    </p>
-                  </div>
-                ))}
-            </div>
-            )}
             <Button type="submit" className="bg-primaryGreen py-[0.3rem] hover:!bg-lime-600 px-4 mt-4" pill>
               <p className="text-[0.79rem]">Reserve</p>
               <PiCaretCircleRightLight className="w-6 h-6 ml-3" />

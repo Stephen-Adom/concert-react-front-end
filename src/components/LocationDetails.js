@@ -48,7 +48,7 @@ const LocationDetails = ({ hall }) => {
           <span data-testid="hallname">{hall.hall_name}</span>
         </p>
 
-        <p className="text-sm text-gray-700">
+        <p className="text-xs text-gray-700">
           <span className="block" data-testid="seats">
             Total Seats:
             {numberWithCommas(hall.total_seats)}

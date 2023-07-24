@@ -9,10 +9,22 @@ const initialState = {
   reservation: {
     allReservations: [
       {
-        hall_name: 'Test Hall',
-        hall_id: 1,
-        city_name: 'Test City',
-        user_id: 1,
+        user: {
+          id: 1,
+          name: 'john doe',
+        },
+        concert: {
+          id: 1,
+          name: 'Test Concert',
+          date: '2020-01-01T00:00:00',
+        },
+        concert_hall: {
+          id: 1,
+          name: 'Test Hall',
+        },
+        city: {
+          name: 'Test City',
+        },
       },
     ],
   },

@@ -223,23 +223,6 @@ const ReservationForm = () => {
                   <ErrorMessage error={errors} field="band_name" />
                 </section>
               </div>
-              <div className="mb-5">
-                <label htmlFor="city_name" className="block mb-2 text-sm font-medium text-left text-gray-900">
-                  Select City
-                </label>
-                <input
-                  type="text"
-                  id="band_name"
-                  className={`block w-full p-3 text-sm text-gray-900 border rounded-sm bg-gray-50 ${errorBorder(
-                    'band_name',
-                  )}`}
-                  placeholder="Swift Band"
-                  required
-                  readOnly
-                  value={concertDetails?.band || ''}
-                />
-                <ErrorMessage error={errors} field="band_name" />
-              </div>
 
               <div className="mb-5">
                 <label htmlFor="city_name" className="block mb-2 text-sm font-medium text-left text-gray-900">

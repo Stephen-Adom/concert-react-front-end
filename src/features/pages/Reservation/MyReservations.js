@@ -77,18 +77,18 @@ const MyReservations = () => {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {userReservations.map((reservation) => (
               <div key={reservation.id} className="bg-white rounded-lg shadow-md p-4">
-                <p className="text-lg font-semibold">{reservation.concert_name}</p>
+                <p className="text-lg font-semibold">{reservation.concert.name}</p>
                 <p className="text-gray-600">
-                  Concert Date:
-                  {formatDate(reservation.concert_date)}
+                  Concert Date: &nbsp;
+                  {formatDate(reservation.concert.date)}
                 </p>
                 <p className="text-gray-600">
-                  Concert Hall:
-                  {reservation.hall_name}
+                  Concert Hall:&nbsp;
+                  {reservation.concert_hall.name}
                 </p>
                 <p className="text-gray-600">
-                  City:
-                  {reservation.city_name}
+                  City:&nbsp;
+                  {reservation.city.name}
                 </p>
               </div>
             ))}

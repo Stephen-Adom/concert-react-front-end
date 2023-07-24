@@ -69,8 +69,8 @@ const MyReservations = () => {
         <MenuButton onClick={toggleSidebar} />
       </h1>
       {isSidebarOpen && <Sidebar />}
-      <div className="px-5 md:px-20 py-10">
-        <h1 className="text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl mb-6">My Reservations</h1>
+      <div className="px-5 py-10 md:px-20">
+        <h1 className="mb-6 text-3xl font-extrabold tracking-wide md:tracking-widest md:text-2xl">My Reservations</h1>
         {Array.isArray(userReservations) && userReservations.length === 0 ? (
           <p>No reservations found.</p>
         ) : (

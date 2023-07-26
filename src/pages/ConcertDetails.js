@@ -47,7 +47,7 @@ const ConcertDetails = () => {
               <div className="concert-image-container w-full lg:w-[70%]">
                 <div
                   style={{ backgroundImage: `url(${concert.image})` }}
-                  className="image-container w-full h-[250px] sm:h-[250px] md:h-[600px] bg-center bg-no-repeat"
+                  className="image-container w-full h-[250px] sm:h-[250px] md:h-[530px] lg:h-[530px] xl:h-[540px] bg-center bg-no-repeat"
                 />
               </div>
               <div className="concert-details w-full md:w-[70%] md:mx-auto lg:w-[30%]">
@@ -66,7 +66,7 @@ const ConcertDetails = () => {
                   </p>
 
                   {concert.concert_halls.length && (
-                  <div className="grid grid-cols-2 gap-4 mt-3">
+                  <div className="grid grid-cols-2 gap-2 mt-3">
                     {concert.concert_halls.map((hall) => (
                       <React.Fragment key={hall.id}>
                         <LocationDetails hall={hall} />

@@ -73,7 +73,7 @@ ConcertHub is a platform where music enthusiasts can discover upcoming concerts,
 
 ## 🚀 Live Demo 🎸
 
-Visit the [Live Demo](https://www.concerthub.com) of ConcertHub to experience the joy of music!
+Visit the [Live Demo](https://concert-react-front-end.vercel.app) of ConcertHub to experience the joy of music!
 
 ---
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

@@ -33,7 +33,7 @@ const LocationDetails = ({ hall }) => {
   return (
     <div className="max-w-sm px-4 py-4 pt-2 bg-white border border-gray-200 rounded-sm hover:shadow hover:cursor-pointer">
       <div className="flex items-center justify-between mb-1">
-        <h5 className="text-sm font-bold tracking-tight text-gray-900 md:text-base">
+        <h5 className="text-sm font-bold tracking-tight text-gray-900 md:text-sm">
           {hall.city_name}
         </h5>
 
@@ -43,12 +43,12 @@ const LocationDetails = ({ hall }) => {
       <hr />
 
       <div className="flex flex-col">
-        <p className="flex items-center gap-1 my-1 text-sm text-gray-700">
+        <p className="flex items-center gap-1 my-1 text-xs text-gray-700">
           <BiMap className="text-primaryGreen" />
           <span data-testid="hallname">{hall.hall_name}</span>
         </p>
 
-        <p className="text-sm text-gray-700">
+        <p className="text-xs text-gray-700">
           <span className="block" data-testid="seats">
             Total Seats:
             {numberWithCommas(hall.total_seats)}

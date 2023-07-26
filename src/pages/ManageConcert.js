@@ -65,7 +65,7 @@ const ManageConcert = () => {
   }, []);
 
   const formatConcertName = (concert) => (
-    <div className="flex gap-2 item-center">
+    <div className="flex gap-2 item-center min-w-[250px]">
       <img className="w-16 h-16 rounded-full" src={concert.image} alt={concert.name} />
       <span className="flex items-center font-bold">{concert.name}</span>
     </div>

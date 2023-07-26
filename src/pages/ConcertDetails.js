@@ -38,12 +38,12 @@ const ConcertDetails = () => {
   }, [id]);
 
   return (
-    <div className="relative w-full h-screen px-5 md:px-10 flex items-center justify-center">
+    <div className="relative flex items-center justify-center w-full h-screen px-5 md:px-10">
       {concert ? (
         <>
-          <section className="flex flex-col items-start justify-start h-full py-2 md:flex-row md:items-center gap-y-2 md:justify-center md:py-0 w-full">
+          <section className="flex flex-col items-start justify-start w-full h-full py-2 md:flex-row md:items-center gap-y-2 md:justify-center md:py-0">
             <MenuButton />
-            <div className="flex flex-col items-start justify-start w-full gap-5 sm:flex-col lg:flex-row lg:gap-14">
+            <div className="flex flex-col items-start justify-start w-full gap-5 sm:flex-col lg:flex-row lg:gap-10">
               <div className="concert-image-container w-full lg:w-[70%]">
                 <div
                   style={{ backgroundImage: `url(${concert.image})` }}

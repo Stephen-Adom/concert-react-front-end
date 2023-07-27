@@ -11,6 +11,7 @@
   - [🎶 Built With 🎶](#-built-with-)
     - [Tech Stack 🎶](#tech-stack-)
     - [Key Features 🎶](#key-features-)
+  - [📋 Kanban Board 📋](#-kanban-board-)
   - [🎸 Live Demo 🎸](#-live-demo-)
   - [🎹 Getting Started 🎹](#-getting-started-)
     - [Prerequisites 🎹](#prerequisites-)
@@ -70,10 +71,24 @@ ConcertHub is a platform where music enthusiasts can discover upcoming concerts,
 - At the admin side, the admin can create a new concert and also delete a concert previously created.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## 📋 Kanban Board 📋
+
+- There are 4 contributors for this project:
+  -  [Stephen Addae](https://github.com/Stephen-Adom)
+  -  [Derbal Mohammed El Amine](https://github.com/AmineDerbal)
+  -  [Oussama Elabdioui](https://github.com/codedit334)
+  -  [Aman Worku](https://github.com/AmanWorku)
+- Here is the link to the final view Kanban board, showing the various tasks in this project [Final Kanban board](https://github.com/users/Stephen-Adom/projects/7)
+- Here is the link to the initial state of the Kanban board [Initial kanban board](https://user-images.githubusercontent.com/42853016/253240226-fe145e92-b944-41b8-bc9f-8662c63e359c.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ## 🚀 Live Demo 🎸
 
 Visit the [Live Demo](https://concert-react-front-end.vercel.app) of ConcertHub to experience the joy of music!
+
+
 
 ---
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
